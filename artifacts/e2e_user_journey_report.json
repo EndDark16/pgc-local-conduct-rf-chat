@@ -1,0 +1,16 @@
+{
+  "model_ready": true,
+  "target": "target_domain_conduct_final",
+  "questions_total": 55,
+  "confirmed": 55,
+  "help_flow_ok": true,
+  "predict_ok": true,
+  "probability": 0.0,
+  "disclaimer_ok": true,
+  "ambiguous_max_attempts_ok": true,
+  "audit_prediction_event": true,
+  "audit_interpret_event": true,
+  "audit_help_event": true,
+  "audit_max_attempt_event": true,
+  "overall": "pass"
+}

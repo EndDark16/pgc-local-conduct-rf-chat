@@ -1,0 +1,1733 @@
+{
+  "features": [
+    {
+      "feature": "age_years",
+      "questionnaire_item_id": "Q001",
+      "question_text_primary": "¿Qué edad tiene el niño o la niña, en años cumplidos?",
+      "caregiver_question": "¿Qué edad tiene el niño o la niña, en años cumplidos?",
+      "psychologist_question": "¿Qué edad tiene el niño o la niña, en años cumplidos?",
+      "feature_label_human": "Edad en años cumplidos",
+      "feature_description": "Input for clean_base - Age years",
+      "term_explanation": NaN,
+      "section_name": "1. Información básica",
+      "subsection_name": "Datos demográficos",
+      "domains_final": "adhd|conduct|elimination|anxiety|depression",
+      "feature_type": "basic_demographic",
+      "feature_role": "unspecified",
+      "response_type": "integer",
+      "response_options": [],
+      "min_value": 6.0,
+      "max_value": 11.0,
+      "unit": "años",
+      "scale_guidance": "Ingrese la edad en años cumplidos, entre 6 y 11.",
+      "help_text": "Se usa solo como dato demográfico básico.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "integer",
+        "scale_type": "numeric_range",
+        "range": [
+          6.0,
+          11.0
+        ],
+        "options": [],
+        "human_options_text": "Puedes responder con tus palabras."
+      },
+      "fallback_question": "¿Qué edad tiene el niño o la niña, en años cumplidos?",
+      "human_options_text": "Puedes responder con tus palabras.",
+      "quick_chips": [
+        "No entiendo"
+      ],
+      "scale_type": "numeric_range"
+    },
+    {
+      "feature": "conduct_01_bullies_threatens_intimidates",
+      "questionnaire_item_id": "Q036",
+      "question_text_primary": "¿Ha intimidado, amenazado o acosado repetidamente a otras personas?",
+      "caregiver_question": "¿Ha intimidado, amenazado o acosado repetidamente a otras personas?",
+      "psychologist_question": "¿Ha intimidado, amenazado o acosado repetidamente a otras personas?",
+      "feature_label_human": "Conduct 01 bullies threatens intimidates",
+      "feature_description": "Input for core_15_symptoms - Conduct 01 bullies threatens intimidates",
+      "term_explanation": NaN,
+      "section_name": "3. Comportamiento, normas y convivencia",
+      "subsection_name": "Conductas observables",
+      "domains_final": "adhd|conduct|elimination|anxiety|depression",
+      "feature_type": "symptom_item",
+      "feature_role": "symptom_item",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "0 = No ocurrió"
+        },
+        {
+          "value": 1,
+          "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+        },
+        {
+          "value": 2,
+          "label": "2 = Ocurrió en los últimos 6 meses"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 2.0,
+      "unit": NaN,
+      "scale_guidance": "0 no ocurrió, 1 ocurrió en los últimos 12 meses pero no en los últimos 6, 2 ocurrió en los últimos 6 meses.",
+      "help_text": "Incluya intimidación física, verbal o social.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "temporal_0_2",
+        "range": [
+          0.0,
+          2.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "0 = No ocurrió"
+          },
+          {
+            "value": 1,
+            "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+          },
+          {
+            "value": 2,
+            "label": "2 = Ocurrió en los últimos 6 meses"
+          }
+        ],
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+      },
+      "fallback_question": "¿Ha intimidado, amenazado o acosado repetidamente a otras personas?",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "quick_chips": [
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
+        "No entiendo"
+      ],
+      "scale_type": "temporal_0_2"
+    },
+    {
+      "feature": "conduct_02_initiates_fights",
+      "questionnaire_item_id": "Q037",
+      "question_text_primary": "¿Ha iniciado peleas físicas?",
+      "caregiver_question": "¿Ha iniciado peleas físicas?",
+      "psychologist_question": "¿Ha iniciado peleas físicas?",
+      "feature_label_human": "Conduct 02 initiates fights",
+      "feature_description": "Input for core_15_symptoms - Conduct 02 initiates fights",
+      "term_explanation": NaN,
+      "section_name": "3. Comportamiento, normas y convivencia",
+      "subsection_name": "Conductas observables",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "feature_type": "symptom_item",
+      "feature_role": "symptom_item",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "0 = No ocurrió"
+        },
+        {
+          "value": 1,
+          "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+        },
+        {
+          "value": 2,
+          "label": "2 = Ocurrió en los últimos 6 meses"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 2.0,
+      "unit": NaN,
+      "scale_guidance": "0 no ocurrió, 1 ocurrió en los últimos 12 meses pero no en los últimos 6, 2 ocurrió en los últimos 6 meses.",
+      "help_text": "No solo responder o defenderse.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "temporal_0_2",
+        "range": [
+          0.0,
+          2.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "0 = No ocurrió"
+          },
+          {
+            "value": 1,
+            "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+          },
+          {
+            "value": 2,
+            "label": "2 = Ocurrió en los últimos 6 meses"
+          }
+        ],
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+      },
+      "fallback_question": "¿Ha iniciado peleas físicas?",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "quick_chips": [
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
+        "No entiendo"
+      ],
+      "scale_type": "temporal_0_2"
+    },
+    {
+      "feature": "conduct_03_weapon_use",
+      "questionnaire_item_id": "Q038",
+      "question_text_primary": "¿Ha usado un objeto o arma que pudiera causar daño grave?",
+      "caregiver_question": "¿Ha usado un objeto o arma que pudiera causar daño grave?",
+      "psychologist_question": "¿Ha usado un objeto o arma que pudiera causar daño grave?",
+      "feature_label_human": "Conduct 03 weapon use",
+      "feature_description": "Input for core_15_symptoms - Conduct 03 weapon use",
+      "term_explanation": NaN,
+      "section_name": "3. Comportamiento, normas y convivencia",
+      "subsection_name": "Conductas observables",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "feature_type": "symptom_item",
+      "feature_role": "symptom_item",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "0 = No ocurrió"
+        },
+        {
+          "value": 1,
+          "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+        },
+        {
+          "value": 2,
+          "label": "2 = Ocurrió en los últimos 6 meses"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 2.0,
+      "unit": NaN,
+      "scale_guidance": "0 no ocurrió, 1 ocurrió en los últimos 12 meses pero no en los últimos 6, 2 ocurrió en los últimos 6 meses.",
+      "help_text": "Por ejemplo cuchillo, palo, piedra u otro objeto peligroso.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "temporal_0_2",
+        "range": [
+          0.0,
+          2.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "0 = No ocurrió"
+          },
+          {
+            "value": 1,
+            "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+          },
+          {
+            "value": 2,
+            "label": "2 = Ocurrió en los últimos 6 meses"
+          }
+        ],
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+      },
+      "fallback_question": "¿Ha usado un objeto o arma que pudiera causar daño grave?",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "quick_chips": [
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
+        "No entiendo"
+      ],
+      "scale_type": "temporal_0_2"
+    },
+    {
+      "feature": "conduct_04_physical_cruelty_people",
+      "questionnaire_item_id": "Q039",
+      "question_text_primary": "¿Ha sido físicamente cruel con otras personas?",
+      "caregiver_question": "¿Ha sido físicamente cruel con otras personas?",
+      "psychologist_question": "¿Ha sido físicamente cruel con otras personas?",
+      "feature_label_human": "Conduct 04 physical cruelty people",
+      "feature_description": "Input for core_15_symptoms - Conduct 04 physical cruelty people",
+      "term_explanation": NaN,
+      "section_name": "3. Comportamiento, normas y convivencia",
+      "subsection_name": "Conductas observables",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "feature_type": "symptom_item",
+      "feature_role": "symptom_item",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "0 = No ocurrió"
+        },
+        {
+          "value": 1,
+          "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+        },
+        {
+          "value": 2,
+          "label": "2 = Ocurrió en los últimos 6 meses"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 2.0,
+      "unit": NaN,
+      "scale_guidance": "0 no ocurrió, 1 ocurrió en los últimos 12 meses pero no en los últimos 6, 2 ocurrió en los últimos 6 meses.",
+      "help_text": "Incluya daño deliberado más allá de una pelea aislada.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "temporal_0_2",
+        "range": [
+          0.0,
+          2.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "0 = No ocurrió"
+          },
+          {
+            "value": 1,
+            "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+          },
+          {
+            "value": 2,
+            "label": "2 = Ocurrió en los últimos 6 meses"
+          }
+        ],
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+      },
+      "fallback_question": "¿Ha sido físicamente cruel con otras personas?",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "quick_chips": [
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
+        "No entiendo"
+      ],
+      "scale_type": "temporal_0_2"
+    },
+    {
+      "feature": "conduct_05_physical_cruelty_animals",
+      "questionnaire_item_id": "Q040",
+      "question_text_primary": "¿Ha sido físicamente cruel con animales?",
+      "caregiver_question": "¿Ha sido físicamente cruel con animales?",
+      "psychologist_question": "¿Ha sido físicamente cruel con animales?",
+      "feature_label_human": "Conduct 05 physical cruelty animals",
+      "feature_description": "Input for core_15_symptoms - Conduct 05 physical cruelty animals",
+      "term_explanation": NaN,
+      "section_name": "3. Comportamiento, normas y convivencia",
+      "subsection_name": "Conductas observables",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "feature_type": "symptom_item",
+      "feature_role": "symptom_item",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "0 = No ocurrió"
+        },
+        {
+          "value": 1,
+          "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+        },
+        {
+          "value": 2,
+          "label": "2 = Ocurrió en los últimos 6 meses"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 2.0,
+      "unit": NaN,
+      "scale_guidance": "0 no ocurrió, 1 ocurrió en los últimos 12 meses pero no en los últimos 6, 2 ocurrió en los últimos 6 meses.",
+      "help_text": "Incluya daño deliberado.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "temporal_0_2",
+        "range": [
+          0.0,
+          2.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "0 = No ocurrió"
+          },
+          {
+            "value": 1,
+            "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+          },
+          {
+            "value": 2,
+            "label": "2 = Ocurrió en los últimos 6 meses"
+          }
+        ],
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+      },
+      "fallback_question": "¿Ha sido físicamente cruel con animales?",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "quick_chips": [
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
+        "No entiendo"
+      ],
+      "scale_type": "temporal_0_2"
+    },
+    {
+      "feature": "conduct_06_steals_confronting_victim",
+      "questionnaire_item_id": "Q041",
+      "question_text_primary": "¿Ha robado algo usando amenaza, fuerza o intimidación contra otra persona?",
+      "caregiver_question": "¿Ha robado algo usando amenaza, fuerza o intimidación contra otra persona?",
+      "psychologist_question": "¿Ha robado algo usando amenaza, fuerza o intimidación contra otra persona?",
+      "feature_label_human": "Conduct 06 steals confronting victim",
+      "feature_description": "Input for core_15_symptoms - Conduct 06 steals confronting victim",
+      "term_explanation": NaN,
+      "section_name": "3. Comportamiento, normas y convivencia",
+      "subsection_name": "Conductas observables",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "feature_type": "symptom_item",
+      "feature_role": "symptom_item",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "0 = No ocurrió"
+        },
+        {
+          "value": 1,
+          "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+        },
+        {
+          "value": 2,
+          "label": "2 = Ocurrió en los últimos 6 meses"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 2.0,
+      "unit": NaN,
+      "scale_guidance": "0 no ocurrió, 1 ocurrió en los últimos 12 meses pero no en los últimos 6, 2 ocurrió en los últimos 6 meses.",
+      "help_text": "Por ejemplo, quitar algo presionando, amenazando, golpeando o asustando directamente a la otra persona.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "temporal_0_2",
+        "range": [
+          0.0,
+          2.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "0 = No ocurrió"
+          },
+          {
+            "value": 1,
+            "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+          },
+          {
+            "value": 2,
+            "label": "2 = Ocurrió en los últimos 6 meses"
+          }
+        ],
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+      },
+      "fallback_question": "¿Ha robado algo usando amenaza, fuerza o intimidación contra otra persona?",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "quick_chips": [
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
+        "No entiendo"
+      ],
+      "scale_type": "temporal_0_2"
+    },
+    {
+      "feature": "conduct_07_forced_sex",
+      "questionnaire_item_id": "Q042",
+      "question_text_primary": "¿Ha forzado a otra persona a una actividad sexual?",
+      "caregiver_question": "¿Ha forzado a otra persona a una actividad sexual?",
+      "psychologist_question": "¿Ha forzado a otra persona a una actividad sexual?",
+      "feature_label_human": "Conduct 07 forced sex",
+      "feature_description": "Input for core_15_symptoms - Conduct 07 forced sex",
+      "term_explanation": NaN,
+      "section_name": "3. Comportamiento, normas y convivencia",
+      "subsection_name": "Conductas observables",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "feature_type": "symptom_item",
+      "feature_role": "symptom_item",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "0 = No ocurrió"
+        },
+        {
+          "value": 1,
+          "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+        },
+        {
+          "value": 2,
+          "label": "2 = Ocurrió en los últimos 6 meses"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 2.0,
+      "unit": NaN,
+      "scale_guidance": "0 no ocurrió, 1 ocurrió en los últimos 12 meses pero no en los últimos 6, 2 ocurrió en los últimos 6 meses.",
+      "help_text": "Ítem sensible; responder con máximo cuidado clínico.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "temporal_0_2",
+        "range": [
+          0.0,
+          2.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "0 = No ocurrió"
+          },
+          {
+            "value": 1,
+            "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+          },
+          {
+            "value": 2,
+            "label": "2 = Ocurrió en los últimos 6 meses"
+          }
+        ],
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+      },
+      "fallback_question": "¿Ha forzado a otra persona a una actividad sexual?",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "quick_chips": [
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
+        "No entiendo"
+      ],
+      "scale_type": "temporal_0_2"
+    },
+    {
+      "feature": "conduct_08_fire_setting",
+      "questionnaire_item_id": "Q043",
+      "question_text_primary": "¿Ha provocado incendios deliberadamente con intención de causar daño o problemas serios?",
+      "caregiver_question": "¿Ha provocado incendios deliberadamente con intención de causar daño o problemas serios?",
+      "psychologist_question": "¿Ha provocado incendios de manera deliberada con intención de causar daño?",
+      "feature_label_human": "Conduct 08 fire setting",
+      "feature_description": "Input for core_15_symptoms - Conduct 08 fire setting",
+      "term_explanation": NaN,
+      "section_name": "3. Comportamiento, normas y convivencia",
+      "subsection_name": "Conductas observables",
+      "domains_final": "adhd|conduct|elimination|anxiety|depression",
+      "feature_type": "symptom_item",
+      "feature_role": "symptom_item",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "0 = No ocurrió"
+        },
+        {
+          "value": 1,
+          "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+        },
+        {
+          "value": 2,
+          "label": "2 = Ocurrió en los últimos 6 meses"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 2.0,
+      "unit": NaN,
+      "scale_guidance": "0 no ocurrió, 1 ocurrió en los últimos 12 meses pero no en los últimos 6, 2 ocurrió en los últimos 6 meses.",
+      "help_text": "No cuente curiosidad aislada sin intención dañina.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "temporal_0_2",
+        "range": [
+          0.0,
+          2.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "0 = No ocurrió"
+          },
+          {
+            "value": 1,
+            "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+          },
+          {
+            "value": 2,
+            "label": "2 = Ocurrió en los últimos 6 meses"
+          }
+        ],
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+      },
+      "fallback_question": "¿Ha provocado incendios deliberadamente con intención de causar daño o problemas serios?",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "quick_chips": [
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
+        "No entiendo"
+      ],
+      "scale_type": "temporal_0_2"
+    },
+    {
+      "feature": "conduct_09_property_destruction",
+      "questionnaire_item_id": "Q044",
+      "question_text_primary": "¿Ha destruido deliberadamente propiedad ajena?",
+      "caregiver_question": "¿Ha destruido deliberadamente propiedad ajena?",
+      "psychologist_question": "¿Ha destruido deliberadamente propiedad ajena?",
+      "feature_label_human": "Conduct 09 property destruction",
+      "feature_description": "Input for core_15_symptoms - Conduct 09 property destruction",
+      "term_explanation": NaN,
+      "section_name": "3. Comportamiento, normas y convivencia",
+      "subsection_name": "Conductas observables",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "feature_type": "symptom_item",
+      "feature_role": "symptom_item",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "0 = No ocurrió"
+        },
+        {
+          "value": 1,
+          "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+        },
+        {
+          "value": 2,
+          "label": "2 = Ocurrió en los últimos 6 meses"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 2.0,
+      "unit": NaN,
+      "scale_guidance": "0 no ocurrió, 1 ocurrió en los últimos 12 meses pero no en los últimos 6, 2 ocurrió en los últimos 6 meses.",
+      "help_text": "Por ejemplo romper objetos, paredes, carros u otros bienes.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "temporal_0_2",
+        "range": [
+          0.0,
+          2.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "0 = No ocurrió"
+          },
+          {
+            "value": 1,
+            "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+          },
+          {
+            "value": 2,
+            "label": "2 = Ocurrió en los últimos 6 meses"
+          }
+        ],
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+      },
+      "fallback_question": "¿Ha destruido deliberadamente propiedad ajena?",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "quick_chips": [
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
+        "No entiendo"
+      ],
+      "scale_type": "temporal_0_2"
+    },
+    {
+      "feature": "conduct_10_breaks_into_house_building_car",
+      "questionnaire_item_id": "Q045",
+      "question_text_primary": "¿Ha entrado por la fuerza a una casa, edificio o vehículo que no le pertenecía?",
+      "caregiver_question": "¿Ha entrado por la fuerza a una casa, edificio o vehículo que no le pertenecía?",
+      "psychologist_question": "¿Ha entrado por la fuerza a una casa, edificio o vehículo?",
+      "feature_label_human": "Conduct 10 breaks into house building car",
+      "feature_description": "Input for core_15_symptoms - Conduct 10 breaks into house building car",
+      "term_explanation": NaN,
+      "section_name": "3. Comportamiento, normas y convivencia",
+      "subsection_name": "Conductas observables",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "feature_type": "symptom_item",
+      "feature_role": "symptom_item",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "0 = No ocurrió"
+        },
+        {
+          "value": 1,
+          "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+        },
+        {
+          "value": 2,
+          "label": "2 = Ocurrió en los últimos 6 meses"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 2.0,
+      "unit": NaN,
+      "scale_guidance": "0 no ocurrió, 1 ocurrió en los últimos 12 meses pero no en los últimos 6, 2 ocurrió en los últimos 6 meses.",
+      "help_text": "Incluya allanamiento o ingreso forzado.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "temporal_0_2",
+        "range": [
+          0.0,
+          2.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "0 = No ocurrió"
+          },
+          {
+            "value": 1,
+            "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+          },
+          {
+            "value": 2,
+            "label": "2 = Ocurrió en los últimos 6 meses"
+          }
+        ],
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+      },
+      "fallback_question": "¿Ha entrado por la fuerza a una casa, edificio o vehículo que no le pertenecía?",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "quick_chips": [
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
+        "No entiendo"
+      ],
+      "scale_type": "temporal_0_2"
+    },
+    {
+      "feature": "conduct_11_lies_to_obtain_or_avoid",
+      "questionnaire_item_id": "Q046",
+      "question_text_primary": "¿Miente con frecuencia para obtener beneficios, evitar consecuencias o librarse de obligaciones?",
+      "caregiver_question": "¿Miente con frecuencia para obtener beneficios, evitar consecuencias o librarse de obligaciones?",
+      "psychologist_question": "¿Miente con frecuencia para obtener beneficios o evitar obligaciones?",
+      "feature_label_human": "Conduct 11 lies to obtain or avoid",
+      "feature_description": "Input for core_15_symptoms - Conduct 11 lies to obtain or avoid",
+      "term_explanation": NaN,
+      "section_name": "3. Comportamiento, normas y convivencia",
+      "subsection_name": "Conductas observables",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "feature_type": "symptom_item",
+      "feature_role": "symptom_item",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "0 = No ocurrió"
+        },
+        {
+          "value": 1,
+          "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+        },
+        {
+          "value": 2,
+          "label": "2 = Ocurrió en los últimos 6 meses"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 2.0,
+      "unit": NaN,
+      "scale_guidance": "0 no ocurrió, 1 ocurrió en los últimos 12 meses pero no en los últimos 6, 2 ocurrió en los últimos 6 meses.",
+      "help_text": "No cuente mentiras ocasionales propias de la edad.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "temporal_0_2",
+        "range": [
+          0.0,
+          2.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "0 = No ocurrió"
+          },
+          {
+            "value": 1,
+            "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+          },
+          {
+            "value": 2,
+            "label": "2 = Ocurrió en los últimos 6 meses"
+          }
+        ],
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+      },
+      "fallback_question": "¿Miente con frecuencia para obtener beneficios, evitar consecuencias o librarse de obligaciones?",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "quick_chips": [
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
+        "No entiendo"
+      ],
+      "scale_type": "temporal_0_2"
+    },
+    {
+      "feature": "conduct_12_steals_without_confrontation",
+      "questionnaire_item_id": "Q047",
+      "question_text_primary": "¿Ha robado objetos sin usar amenaza, fuerza ni contacto directo con la persona afectada?",
+      "caregiver_question": "¿Ha robado objetos sin usar amenaza, fuerza ni contacto directo con la persona afectada?",
+      "psychologist_question": "¿Ha robado objetos sin usar amenaza, fuerza ni contacto directo con la persona afectada?",
+      "feature_label_human": "Conduct 12 steals without confrontation",
+      "feature_description": "Input for core_15_symptoms - Conduct 12 steals without confrontation",
+      "term_explanation": NaN,
+      "section_name": "3. Comportamiento, normas y convivencia",
+      "subsection_name": "Conductas observables",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "feature_type": "symptom_item",
+      "feature_role": "symptom_item",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "0 = No ocurrió"
+        },
+        {
+          "value": 1,
+          "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+        },
+        {
+          "value": 2,
+          "label": "2 = Ocurrió en los últimos 6 meses"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 2.0,
+      "unit": NaN,
+      "scale_guidance": "0 no ocurrió, 1 ocurrió en los últimos 12 meses pero no en los últimos 6, 2 ocurrió en los últimos 6 meses.",
+      "help_text": "Por ejemplo, tomar dinero u objetos escondidas, sin enfrentarse directamente a la persona afectada.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "temporal_0_2",
+        "range": [
+          0.0,
+          2.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "0 = No ocurrió"
+          },
+          {
+            "value": 1,
+            "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+          },
+          {
+            "value": 2,
+            "label": "2 = Ocurrió en los últimos 6 meses"
+          }
+        ],
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+      },
+      "fallback_question": "¿Ha robado objetos sin usar amenaza, fuerza ni contacto directo con la persona afectada?",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "quick_chips": [
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
+        "No entiendo"
+      ],
+      "scale_type": "temporal_0_2"
+    },
+    {
+      "feature": "conduct_13_stays_out_at_night_before_13",
+      "questionnaire_item_id": "Q048",
+      "question_text_primary": "¿Se ha quedado fuera de casa durante la noche sin permiso?",
+      "caregiver_question": "¿Se ha quedado fuera de casa durante la noche sin permiso?",
+      "psychologist_question": "¿Se ha quedado fuera de casa durante la noche sin permiso?",
+      "feature_label_human": "Conduct 13 stays out at night before 13",
+      "feature_description": "Input for core_15_symptoms - Conduct 13 stays out at night before 13",
+      "term_explanation": NaN,
+      "section_name": "3. Comportamiento, normas y convivencia",
+      "subsection_name": "Conductas observables",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "feature_type": "symptom_item",
+      "feature_role": "symptom_item",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "0 = No ocurrió"
+        },
+        {
+          "value": 1,
+          "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+        },
+        {
+          "value": 2,
+          "label": "2 = Ocurrió en los últimos 6 meses"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 2.0,
+      "unit": NaN,
+      "scale_guidance": "0 no ocurrió, 1 ocurrió en los últimos 12 meses pero no en los últimos 6, 2 ocurrió en los últimos 6 meses.",
+      "help_text": "Considere si ocurrió de forma relevante y no solo por una situación excepcional o un malentendido puntual.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "temporal_0_2",
+        "range": [
+          0.0,
+          2.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "0 = No ocurrió"
+          },
+          {
+            "value": 1,
+            "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+          },
+          {
+            "value": 2,
+            "label": "2 = Ocurrió en los últimos 6 meses"
+          }
+        ],
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+      },
+      "fallback_question": "¿Se ha quedado fuera de casa durante la noche sin permiso?",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "quick_chips": [
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
+        "No entiendo"
+      ],
+      "scale_type": "temporal_0_2"
+    },
+    {
+      "feature": "conduct_14_runs_away_overnight",
+      "questionnaire_item_id": "Q049",
+      "question_text_primary": "¿Se ha escapado de casa pasando la noche fuera?",
+      "caregiver_question": "¿Se ha escapado de casa pasando la noche fuera?",
+      "psychologist_question": "¿Se ha escapado de casa pasando la noche fuera?",
+      "feature_label_human": "Conduct 14 runs away overnight",
+      "feature_description": "Input for core_15_symptoms - Conduct 14 runs away overnight",
+      "term_explanation": NaN,
+      "section_name": "3. Comportamiento, normas y convivencia",
+      "subsection_name": "Conductas observables",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "feature_type": "symptom_item",
+      "feature_role": "symptom_item",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "0 = No ocurrió"
+        },
+        {
+          "value": 1,
+          "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+        },
+        {
+          "value": 2,
+          "label": "2 = Ocurrió en los últimos 6 meses"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 2.0,
+      "unit": NaN,
+      "scale_guidance": "0 no ocurrió, 1 ocurrió en los últimos 12 meses pero no en los últimos 6, 2 ocurrió en los últimos 6 meses.",
+      "help_text": "Marque según ocurrencia relevante.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "temporal_0_2",
+        "range": [
+          0.0,
+          2.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "0 = No ocurrió"
+          },
+          {
+            "value": 1,
+            "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+          },
+          {
+            "value": 2,
+            "label": "2 = Ocurrió en los últimos 6 meses"
+          }
+        ],
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+      },
+      "fallback_question": "¿Se ha escapado de casa pasando la noche fuera?",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "quick_chips": [
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
+        "No entiendo"
+      ],
+      "scale_type": "temporal_0_2"
+    },
+    {
+      "feature": "conduct_15_truancy_before_13",
+      "questionnaire_item_id": "Q050",
+      "question_text_primary": "¿Ha faltado al colegio sin permiso?",
+      "caregiver_question": "¿Ha faltado al colegio sin permiso?",
+      "psychologist_question": "¿Ha faltado al colegio sin permiso?",
+      "feature_label_human": "Conduct 15 truancy before 13",
+      "feature_description": "Input for core_15_symptoms - Conduct 15 truancy before 13",
+      "term_explanation": NaN,
+      "section_name": "3. Comportamiento, normas y convivencia",
+      "subsection_name": "Conductas observables",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "feature_type": "symptom_item",
+      "feature_role": "symptom_item",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "0 = No ocurrió"
+        },
+        {
+          "value": 1,
+          "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+        },
+        {
+          "value": 2,
+          "label": "2 = Ocurrió en los últimos 6 meses"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 2.0,
+      "unit": NaN,
+      "scale_guidance": "0 no ocurrió, 1 ocurrió en los últimos 12 meses pero no en los últimos 6, 2 ocurrió en los últimos 6 meses.",
+      "help_text": "Considere ausencias voluntarias y no justificadas, no faltas explicadas por enfermedad u otra causa conocida.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "temporal_0_2",
+        "range": [
+          0.0,
+          2.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "0 = No ocurrió"
+          },
+          {
+            "value": 1,
+            "label": "1 = Ocurrió en los últimos 12 meses, pero no en los últimos 6 meses"
+          },
+          {
+            "value": 2,
+            "label": "2 = Ocurrió en los últimos 6 meses"
+          }
+        ],
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+      },
+      "fallback_question": "¿Ha faltado al colegio sin permiso?",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "quick_chips": [
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
+        "No entiendo"
+      ],
+      "scale_type": "temporal_0_2"
+    },
+    {
+      "feature": "conduct_impairment_global",
+      "questionnaire_item_id": "Q027",
+      "question_text_primary": "En conjunto, ¿cuánto afectan estas conductas la vida diaria?",
+      "caregiver_question": "En conjunto, ¿cuánto afectan estas conductas la vida diaria?",
+      "psychologist_question": "En conjunto, ¿cuánto afectan estas conductas la vida diaria?",
+      "feature_label_human": "Conduct impairment global",
+      "feature_description": "Input for impairment - Conduct impairment global",
+      "term_explanation": NaN,
+      "section_name": "2. Atención, actividad e impulsividad",
+      "subsection_name": "Impacto en la vida diaria",
+      "domains_final": "adhd|conduct|elimination|depression",
+      "feature_type": "impairment_item",
+      "feature_role": "impairment_item",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "0 = Sin impacto"
+        },
+        {
+          "value": 1,
+          "label": "1 = Impacto leve"
+        },
+        {
+          "value": 2,
+          "label": "2 = Impacto moderado"
+        },
+        {
+          "value": 3,
+          "label": "3 = Impacto marcado"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 3.0,
+      "unit": NaN,
+      "scale_guidance": "0 sin impacto, 1 impacto leve, 2 impacto moderado, 3 impacto marcado.",
+      "help_text": "Responda de forma global, pensando en casa, colegio, convivencia, juego y actividades cotidianas.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "impact_0_3",
+        "range": [
+          0.0,
+          3.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "0 = Sin impacto"
+          },
+          {
+            "value": 1,
+            "label": "1 = Impacto leve"
+          },
+          {
+            "value": 2,
+            "label": "2 = Impacto moderado"
+          },
+          {
+            "value": 3,
+            "label": "3 = Impacto marcado"
+          }
+        ],
+        "human_options_text": "Puedes responder: no afecta, leve, moderado, o marcado."
+      },
+      "fallback_question": "En conjunto, ¿cuánto afectan estas conductas la vida diaria?",
+      "human_options_text": "Puedes responder: no afecta, leve, moderado, o marcado.",
+      "quick_chips": [
+        "No afecta",
+        "Leve",
+        "Moderado",
+        "Marcado",
+        "No entiendo"
+      ],
+      "scale_type": "impact_0_3"
+    },
+    {
+      "feature": "conduct_lpe_01_lack_remorse_guilt",
+      "questionnaire_item_id": "Q032",
+      "question_text_primary": "¿Suele mostrar poca culpa o poco remordimiento después de hacer daño o de comportarse mal?",
+      "caregiver_question": "¿Suele mostrar poca culpa o poco remordimiento después de hacer daño o de comportarse mal?",
+      "psychologist_question": "¿Suele mostrar poca culpa o poco remordimiento después de hacer daño o de comportarse mal?",
+      "feature_label_human": "Conduct lpe 01 lack remorse guilt",
+      "feature_description": "Input for limited_prosocial_emotions - Conduct lpe 01 lack remorse guilt",
+      "term_explanation": NaN,
+      "section_name": "3. Comportamiento, normas y convivencia",
+      "subsection_name": "Empatía, culpa y sensibilidad emocional",
+      "domains_final": "adhd|conduct|depression",
+      "feature_type": "specifier_item",
+      "feature_role": "specifier_item",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "0 = No se observa"
+        },
+        {
+          "value": 1,
+          "label": "1 = Se observa a veces o hay duda"
+        },
+        {
+          "value": 2,
+          "label": "2 = Se observa de forma clara y persistente"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 2.0,
+      "unit": NaN,
+      "scale_guidance": "0 no se observa, 1 a veces o hay duda, 2 se observa de forma clara y persistente.",
+      "help_text": "Observe si minimiza el daño causado.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "observation_0_2",
+        "range": [
+          0.0,
+          2.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "0 = No se observa"
+          },
+          {
+            "value": 1,
+            "label": "1 = Se observa a veces o hay duda"
+          },
+          {
+            "value": 2,
+            "label": "2 = Se observa de forma clara y persistente"
+          }
+        ],
+        "human_options_text": "Puedes responder: no se observa, a veces, o claramente."
+      },
+      "fallback_question": "¿Suele mostrar poca culpa o poco remordimiento después de hacer daño o de comportarse mal?",
+      "human_options_text": "Puedes responder: no se observa, a veces, o claramente.",
+      "quick_chips": [
+        "No se observa",
+        "A veces",
+        "Claramente",
+        "No entiendo"
+      ],
+      "scale_type": "observation_0_2"
+    },
+    {
+      "feature": "conduct_lpe_02_callous_lack_empathy",
+      "questionnaire_item_id": "Q033",
+      "question_text_primary": "¿Suele mostrar poca empatía o poca preocupación por los sentimientos de otras personas?",
+      "caregiver_question": "¿Suele mostrar poca empatía o poca preocupación por los sentimientos de otras personas?",
+      "psychologist_question": "¿Suele mostrar poca empatía o poca preocupación por los sentimientos de otras personas?",
+      "feature_label_human": "Conduct lpe 02 callous lack empathy",
+      "feature_description": "Input for limited_prosocial_emotions - Conduct lpe 02 callous lack empathy",
+      "term_explanation": NaN,
+      "section_name": "3. Comportamiento, normas y convivencia",
+      "subsection_name": "Empatía, culpa y sensibilidad emocional",
+      "domains_final": "adhd|conduct|depression",
+      "feature_type": "specifier_item",
+      "feature_role": "specifier_item",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "0 = No se observa"
+        },
+        {
+          "value": 1,
+          "label": "1 = Se observa a veces o hay duda"
+        },
+        {
+          "value": 2,
+          "label": "2 = Se observa de forma clara y persistente"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 2.0,
+      "unit": NaN,
+      "scale_guidance": "0 no se observa, 1 a veces o hay duda, 2 se observa de forma clara y persistente.",
+      "help_text": "Observe frialdad afectiva o indiferencia.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "observation_0_2",
+        "range": [
+          0.0,
+          2.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "0 = No se observa"
+          },
+          {
+            "value": 1,
+            "label": "1 = Se observa a veces o hay duda"
+          },
+          {
+            "value": 2,
+            "label": "2 = Se observa de forma clara y persistente"
+          }
+        ],
+        "human_options_text": "Puedes responder: no se observa, a veces, o claramente."
+      },
+      "fallback_question": "¿Suele mostrar poca empatía o poca preocupación por los sentimientos de otras personas?",
+      "human_options_text": "Puedes responder: no se observa, a veces, o claramente.",
+      "quick_chips": [
+        "No se observa",
+        "A veces",
+        "Claramente",
+        "No entiendo"
+      ],
+      "scale_type": "observation_0_2"
+    },
+    {
+      "feature": "conduct_lpe_03_unconcerned_performance",
+      "questionnaire_item_id": "Q034",
+      "question_text_primary": "¿Parece poco preocupado por cómo le va en el colegio, con otras personas o con su comportamiento?",
+      "caregiver_question": "¿Parece poco preocupado por cómo le va en el colegio, con otras personas o con su comportamiento?",
+      "psychologist_question": "¿Parece poco preocupado por cómo le va en el colegio, con otras personas o con su comportamiento?",
+      "feature_label_human": "Conduct lpe 03 unconcerned performance",
+      "feature_description": "Input for limited_prosocial_emotions - Conduct lpe 03 unconcerned performance",
+      "term_explanation": NaN,
+      "section_name": "3. Comportamiento, normas y convivencia",
+      "subsection_name": "Empatía, culpa y sensibilidad emocional",
+      "domains_final": "adhd|conduct|depression",
+      "feature_type": "specifier_item",
+      "feature_role": "specifier_item",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "0 = No se observa"
+        },
+        {
+          "value": 1,
+          "label": "1 = Se observa a veces o hay duda"
+        },
+        {
+          "value": 2,
+          "label": "2 = Se observa de forma clara y persistente"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 2.0,
+      "unit": NaN,
+      "scale_guidance": "0 no se observa, 1 a veces o hay duda, 2 se observa de forma clara y persistente.",
+      "help_text": "Observe si parece no darle importancia a hacerlo mal, incumplir normas o afectar a otras personas.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "observation_0_2",
+        "range": [
+          0.0,
+          2.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "0 = No se observa"
+          },
+          {
+            "value": 1,
+            "label": "1 = Se observa a veces o hay duda"
+          },
+          {
+            "value": 2,
+            "label": "2 = Se observa de forma clara y persistente"
+          }
+        ],
+        "human_options_text": "Puedes responder: no se observa, a veces, o claramente."
+      },
+      "fallback_question": "¿Parece poco preocupado por cómo le va en el colegio, con otras personas o con su comportamiento?",
+      "human_options_text": "Puedes responder: no se observa, a veces, o claramente.",
+      "quick_chips": [
+        "No se observa",
+        "A veces",
+        "Claramente",
+        "No entiendo"
+      ],
+      "scale_type": "observation_0_2"
+    },
+    {
+      "feature": "conduct_lpe_04_shallow_deficient_affect",
+      "questionnaire_item_id": "Q035",
+      "question_text_primary": "¿La forma en que expresa sus emociones parece poco sincera, superficial o muy limitada?",
+      "caregiver_question": "¿La forma en que expresa sus emociones parece poco sincera, superficial o muy limitada?",
+      "psychologist_question": "¿La forma en que expresa sus emociones parece poco sincera, superficial o muy limitada?",
+      "feature_label_human": "Conduct lpe 04 shallow deficient affect",
+      "feature_description": "Input for limited_prosocial_emotions - Conduct lpe 04 shallow deficient affect",
+      "term_explanation": NaN,
+      "section_name": "3. Comportamiento, normas y convivencia",
+      "subsection_name": "Empatía, culpa y sensibilidad emocional",
+      "domains_final": "adhd|conduct|depression",
+      "feature_type": "specifier_item",
+      "feature_role": "specifier_item",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "0 = No se observa"
+        },
+        {
+          "value": 1,
+          "label": "1 = Se observa a veces o hay duda"
+        },
+        {
+          "value": 2,
+          "label": "2 = Se observa de forma clara y persistente"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 2.0,
+      "unit": NaN,
+      "scale_guidance": "0 no se observa, 1 a veces o hay duda, 2 se observa de forma clara y persistente.",
+      "help_text": "Por ejemplo, si sus emociones parecen frías, poco profundas, poco creíbles o no coinciden con la situación.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "observation_0_2",
+        "range": [
+          0.0,
+          2.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "0 = No se observa"
+          },
+          {
+            "value": 1,
+            "label": "1 = Se observa a veces o hay duda"
+          },
+          {
+            "value": 2,
+            "label": "2 = Se observa de forma clara y persistente"
+          }
+        ],
+        "human_options_text": "Puedes responder: no se observa, a veces, o claramente."
+      },
+      "fallback_question": "¿La forma en que expresa sus emociones parece poco sincera, superficial o muy limitada?",
+      "human_options_text": "Puedes responder: no se observa, a veces, o claramente.",
+      "quick_chips": [
+        "No se observa",
+        "A veces",
+        "Claramente",
+        "No entiendo"
+      ],
+      "scale_type": "observation_0_2"
+    },
+    {
+      "feature": "conduct_onset_before_10",
+      "questionnaire_item_id": "Q029",
+      "question_text_primary": "¿Las primeras conductas problemáticas relevantes empezaron antes de los 10 años?",
+      "caregiver_question": "¿Las primeras conductas problemáticas relevantes empezaron antes de los 10 años?",
+      "psychologist_question": "¿Las primeras conductas problemáticas relevantes empezaron antes de los 10 años?",
+      "feature_label_human": "Conduct onset before 10",
+      "feature_description": "Input for history - Conduct onset before 10",
+      "term_explanation": NaN,
+      "section_name": "2. Atención, actividad e impulsividad",
+      "subsection_name": "Inicio e historia",
+      "domains_final": "adhd|depression",
+      "feature_type": "history_flag",
+      "feature_role": "history_flag",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": 0,
+          "label": "No"
+        },
+        {
+          "value": 1,
+          "label": "Sí"
+        }
+      ],
+      "min_value": 0.0,
+      "max_value": 1.0,
+      "unit": NaN,
+      "scale_guidance": "Seleccione Sí o No.",
+      "help_text": "Inicio temprano de conductas disociales.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "binary",
+        "range": [
+          0.0,
+          1.0
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "No"
+          },
+          {
+            "value": 1,
+            "label": "Sí"
+          }
+        ],
+        "human_options_text": "Puedes responder: No o Sí."
+      },
+      "fallback_question": "¿Las primeras conductas problemáticas relevantes empezaron antes de los 10 años?",
+      "human_options_text": "Puedes responder: No o Sí.",
+      "quick_chips": [
+        "Sí",
+        "No",
+        "No entiendo"
+      ],
+      "scale_type": "binary"
+    },
+    {
+      "feature": "sex_assigned_at_birth",
+      "questionnaire_item_id": "Q002",
+      "question_text_primary": "¿Qué sexo se registró al nacer para el niño o la niña?",
+      "caregiver_question": "¿Qué sexo se registró al nacer para el niño o la niña?",
+      "psychologist_question": "¿Qué sexo se registró al nacer para el niño o la niña?",
+      "feature_label_human": "Sexo registrado al nacer",
+      "feature_description": "Input for clean_base - Sex assigned at birth",
+      "term_explanation": NaN,
+      "section_name": "1. Información básica",
+      "subsection_name": "Datos demográficos",
+      "domains_final": "adhd|depression",
+      "feature_type": "basic_demographic",
+      "feature_role": "unspecified",
+      "response_type": "single_choice",
+      "response_options": [
+        {
+          "value": "male",
+          "label": "Masculino"
+        },
+        {
+          "value": "female",
+          "label": "Femenino"
+        },
+        {
+          "value": "unknown",
+          "label": "No sabe / prefiere no responder"
+        }
+      ],
+      "min_value": NaN,
+      "max_value": NaN,
+      "unit": NaN,
+      "scale_guidance": "Seleccione la opción que corresponda o la opción de no sabe / no responde.",
+      "help_text": "Se usa solo como dato demográfico básico. Responda según el registro de nacimiento o el dato clínico disponible.",
+      "who_answers": "Cuidador y/o psicólogo/a",
+      "respondent_expected": "caregiver_or_psychologist",
+      "administered_by": "caregiver_or_psychologist",
+      "requires_clinician_administration": false,
+      "requires_child_self_report": false,
+      "question_audit_status": "audited_v16_4",
+      "is_required": true,
+      "parser_rules": {
+        "response_type": "single_choice",
+        "scale_type": "categorical",
+        "range": [
+          NaN,
+          NaN
+        ],
+        "options": [
+          {
+            "value": "male",
+            "label": "Masculino"
+          },
+          {
+            "value": "female",
+            "label": "Femenino"
+          },
+          {
+            "value": "unknown",
+            "label": "No sabe / prefiere no responder"
+          }
+        ],
+        "human_options_text": "Puedes responder: Masculino, Femenino, o No sabe / prefiere no responder."
+      },
+      "fallback_question": "¿Qué sexo se registró al nacer para el niño o la niña?",
+      "human_options_text": "Puedes responder: Masculino, Femenino, o No sabe / prefiere no responder.",
+      "quick_chips": [
+        "Masculino",
+        "Femenino",
+        "No sabe / prefiere no responder",
+        "No entiendo"
+      ],
+      "scale_type": "categorical"
+    }
+  ],
+  "feature_order": [
+    "age_years",
+    "conduct_01_bullies_threatens_intimidates",
+    "conduct_02_initiates_fights",
+    "conduct_03_weapon_use",
+    "conduct_04_physical_cruelty_people",
+    "conduct_05_physical_cruelty_animals",
+    "conduct_06_steals_confronting_victim",
+    "conduct_07_forced_sex",
+    "conduct_08_fire_setting",
+    "conduct_09_property_destruction",
+    "conduct_10_breaks_into_house_building_car",
+    "conduct_11_lies_to_obtain_or_avoid",
+    "conduct_12_steals_without_confrontation",
+    "conduct_13_stays_out_at_night_before_13",
+    "conduct_14_runs_away_overnight",
+    "conduct_15_truancy_before_13",
+    "conduct_impairment_global",
+    "conduct_lpe_01_lack_remorse_guilt",
+    "conduct_lpe_02_callous_lack_empathy",
+    "conduct_lpe_03_unconcerned_performance",
+    "conduct_lpe_04_shallow_deficient_affect",
+    "conduct_onset_before_10",
+    "sex_assigned_at_birth"
+  ],
+  "fields": [
+    "feature",
+    "questionnaire_item_id",
+    "question_text_primary",
+    "caregiver_question",
+    "psychologist_question",
+    "feature_label_human",
+    "feature_description",
+    "term_explanation",
+    "section_name",
+    "subsection_name",
+    "domains_final",
+    "feature_type",
+    "feature_role",
+    "response_type",
+    "response_options",
+    "min_value",
+    "max_value",
+    "unit",
+    "scale_guidance",
+    "help_text",
+    "who_answers",
+    "respondent_expected",
+    "administered_by",
+    "requires_clinician_administration",
+    "requires_child_self_report",
+    "question_audit_status",
+    "is_required",
+    "parser_rules",
+    "fallback_question"
+  ]
+}

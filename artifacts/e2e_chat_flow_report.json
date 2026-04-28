@@ -1,0 +1,17 @@
+{
+  "status": "pass",
+  "questions_total": 55,
+  "confirmed": 55,
+  "clarifications": 0,
+  "errors": [],
+  "prediction": {
+    "probability_estimated": 0.001443,
+    "threshold_used": 0.39,
+    "internal_class": 0,
+    "compatibility_text": "patrón no compatible",
+    "risk_text": "riesgo estimado bajo",
+    "missing_features": [],
+    "explanation": "La estimación se basa en respuestas interpretadas y confirmadas por el usuario. Este resultado expresa probabilidad estimada, no una conclusión clínica.",
+    "medical_disclaimer": "Este resultado no es un diagnóstico médico y debe ser revisado por un profesional calificado."
+  }
+}

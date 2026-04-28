@@ -1,0 +1,10 @@
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+
+# Test/cache artifacts
+.pytest_cache/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db

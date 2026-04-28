@@ -1,0 +1,5 @@
+{
+  "target_column": "target_domain_conduct_final",
+  "selection_method": "default_conduct",
+  "target_disorder_env": ""
+}

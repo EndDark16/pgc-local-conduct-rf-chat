@@ -1,0 +1,12 @@
+{
+  "f1_test_mean": 0.9929960618194432,
+  "f1_test_std": 0.0029118712083664984,
+  "f1_train_mean": 0.9947430713984285,
+  "f1_gap_train_test": 0.0017470095789853257,
+  "recall_test_mean": 1.0,
+  "recall_test_std": 0.0,
+  "precision_test_mean": 0.9861061419200954,
+  "precision_test_std": 0.005737413399798934,
+  "roc_auc_test_mean": 0.999951123628821,
+  "roc_auc_test_std": 4.568752305761001e-05
+}

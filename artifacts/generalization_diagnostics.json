@@ -1,0 +1,155 @@
+{
+  "train_metrics_final": {
+    "threshold": 0.42,
+    "accuracy": 0.9928385416666666,
+    "precision": 0.9788867562380038,
+    "recall": 1.0,
+    "f1": 0.9893307468477207,
+    "confusion_matrix": [
+      [
+        1015,
+        11
+      ],
+      [
+        0,
+        510
+      ]
+    ],
+    "classification_report": {
+      "0": {
+        "precision": 1.0,
+        "recall": 0.9892787524366472,
+        "f1-score": 0.994610485056345,
+        "support": 1026.0
+      },
+      "1": {
+        "precision": 0.9788867562380038,
+        "recall": 1.0,
+        "f1-score": 0.9893307468477207,
+        "support": 510.0
+      },
+      "accuracy": 0.9928385416666666,
+      "macro avg": {
+        "precision": 0.989443378119002,
+        "recall": 0.9946393762183237,
+        "f1-score": 0.9919706159520328,
+        "support": 1536.0
+      },
+      "weighted avg": {
+        "precision": 0.9929897432821497,
+        "recall": 0.9928385416666666,
+        "f1-score": 0.9928574469792627,
+        "support": 1536.0
+      }
+    },
+    "roc_auc": 0.9999541337002636,
+    "pr_auc": 0.9999061460360137
+  },
+  "validation_metrics_final": {
+    "threshold": 0.42,
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "confusion_matrix": [
+      [
+        256,
+        0
+      ],
+      [
+        0,
+        128
+      ]
+    ],
+    "classification_report": {
+      "0": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 256.0
+      },
+      "1": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 128.0
+      },
+      "accuracy": 1.0,
+      "macro avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 384.0
+      },
+      "weighted avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 384.0
+      }
+    },
+    "roc_auc": 1.0,
+    "pr_auc": 1.0
+  },
+  "test_metrics_final": {
+    "threshold": 0.42,
+    "accuracy": 0.9979166666666667,
+    "precision": 0.9937888198757764,
+    "recall": 1.0,
+    "f1": 0.9968847352024922,
+    "confusion_matrix": [
+      [
+        319,
+        1
+      ],
+      [
+        0,
+        160
+      ]
+    ],
+    "classification_report": {
+      "0": {
+        "precision": 1.0,
+        "recall": 0.996875,
+        "f1-score": 0.9984350547730829,
+        "support": 320.0
+      },
+      "1": {
+        "precision": 0.9937888198757764,
+        "recall": 1.0,
+        "f1-score": 0.9968847352024922,
+        "support": 160.0
+      },
+      "accuracy": 0.9979166666666667,
+      "macro avg": {
+        "precision": 0.9968944099378882,
+        "recall": 0.9984375,
+        "f1-score": 0.9976598949877875,
+        "support": 480.0
+      },
+      "weighted avg": {
+        "precision": 0.9979296066252588,
+        "recall": 0.9979166666666667,
+        "f1-score": 0.9979182815828859,
+        "support": 480.0
+      }
+    },
+    "roc_auc": 0.9998242187499999,
+    "pr_auc": 0.9996416227969037
+  },
+  "cross_validation_summary": {
+    "f1_test_mean": 0.9929960618194432,
+    "f1_test_std": 0.0029118712083664984,
+    "f1_train_mean": 0.9947430713984285,
+    "f1_gap_train_test": 0.0017470095789853257,
+    "recall_test_mean": 1.0,
+    "recall_test_std": 0.0,
+    "precision_test_mean": 0.9861061419200954,
+    "precision_test_std": 0.005737413399798934,
+    "roc_auc_test_mean": 0.999951123628821,
+    "roc_auc_test_std": 4.568752305761001e-05
+  },
+  "overfit_gap_train_val_f1": 0.0,
+  "selection_score": 1.21,
+  "note": "Brecha train-validación cercana a cero indica menor riesgo de sobreentrenamiento."
+}

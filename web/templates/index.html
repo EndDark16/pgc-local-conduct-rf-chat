@@ -1,0 +1,83 @@
+﻿<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Asistente local de apoyo preliminar</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell" id="appShell">
+      <header class="top-panel">
+        <div class="project-block">
+          <p class="eyebrow">PGC · Asistente local</p>
+          <h1 class="project-title">Estimación preliminar conversacional</h1>
+          <p class="project-subtitle">Flujo local con Random Forest y NLP basado en reglas.</p>
+        </div>
+        <div class="status-grid">
+          <div class="status-item">
+            <span class="status-label">Estado del modelo</span>
+            <span class="status-value" id="modelStatusText">Verificando...</span>
+          </div>
+          <div class="status-item">
+            <span class="status-label">Target</span>
+            <span class="status-value" id="targetText">target_domain_conduct_final</span>
+          </div>
+          <div class="status-item">
+            <span class="status-label">Progreso</span>
+            <span class="status-value" id="progressText">Preparando preguntas...</span>
+          </div>
+          <div class="status-actions">
+            <label for="roleSelect" class="role-label">Rol</label>
+            <select id="roleSelect" class="role-select">
+              <option value="caregiver">Cuidador</option>
+              <option value="psychologist">Psicólogo</option>
+            </select>
+            <button id="resetBtn" class="btn btn-ghost" type="button">Reiniciar</button>
+          </div>
+        </div>
+      </header>
+
+      <section class="warning-card">
+        <strong>Aviso importante:</strong>
+        Este resultado no es un diagnóstico médico y debe ser revisado por un profesional calificado.
+      </section>
+
+      <section class="model-missing-card hidden" id="modelMissingCard">
+        <h2>Modelo no entrenado</h2>
+        <p>Para iniciar la experiencia conversacional necesitas entrenar primero el modelo local.</p>
+        <pre>python train.py</pre>
+      </section>
+
+      <section class="chat-panel" id="chatPanel">
+        <div class="chat-messages" id="chatMessages" aria-live="polite"></div>
+
+        <div class="context-actions hidden" id="contextActions"></div>
+
+        <div class="quick-actions" id="quickActions"></div>
+
+        <form id="chatInputForm" class="chat-input-form">
+          <textarea
+            id="chatInput"
+            rows="2"
+            placeholder="Escribe tu respuesta con tus palabras..."
+            autocomplete="off"
+          ></textarea>
+          <button id="sendBtn" class="btn btn-primary" type="submit">Enviar</button>
+        </form>
+      </section>
+
+      <details class="tech-details" id="technicalDetails">
+        <summary>Detalles técnicos</summary>
+        <div class="tech-actions">
+          <button id="loadMetricsBtn" class="btn btn-ghost" type="button">Ver métricas</button>
+          <button id="loadImportanceBtn" class="btn btn-ghost" type="button">Ver importancia</button>
+        </div>
+        <pre id="metricsBox" class="json-box hidden"></pre>
+        <pre id="importanceBox" class="json-box hidden"></pre>
+      </details>
+    </main>
+
+    <script src="/static/js/app.js"></script>
+  </body>
+</html>

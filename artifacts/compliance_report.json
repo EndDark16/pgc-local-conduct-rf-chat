@@ -1,0 +1,252 @@
+{
+  "generated_at_utc": "2026-04-28T05:00:31.255896+00:00",
+  "status": "error",
+  "summary": {
+    "total_items": 20,
+    "passed_items": 19,
+    "failed_items": 1
+  },
+  "items": [
+    {
+      "id": "dirs_and_structure",
+      "description": "Estructura de carpetas obligatoria",
+      "passed": true,
+      "evidence": [
+        "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC\\data",
+        "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC\\src",
+        "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC\\models",
+        "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC\\artifacts",
+        "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC\\logs",
+        "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC\\tests",
+        "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC\\docs",
+        "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC\\web",
+        "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC\\web\\templates",
+        "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC\\web\\static",
+        "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC\\web\\static\\css",
+        "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC\\web\\static\\js",
+        "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC\\web\\static\\img"
+      ]
+    },
+    {
+      "id": "essential_files",
+      "description": "Archivos esenciales obligatorios",
+      "passed": true,
+      "evidence": [
+        "app.py",
+        "train.py",
+        "predict.py",
+        "setup_project.py",
+        "validate_project.py",
+        "requirements.txt",
+        "README.md",
+        "src/data_contract.py",
+        "src/data_loader.py",
+        "src/questionnaire_loader.py",
+        "src/feature_selection.py",
+        "src/preprocessing.py",
+        "src/question_generator.py",
+        "src/question_explainer.py",
+        "src/nlp_interpreter.py",
+        "src/model.py",
+        "src/predictor.py",
+        "src/web_app.py",
+        "src/audit.py",
+        "src/training_utils.py",
+        "web/templates/index.html",
+        "web/static/css/styles.css",
+        "web/static/js/app.js",
+        "docs/documento_pgc_contenido.md",
+        "docs/presentacion_pgc_contenido.md",
+        "docs/generar_documentos_word.py",
+        "docs/demo_commands.txt"
+      ]
+    },
+    {
+      "id": "csv_presence",
+      "description": "CSV principal y cuestionario presentes con nombres esperados",
+      "passed": true,
+      "evidence": {
+        "main_dataset": "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC\\data\\hybrid_no_external_scores_dataset_ready(1).csv",
+        "questionnaire": "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC\\data\\questionnaire_v16_4_visible_questions_excel_utf8.csv"
+      }
+    },
+    {
+      "id": "default_target_conduct",
+      "description": "Target por defecto configurado como target_domain_conduct_final",
+      "passed": true,
+      "evidence": {
+        "DEFAULT_TARGET_COLUMN": "target_domain_conduct_final"
+      }
+    },
+    {
+      "id": "target_domain_coherence",
+      "description": "Si el target es conducta, no se permiten features ADHD en preguntas",
+      "passed": true,
+      "evidence": {
+        "target": "target_domain_conduct_final",
+        "schema_feature_count": 23,
+        "selected_feature_count": 23,
+        "adhd_in_schema": [],
+        "adhd_in_selected": [],
+        "coherent": true
+      }
+    },
+    {
+      "id": "contract_report",
+      "description": "Reporte de contrato de datos generado",
+      "passed": true,
+      "evidence": {
+        "ok": true,
+        "error": ""
+      }
+    },
+    {
+      "id": "dataset_analysis_doc",
+      "description": "Documento docs/dataset_analysis.md generado",
+      "passed": true,
+      "evidence": "docs/dataset_analysis.md"
+    },
+    {
+      "id": "requirements_declared",
+      "description": "Dependencias requeridas declaradas",
+      "passed": true,
+      "evidence": {
+        "missing": [],
+        "declared": [
+          "pandas",
+          "numpy",
+          "scikit-learn",
+          "joblib",
+          "fastapi",
+          "uvicorn",
+          "jinja2",
+          "python-multipart",
+          "matplotlib",
+          "rapidfuzz",
+          "unidecode",
+          "openpyxl",
+          "pytest",
+          "python-docx"
+        ]
+      }
+    },
+    {
+      "id": "requirements_banned_absent",
+      "description": "Dependencias prohibidas ausentes",
+      "passed": true,
+      "evidence": {
+        "banned_found": []
+      }
+    },
+    {
+      "id": "forbidden_imports_absent",
+      "description": "Sin imports de frameworks/proveedores prohibidos",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "id": "random_forest_model_file",
+      "description": "Modelo y preprocesador guardados",
+      "passed": true,
+      "evidence": {
+        "missing": [],
+        "expected": [
+          "models/model.joblib",
+          "models/preprocessor.joblib",
+          "models/metadata.json"
+        ]
+      }
+    },
+    {
+      "id": "artifacts_generated",
+      "description": "Artefactos de mÃ©tricas/threshold/importancia generados",
+      "passed": true,
+      "evidence": {
+        "missing": []
+      }
+    },
+    {
+      "id": "frontend_files",
+      "description": "Frontend HTML/CSS/JS existe y no estÃ¡ vacÃ­o",
+      "passed": true,
+      "evidence": {
+        "html_exists": true,
+        "css_exists": true,
+        "js_exists": true
+      }
+    },
+    {
+      "id": "frontend_required_controls",
+      "description": "Frontend contiene botones de ayuda y flujo de confirmaciÃ³n",
+      "passed": true,
+      "evidence": "No entiendo la pregunta / Dame un ejemplo / Explicar con palabras mÃ¡s simples / Enviar / Reiniciar"
+    },
+    {
+      "id": "frontend_no_demo_or_technical_text",
+      "description": "Frontend no contiene textos de demo, Input for ni JSON crudo",
+      "passed": true,
+      "evidence": {
+        "forbidden_hits": []
+      }
+    },
+    {
+      "id": "medical_disclaimer_visible",
+      "description": "Advertencia no diagnÃ³stica visible",
+      "passed": false,
+      "evidence": "Texto de advertencia en index.html"
+    },
+    {
+      "id": "quick_smoke_test",
+      "description": "Prueba rÃ¡pida de pytest ejecutada",
+      "passed": true,
+      "evidence": {
+        "executed": true,
+        "return_code": 0,
+        "stdout_tail": ".                                                                        [100%]\n1 passed in 0.03s",
+        "stderr_tail": ""
+      }
+    },
+    {
+      "id": "backend_endpoint_smoke",
+      "description": "Backend levanta y endpoints principales responden",
+      "passed": true,
+      "evidence": {
+        "ok": true,
+        "errors": [],
+        "checks": {
+          "model_status": {
+            "model_trained": true,
+            "target_column": "target_domain_conduct_final",
+            "threshold_final": 0.42,
+            "features_count": 23,
+            "medical_disclaimer": "Este resultado no es un diagnóstico médico y debe ser revisado por un profesional calificado.",
+            "message": "Modelo listo para predicción."
+          },
+          "home_ok": true,
+          "questions_ok": true,
+          "explain_ok": true,
+          "interpret_help_ok": true,
+          "metrics_endpoint_ok": true,
+          "importance_endpoint_ok": true
+        }
+      }
+    },
+    {
+      "id": "audit_file_exists",
+      "description": "Archivo de auditorÃ­a existe",
+      "passed": true,
+      "evidence": "logs/audit.jsonl"
+    },
+    {
+      "id": "docs_pgc",
+      "description": "DocumentaciÃ³n PGC y comandos demo presentes",
+      "passed": true,
+      "evidence": [
+        "docs/documento_pgc_contenido.md",
+        "docs/presentacion_pgc_contenido.md",
+        "docs/demo_commands.txt",
+        "docs/generar_documentos_word.py"
+      ]
+    }
+  ]
+}

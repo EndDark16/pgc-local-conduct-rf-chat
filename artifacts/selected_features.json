@@ -1,0 +1,665 @@
+{
+  "target_used": "target_domain_conduct_final",
+  "features_used": [
+    "age_years",
+    "conduct_01_bullies_threatens_intimidates",
+    "conduct_02_initiates_fights",
+    "conduct_03_weapon_use",
+    "conduct_04_physical_cruelty_people",
+    "conduct_05_physical_cruelty_animals",
+    "conduct_06_steals_confronting_victim",
+    "conduct_07_forced_sex",
+    "conduct_08_fire_setting",
+    "conduct_09_property_destruction",
+    "conduct_10_breaks_into_house_building_car",
+    "conduct_11_lies_to_obtain_or_avoid",
+    "conduct_12_steals_without_confrontation",
+    "conduct_13_stays_out_at_night_before_13",
+    "conduct_14_runs_away_overnight",
+    "conduct_15_truancy_before_13",
+    "conduct_impairment_global",
+    "conduct_lpe_01_lack_remorse_guilt",
+    "conduct_lpe_02_callous_lack_empathy",
+    "conduct_lpe_03_unconcerned_performance",
+    "conduct_lpe_04_shallow_deficient_affect",
+    "conduct_onset_before_10",
+    "sex_assigned_at_birth"
+  ],
+  "features_used_count": 23,
+  "features_excluded": [
+    {
+      "feature": "adhd_context_home",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_context_other",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_context_school",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_hypimp_01_fidgets",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_hypimp_02_leaves_seat",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_hypimp_03_runs_or_climbs_inappropriately",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_hypimp_04_cannot_play_quietly",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_hypimp_05_driven_by_motor",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_hypimp_06_talks_excessively",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_hypimp_07_blurts_out",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_hypimp_08_difficulty_waiting_turn",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_hypimp_09_interrupts_intrudes",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_inatt_01_attention_to_detail_errors",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_inatt_02_sustained_attention_difficulty",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_inatt_03_seems_not_listening",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_inatt_04_fails_to_finish_tasks",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_inatt_05_organization_difficulty",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_inatt_06_avoids_sustained_effort",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_inatt_07_loses_things",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_inatt_08_easily_distracted",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_inatt_09_forgetful_daily_activities",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_impairment_home",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_impairment_school",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_impairment_social",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_onset_before_12",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_not_better_explained_other_mental",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "adhd_not_psychosis_exclusive",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "agor_almost_always_triggered",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "agor_avoid_or_need_companion",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "agor_disproportionate",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "agor_duration_months",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "agor_escape_help_cognition",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "agor_fear_01_public_transport",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "agor_fear_02_open_spaces",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "agor_fear_03_enclosed_spaces",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "agor_fear_04_crowds_queues",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "agor_fear_05_outside_home_alone",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "agor_impairment",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "agor_not_better_explained",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "agor_not_excessive_due_medical",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "gad_assoc_01_restlessness",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "gad_assoc_02_fatigue",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "gad_assoc_03_concentration_difficulty",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "gad_assoc_04_irritability",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "gad_assoc_05_muscle_tension",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "gad_assoc_06_sleep_problems",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "gad_difficulty_controlling_worry",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "gad_duration_months",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "gad_excessive_worry_multiple_areas",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "gad_impairment",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "gad_not_better_explained",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "gad_not_due_substance_medical",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "sep_anx_01_distress_on_separation",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "sep_anx_02_worry_losing_attachment_figures",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "sep_anx_03_worry_event_causing_separation",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "sep_anx_04_refuses_leaving_home_school",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "sep_anx_05_fear_being_alone_without_attachment",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "sep_anx_06_refuses_sleep_away_or_alone",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "sep_anx_07_separation_nightmares",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "sep_anx_08_physical_complaints_on_separation",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "sep_anx_duration_weeks",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "sep_anx_impairment",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "sep_anx_not_better_explained",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "social_anxiety_almost_always_triggered",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "social_anxiety_avoid_or_endure_intense",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "social_anxiety_children_peer_only_flag",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "social_anxiety_disproportionate",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "social_anxiety_duration_months",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "social_anxiety_fear_being_observed",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "social_anxiety_fear_interactions",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "social_anxiety_fear_negative_evaluation",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "social_anxiety_fear_performance",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "social_anxiety_impairment",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "social_anxiety_not_better_explained",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "social_anxiety_not_due_substance_medical",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "pdd_01_appetite_change",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "pdd_02_sleep_change",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "pdd_03_low_energy",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "pdd_04_low_self_esteem",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "pdd_05_concentration_difficulty",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "pdd_06_hopelessness",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "pdd_depressed_or_irritable_mood",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "pdd_duration_months_child",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "pdd_impairment",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "pdd_no_gap_gt_2_months",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "pdd_no_mania_hypomania",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "pdd_no_psychotic_explained",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "pdd_no_substance_medical",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "mdd_02_loss_of_interest_or_pleasure",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "mdd_03_weight_or_appetite_change",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "mdd_05_psychomotor_change",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "mdd_06_fatigue_or_low_energy",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "mdd_07_worthlessness_or_excessive_guilt",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "mdd_08_concentration_or_decision_difficulty",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "mdd_09_death_or_suicidal_thoughts",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "mdd_duration_weeks",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "mdd_impairment",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "dmdd_context_home",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "dmdd_context_peers",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "dmdd_context_school",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "dmdd_developmentally_inappropriate",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "dmdd_duration_months",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "dmdd_irritable_between_outbursts",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "dmdd_no_mania_hypomania",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "dmdd_no_substance_medical",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "dmdd_not_better_explained",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "dmdd_onset_before_10",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "dmdd_outbursts_frequency_per_week",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "dmdd_outbursts_severity",
+      "reason": "target_domain_prefix_exclusion"
+    },
+    {
+      "feature": "encopresis_constipation_present",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "encopresis_duration_months_consecutive",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "encopresis_event_frequency_per_month",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "encopresis_not_due_substance_medical",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "encopresis_overflow_incontinence",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "encopresis_visible_deposition_pattern",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "enuresis_distress_impairment",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "enuresis_diurnal",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "enuresis_duration_months_consecutive",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "enuresis_event_frequency_per_week",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "enuresis_nocturnal",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "enuresis_not_due_substance_medical",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "enuresis_primary_course",
+      "reason": "out_of_target_domain"
+    },
+    {
+      "feature": "enuresis_secondary_course",
+      "reason": "out_of_target_domain"
+    }
+  ],
+  "feature_origins": {
+    "age_years": {
+      "origin": "questionnaire_contract",
+      "question": "¿Qué edad tiene el niño o la niña, en años cumplidos?",
+      "domains_final": "adhd|conduct|elimination|anxiety|depression",
+      "section_name": "1. Información básica"
+    },
+    "conduct_01_bullies_threatens_intimidates": {
+      "origin": "questionnaire_contract",
+      "question": "¿Ha intimidado, amenazado o acosado repetidamente a otras personas?",
+      "domains_final": "adhd|conduct|elimination|anxiety|depression",
+      "section_name": "3. Comportamiento, normas y convivencia"
+    },
+    "conduct_02_initiates_fights": {
+      "origin": "questionnaire_contract",
+      "question": "¿Ha iniciado peleas físicas?",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "section_name": "3. Comportamiento, normas y convivencia"
+    },
+    "conduct_03_weapon_use": {
+      "origin": "questionnaire_contract",
+      "question": "¿Ha usado un objeto o arma que pudiera causar daño grave?",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "section_name": "3. Comportamiento, normas y convivencia"
+    },
+    "conduct_04_physical_cruelty_people": {
+      "origin": "questionnaire_contract",
+      "question": "¿Ha sido físicamente cruel con otras personas?",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "section_name": "3. Comportamiento, normas y convivencia"
+    },
+    "conduct_05_physical_cruelty_animals": {
+      "origin": "questionnaire_contract",
+      "question": "¿Ha sido físicamente cruel con animales?",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "section_name": "3. Comportamiento, normas y convivencia"
+    },
+    "conduct_06_steals_confronting_victim": {
+      "origin": "questionnaire_contract",
+      "question": "¿Ha robado algo usando amenaza, fuerza o intimidación contra otra persona?",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "section_name": "3. Comportamiento, normas y convivencia"
+    },
+    "conduct_07_forced_sex": {
+      "origin": "questionnaire_contract",
+      "question": "¿Ha forzado a otra persona a una actividad sexual?",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "section_name": "3. Comportamiento, normas y convivencia"
+    },
+    "conduct_08_fire_setting": {
+      "origin": "questionnaire_contract",
+      "question": "¿Ha provocado incendios deliberadamente con intención de causar daño o problemas serios?",
+      "domains_final": "adhd|conduct|elimination|anxiety|depression",
+      "section_name": "3. Comportamiento, normas y convivencia"
+    },
+    "conduct_09_property_destruction": {
+      "origin": "questionnaire_contract",
+      "question": "¿Ha destruido deliberadamente propiedad ajena?",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "section_name": "3. Comportamiento, normas y convivencia"
+    },
+    "conduct_10_breaks_into_house_building_car": {
+      "origin": "questionnaire_contract",
+      "question": "¿Ha entrado por la fuerza a una casa, edificio o vehículo que no le pertenecía?",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "section_name": "3. Comportamiento, normas y convivencia"
+    },
+    "conduct_11_lies_to_obtain_or_avoid": {
+      "origin": "questionnaire_contract",
+      "question": "¿Miente con frecuencia para obtener beneficios, evitar consecuencias o librarse de obligaciones?",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "section_name": "3. Comportamiento, normas y convivencia"
+    },
+    "conduct_12_steals_without_confrontation": {
+      "origin": "questionnaire_contract",
+      "question": "¿Ha robado objetos sin usar amenaza, fuerza ni contacto directo con la persona afectada?",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "section_name": "3. Comportamiento, normas y convivencia"
+    },
+    "conduct_13_stays_out_at_night_before_13": {
+      "origin": "questionnaire_contract",
+      "question": "¿Se ha quedado fuera de casa durante la noche sin permiso?",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "section_name": "3. Comportamiento, normas y convivencia"
+    },
+    "conduct_14_runs_away_overnight": {
+      "origin": "questionnaire_contract",
+      "question": "¿Se ha escapado de casa pasando la noche fuera?",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "section_name": "3. Comportamiento, normas y convivencia"
+    },
+    "conduct_15_truancy_before_13": {
+      "origin": "questionnaire_contract",
+      "question": "¿Ha faltado al colegio sin permiso?",
+      "domains_final": "adhd|conduct|anxiety|depression",
+      "section_name": "3. Comportamiento, normas y convivencia"
+    },
+    "conduct_impairment_global": {
+      "origin": "questionnaire_contract",
+      "question": "En conjunto, ¿cuánto afectan estas conductas la vida diaria?",
+      "domains_final": "adhd|conduct|elimination|depression",
+      "section_name": "2. Atención, actividad e impulsividad"
+    },
+    "conduct_lpe_01_lack_remorse_guilt": {
+      "origin": "questionnaire_contract",
+      "question": "¿Suele mostrar poca culpa o poco remordimiento después de hacer daño o de comportarse mal?",
+      "domains_final": "adhd|conduct|depression",
+      "section_name": "3. Comportamiento, normas y convivencia"
+    },
+    "conduct_lpe_02_callous_lack_empathy": {
+      "origin": "questionnaire_contract",
+      "question": "¿Suele mostrar poca empatía o poca preocupación por los sentimientos de otras personas?",
+      "domains_final": "adhd|conduct|depression",
+      "section_name": "3. Comportamiento, normas y convivencia"
+    },
+    "conduct_lpe_03_unconcerned_performance": {
+      "origin": "questionnaire_contract",
+      "question": "¿Parece poco preocupado por cómo le va en el colegio, con otras personas o con su comportamiento?",
+      "domains_final": "adhd|conduct|depression",
+      "section_name": "3. Comportamiento, normas y convivencia"
+    },
+    "conduct_lpe_04_shallow_deficient_affect": {
+      "origin": "questionnaire_contract",
+      "question": "¿La forma en que expresa sus emociones parece poco sincera, superficial o muy limitada?",
+      "domains_final": "adhd|conduct|depression",
+      "section_name": "3. Comportamiento, normas y convivencia"
+    },
+    "conduct_onset_before_10": {
+      "origin": "questionnaire_contract",
+      "question": "¿Las primeras conductas problemáticas relevantes empezaron antes de los 10 años?",
+      "domains_final": "adhd|depression",
+      "section_name": "2. Atención, actividad e impulsividad"
+    },
+    "sex_assigned_at_birth": {
+      "origin": "questionnaire_contract",
+      "question": "¿Qué sexo se registró al nacer para el niño o la niña?",
+      "domains_final": "adhd|depression",
+      "section_name": "1. Información básica"
+    }
+  },
+  "warnings": [],
+  "decision": "Selección por dominio objetivo con prioridad de contrato, exclusión de fugas, y bloqueo de prefijos de otros dominios para evitar incoherencias."
+}

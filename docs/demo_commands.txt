@@ -1,0 +1,7 @@
+pip install -r requirements.txt
+python validate_project.py
+python train.py
+python app.py
+http://127.0.0.1:8000
+pytest
+python docs/generar_documentos_word.py

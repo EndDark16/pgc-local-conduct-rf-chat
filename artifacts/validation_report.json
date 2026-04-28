@@ -1,0 +1,79 @@
+{
+  "generated_at_utc": "2026-04-28T05:00:31.257898+00:00",
+  "project_root": "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC",
+  "checks": {
+    "required_dirs_ok": true,
+    "essential_files_checked": 27,
+    "main_dataset_found": "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC\\data\\hybrid_no_external_scores_dataset_ready(1).csv",
+    "questionnaire_found": "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC\\data\\questionnaire_v16_4_visible_questions_excel_utf8.csv",
+    "imports": {
+      "src.config": "ok",
+      "src.data_loader": "ok",
+      "src.questionnaire_loader": "ok",
+      "src.data_contract": "ok",
+      "src.feature_selection": "ok",
+      "src.preprocessing": "ok",
+      "src.question_generator": "ok",
+      "src.question_explainer": "ok",
+      "src.nlp_interpreter": "ok",
+      "src.model": "ok",
+      "src.predictor": "ok",
+      "src.web_app": "ok"
+    },
+    "model_exists": true,
+    "frontend_files": {
+      "html_exists": true,
+      "css_exists": true,
+      "js_exists": true
+    },
+    "quick_tests": {
+      "executed": true,
+      "return_code": 0,
+      "stdout_tail": ".                                                                        [100%]\n1 passed in 0.03s",
+      "stderr_tail": ""
+    },
+    "backend_smoke": {
+      "ok": true,
+      "errors": [],
+      "checks": {
+        "model_status": {
+          "model_trained": true,
+          "target_column": "target_domain_conduct_final",
+          "threshold_final": 0.42,
+          "features_count": 23,
+          "medical_disclaimer": "Este resultado no es un diagnóstico médico y debe ser revisado por un profesional calificado.",
+          "message": "Modelo listo para predicción."
+        },
+        "home_ok": true,
+        "questions_ok": true,
+        "explain_ok": true,
+        "interpret_help_ok": true,
+        "metrics_endpoint_ok": true,
+        "importance_endpoint_ok": true
+      }
+    },
+    "requirements": {
+      "missing_required": [],
+      "banned_found": []
+    },
+    "banned_import_hits": [],
+    "domain_coherence": {
+      "target": "target_domain_conduct_final",
+      "schema_feature_count": 23,
+      "selected_feature_count": 23,
+      "adhd_in_schema": [],
+      "adhd_in_selected": [],
+      "coherent": true
+    },
+    "forbidden_frontend_hits": []
+  },
+  "issues": [],
+  "warnings": [],
+  "auto_fixes": [],
+  "status": "ok",
+  "next_steps": [
+    "python train.py",
+    "python app.py"
+  ],
+  "compliance_report_path": "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC\\artifacts\\compliance_report.json"
+}

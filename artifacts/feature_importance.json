@@ -1,0 +1,244 @@
+{
+  "top_transformed_features": [
+    {
+      "transformed_feature": "num__conduct_impairment_global",
+      "importance": 0.2878474414870699
+    },
+    {
+      "transformed_feature": "num__conduct_03_weapon_use",
+      "importance": 0.10689658596580848
+    },
+    {
+      "transformed_feature": "num__conduct_08_fire_setting",
+      "importance": 0.07187655990611388
+    },
+    {
+      "transformed_feature": "num__conduct_06_steals_confronting_victim",
+      "importance": 0.06473114448957491
+    },
+    {
+      "transformed_feature": "num__conduct_02_initiates_fights",
+      "importance": 0.06426227795854685
+    },
+    {
+      "transformed_feature": "num__conduct_09_property_destruction",
+      "importance": 0.058011854191152915
+    },
+    {
+      "transformed_feature": "num__conduct_15_truancy_before_13",
+      "importance": 0.043937812505788265
+    },
+    {
+      "transformed_feature": "num__conduct_01_bullies_threatens_intimidates",
+      "importance": 0.03878459657939828
+    },
+    {
+      "transformed_feature": "num__conduct_14_runs_away_overnight",
+      "importance": 0.034442675672574224
+    },
+    {
+      "transformed_feature": "num__conduct_10_breaks_into_house_building_car",
+      "importance": 0.03215303062115029
+    },
+    {
+      "transformed_feature": "num__conduct_05_physical_cruelty_animals",
+      "importance": 0.031187978403388356
+    },
+    {
+      "transformed_feature": "num__conduct_lpe_02_callous_lack_empathy",
+      "importance": 0.027781582430014686
+    },
+    {
+      "transformed_feature": "num__conduct_12_steals_without_confrontation",
+      "importance": 0.02690676653643898
+    },
+    {
+      "transformed_feature": "num__conduct_lpe_04_shallow_deficient_affect",
+      "importance": 0.025839784097380393
+    },
+    {
+      "transformed_feature": "num__conduct_lpe_03_unconcerned_performance",
+      "importance": 0.0198211305698946
+    },
+    {
+      "transformed_feature": "num__conduct_07_forced_sex",
+      "importance": 0.017937876244634773
+    },
+    {
+      "transformed_feature": "num__conduct_13_stays_out_at_night_before_13",
+      "importance": 0.01714558996714025
+    },
+    {
+      "transformed_feature": "num__conduct_04_physical_cruelty_people",
+      "importance": 0.012953855043740995
+    },
+    {
+      "transformed_feature": "num__conduct_11_lies_to_obtain_or_avoid",
+      "importance": 0.009406451966186816
+    },
+    {
+      "transformed_feature": "num__conduct_lpe_01_lack_remorse_guilt",
+      "importance": 0.0052753016835378076
+    },
+    {
+      "transformed_feature": "num__conduct_onset_before_10",
+      "importance": 0.0012882524366004918
+    },
+    {
+      "transformed_feature": "num__age_years",
+      "importance": 0.0012616146026473928
+    },
+    {
+      "transformed_feature": "cat__sex_assigned_at_birth_Female",
+      "importance": 0.0001522939268608914
+    },
+    {
+      "transformed_feature": "cat__sex_assigned_at_birth_Male",
+      "importance": 9.754271435560568e-05
+    },
+    {
+      "transformed_feature": "cat__sex_assigned_at_birth_Unknown",
+      "importance": 0.0
+    }
+  ],
+  "feature_importance_aggregated": [
+    {
+      "feature": "conduct_impairment_global",
+      "importance": 0.2878474414870699,
+      "label": "Conduct impairment global",
+      "question": "En conjunto, ¿cuánto afectan estas conductas la vida diaria?"
+    },
+    {
+      "feature": "conduct_03_weapon_use",
+      "importance": 0.10689658596580848,
+      "label": "Conduct 03 weapon use",
+      "question": "¿Ha usado un objeto o arma que pudiera causar daño grave?"
+    },
+    {
+      "feature": "conduct_08_fire_setting",
+      "importance": 0.07187655990611388,
+      "label": "Conduct 08 fire setting",
+      "question": "¿Ha provocado incendios deliberadamente con intención de causar daño o problemas serios?"
+    },
+    {
+      "feature": "conduct_06_steals_confronting_victim",
+      "importance": 0.06473114448957491,
+      "label": "Conduct 06 steals confronting victim",
+      "question": "¿Ha robado algo usando amenaza, fuerza o intimidación contra otra persona?"
+    },
+    {
+      "feature": "conduct_02_initiates_fights",
+      "importance": 0.06426227795854685,
+      "label": "Conduct 02 initiates fights",
+      "question": "¿Ha iniciado peleas físicas?"
+    },
+    {
+      "feature": "conduct_09_property_destruction",
+      "importance": 0.058011854191152915,
+      "label": "Conduct 09 property destruction",
+      "question": "¿Ha destruido deliberadamente propiedad ajena?"
+    },
+    {
+      "feature": "conduct_15_truancy_before_13",
+      "importance": 0.043937812505788265,
+      "label": "Conduct 15 truancy before 13",
+      "question": "¿Ha faltado al colegio sin permiso?"
+    },
+    {
+      "feature": "conduct_01_bullies_threatens_intimidates",
+      "importance": 0.03878459657939828,
+      "label": "Conduct 01 bullies threatens intimidates",
+      "question": "¿Ha intimidado, amenazado o acosado repetidamente a otras personas?"
+    },
+    {
+      "feature": "conduct_14_runs_away_overnight",
+      "importance": 0.034442675672574224,
+      "label": "Conduct 14 runs away overnight",
+      "question": "¿Se ha escapado de casa pasando la noche fuera?"
+    },
+    {
+      "feature": "conduct_10_breaks_into_house_building_car",
+      "importance": 0.03215303062115029,
+      "label": "Conduct 10 breaks into house building car",
+      "question": "¿Ha entrado por la fuerza a una casa, edificio o vehículo que no le pertenecía?"
+    },
+    {
+      "feature": "conduct_05_physical_cruelty_animals",
+      "importance": 0.031187978403388356,
+      "label": "Conduct 05 physical cruelty animals",
+      "question": "¿Ha sido físicamente cruel con animales?"
+    },
+    {
+      "feature": "conduct_lpe_02_callous_lack_empathy",
+      "importance": 0.027781582430014686,
+      "label": "Conduct lpe 02 callous lack empathy",
+      "question": "¿Suele mostrar poca empatía o poca preocupación por los sentimientos de otras personas?"
+    },
+    {
+      "feature": "conduct_12_steals_without_confrontation",
+      "importance": 0.02690676653643898,
+      "label": "Conduct 12 steals without confrontation",
+      "question": "¿Ha robado objetos sin usar amenaza, fuerza ni contacto directo con la persona afectada?"
+    },
+    {
+      "feature": "conduct_lpe_04_shallow_deficient_affect",
+      "importance": 0.025839784097380393,
+      "label": "Conduct lpe 04 shallow deficient affect",
+      "question": "¿La forma en que expresa sus emociones parece poco sincera, superficial o muy limitada?"
+    },
+    {
+      "feature": "conduct_lpe_03_unconcerned_performance",
+      "importance": 0.0198211305698946,
+      "label": "Conduct lpe 03 unconcerned performance",
+      "question": "¿Parece poco preocupado por cómo le va en el colegio, con otras personas o con su comportamiento?"
+    },
+    {
+      "feature": "conduct_07_forced_sex",
+      "importance": 0.017937876244634773,
+      "label": "Conduct 07 forced sex",
+      "question": "¿Ha forzado a otra persona a una actividad sexual?"
+    },
+    {
+      "feature": "conduct_13_stays_out_at_night_before_13",
+      "importance": 0.01714558996714025,
+      "label": "Conduct 13 stays out at night before 13",
+      "question": "¿Se ha quedado fuera de casa durante la noche sin permiso?"
+    },
+    {
+      "feature": "conduct_04_physical_cruelty_people",
+      "importance": 0.012953855043740995,
+      "label": "Conduct 04 physical cruelty people",
+      "question": "¿Ha sido físicamente cruel con otras personas?"
+    },
+    {
+      "feature": "conduct_11_lies_to_obtain_or_avoid",
+      "importance": 0.009406451966186816,
+      "label": "Conduct 11 lies to obtain or avoid",
+      "question": "¿Miente con frecuencia para obtener beneficios, evitar consecuencias o librarse de obligaciones?"
+    },
+    {
+      "feature": "conduct_lpe_01_lack_remorse_guilt",
+      "importance": 0.0052753016835378076,
+      "label": "Conduct lpe 01 lack remorse guilt",
+      "question": "¿Suele mostrar poca culpa o poco remordimiento después de hacer daño o de comportarse mal?"
+    },
+    {
+      "feature": "conduct_onset_before_10",
+      "importance": 0.0012882524366004918,
+      "label": "Conduct onset before 10",
+      "question": "¿Las primeras conductas problemáticas relevantes empezaron antes de los 10 años?"
+    },
+    {
+      "feature": "age_years",
+      "importance": 0.0012616146026473928,
+      "label": "Edad en años cumplidos",
+      "question": "¿Qué edad tiene el niño o la niña, en años cumplidos?"
+    },
+    {
+      "feature": "sex_assigned_at_birth",
+      "importance": 0.0002498366412164971,
+      "label": "Sexo registrado al nacer",
+      "question": "¿Qué sexo se registró al nacer para el niño o la niña?"
+    }
+  ]
+}
