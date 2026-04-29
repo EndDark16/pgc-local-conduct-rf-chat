@@ -117,6 +117,49 @@ Abrir en:
 http://127.0.0.1:8000
 ```
 
+## Despliegue en Netlify (frontend + proxy API)
+
+Este repositorio ahora incluye configuración lista para Netlify:
+
+- `netlify.toml`
+- `web/index.html` (entrada estática para Netlify)
+- `netlify/functions/api-proxy.js` (proxy de `/api/*`)
+
+### Importante
+
+Netlify no ejecuta este backend Python/FastAPI directamente como app persistente.  
+Por eso, en Netlify se despliega:
+
+1. Frontend estático (carpeta `web/`).
+2. Función serverless `api-proxy` que reenvía `/api/*` hacia un backend FastAPI público.
+
+### Variable obligatoria en Netlify
+
+Define en **Site settings → Environment variables**:
+
+- `BACKEND_API_URL`: URL pública base de tu backend FastAPI  
+  Ejemplo: `https://tu-backend.onrender.com`
+
+La función proxy enviará:
+
+- `/api/model-status` -> `https://tu-backend.onrender.com/api/model-status`
+- `/api/questions` -> `https://tu-backend.onrender.com/api/questions`
+- etc.
+
+Si `BACKEND_API_URL` no existe, el sitio abrirá pero las llamadas API devolverán error controlado (no 404 de página).
+
+### Cómo desplegar
+
+1. Conecta el repo en Netlify.
+2. Build command: vacío (o `echo "static"`).
+3. Publish directory: se toma de `netlify.toml` (`web`).
+4. Agrega `BACKEND_API_URL`.
+5. Deploy.
+
+El 404 “Page not found” en rutas internas se corrige con el rewrite:
+
+- `/* -> /index.html (200)`
+
 ## Flujo conversacional
 
 1. La app carga modelo y preguntas automáticamente.
