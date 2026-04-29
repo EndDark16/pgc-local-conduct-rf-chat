@@ -1,4 +1,4 @@
-"""Humanized questionnaire generation for chat UI."""
+﻿"""Humanized questionnaire generation for chat UI."""
 
 from __future__ import annotations
 
@@ -14,16 +14,11 @@ def _auto_fallback_question() -> str:
 
 def _pick_question_text(metadata: Dict[str, Any], role: str) -> str:
     role_norm = normalize_text(role)
-    if role_norm in {"psychologist", "psicologo"}:
+    if role_norm in {"psychologist", "psicologo", "psicólogo"}:
         preferred = metadata.get("psychologist_question")
     else:
         preferred = metadata.get("caregiver_question")
-    return str(
-        preferred
-        or metadata.get("question_text_primary")
-        or metadata.get("fallback_question")
-        or _auto_fallback_question()
-    ).strip()
+    return str(preferred or metadata.get("question_text_primary") or metadata.get("fallback_question") or _auto_fallback_question()).strip()
 
 
 def question_for_feature(metadata: Dict[str, Any], role: str = "caregiver") -> Dict[str, Any]:
@@ -54,10 +49,6 @@ def question_for_feature(metadata: Dict[str, Any], role: str = "caregiver") -> D
     }
 
 
-def generate_questionnaire(
-    schema: Dict[str, Any],
-    role: str = "caregiver",
-) -> List[Dict[str, Any]]:
+def generate_questionnaire(schema: Dict[str, Any], role: str = "caregiver") -> List[Dict[str, Any]]:
     items = schema.get("features", [])
     return [question_for_feature(item, role=role) for item in items]
-

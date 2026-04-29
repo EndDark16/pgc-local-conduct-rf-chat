@@ -206,3 +206,19 @@ umeric_range, categorical).
 - Respuestas ambiguas generan aclaraciones específicas por escala.
 - El sistema evita mostrar nombres técnicos y JSON crudo en la interfaz principal.
 
+
+## Actualización técnica reciente
+
+- Target por defecto confirmado: `target_domain_conduct_final` cuando no existe `TARGET_DISORDER`.
+- Filtrado de preguntas por dominio: para conducta se excluyen preguntas `adhd_*` y de dominios no objetivo.
+- Parser NLP local generalizado por tipo de escala:
+  - `binary`
+  - `temporal_0_2`
+  - `observation_0_2`
+  - `frequency_0_3`
+  - `impact_0_3`
+  - `numeric_range`
+  - `categorical`
+- Manejo de intención de ayuda separado de respuestas válidas.
+- Flujo chat con confirmación obligatoria, aclaraciones contextuales y QA posterior al resultado.
+- Sin uso de APIs externas, sin modelos LLM remotos, sin dependencias pagas.

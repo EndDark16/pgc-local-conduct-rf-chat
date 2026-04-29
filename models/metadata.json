@@ -1,5 +1,5 @@
 {
-  "trained_at_utc": "2026-04-28T05:00:16.351423+00:00",
+  "trained_at_utc": "2026-04-29T02:02:07.493378+00:00",
   "model_type": "RandomForestClassifier",
   "dataset_file": "hybrid_no_external_scores_dataset_ready(1).csv",
   "dataset_hash_sha256": "ff76e9235a0a538452f92004e878ca7a75db23e28a69cee7a805b241d7ab7473",
@@ -36,43 +36,46 @@
   "feature_strategy_selected": "base_contract_selection",
   "feature_candidates_tested": 1,
   "hyperparameters": {
-    "model__n_estimators": 200,
-    "model__min_samples_split": 30,
+    "model__n_estimators": 100,
+    "model__min_samples_split": 40,
     "model__min_samples_leaf": 4,
-    "model__max_samples": 0.8,
+    "model__max_samples": 0.55,
     "model__max_features": "log2",
-    "model__max_depth": 6,
-    "model__criterion": "gini",
+    "model__max_depth": 8,
+    "model__criterion": "entropy",
     "model__class_weight": "balanced",
-    "model__ccp_alpha": 0.0,
+    "model__ccp_alpha": 0.001,
     "model__bootstrap": true
   },
   "cv_selection_diagnostics": {
     "mean_test_f1": 0.9961238549473843,
     "mean_test_recall": 1.0,
     "mean_test_precision": 0.9923216841603053,
-    "mean_train_f1": 0.9967430885075982,
-    "overfit_gap_cv": 0.0006192335602138721,
+    "mean_train_f1": 0.9960945899767536,
+    "overfit_gap_cv": 0.0,
     "std_test_f1": 0.004728817398576547,
-    "selection_score": 1.205285524466136
+    "selection_score": 1.2056570646022644
   },
   "thresholds": {
     "default": 0.5,
-    "best_f1": 0.42,
-    "best_recall": 0.42,
-    "final": 0.42
+    "best_f1": 0.45,
+    "best_recall": 0.45,
+    "final": 0.45
   },
   "metrics_summary": {
     "precision_final": 0.9937888198757764,
     "recall_final": 1.0,
     "f1_final": 0.9968847352024922,
     "accuracy_final": 0.9979166666666667,
-    "roc_auc_final": 0.9998242187499999,
-    "pr_auc_final": 0.9996416227969037,
+    "roc_auc_final": 0.9996484375000001,
+    "pr_auc_final": 0.9992614394902187,
     "overfit_gap_train_val_f1": 0.0,
-    "generalization_cv_f1_mean": 0.9929960618194432,
-    "generalization_cv_f1_std": 0.0029118712083664984,
-    "generalization_cv_f1_gap_train_test": 0.0017470095789853257
+    "generalization_cv_f1_mean": 0.9937559611098987,
+    "generalization_cv_f1_std": 0.003993398793079302,
+    "generalization_cv_f1_gap_train_test": 0.0011784552917049052,
+    "generalization_alerts": [
+      "Las métricas de test superan 0.98. Esto puede indicar señales muy directas del target o la necesidad de validación externa adicional."
+    ]
   },
   "preprocessing_info": {
     "numeric_columns": [
@@ -109,5 +112,5 @@
     "matching_features_count": 146,
     "questionnaire_features_count": 146
   },
-  "model_hash_sha256": "53c4dde9ff7e0bc54c30bed3f51936872cce80638d249e1eb43ff50fca31e95f"
+  "model_hash_sha256": "d618bef68ebdb9f95f1f2b7e64dc61d44c22d42c6aae7deaadbda34dea5165f6"
 }

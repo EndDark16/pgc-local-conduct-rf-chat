@@ -1,6 +1,6 @@
 {
   "train_metrics_final": {
-    "threshold": 0.42,
+    "threshold": 0.45,
     "accuracy": 0.9928385416666666,
     "precision": 0.9788867562380038,
     "recall": 1.0,
@@ -42,11 +42,11 @@
         "support": 1536.0
       }
     },
-    "roc_auc": 0.9999541337002636,
-    "pr_auc": 0.9999061460360137
+    "roc_auc": 0.9999025341130604,
+    "pr_auc": 0.9998004735408991
   },
   "validation_metrics_final": {
-    "threshold": 0.42,
+    "threshold": 0.45,
     "accuracy": 1.0,
     "precision": 1.0,
     "recall": 1.0,
@@ -92,7 +92,7 @@
     "pr_auc": 1.0
   },
   "test_metrics_final": {
-    "threshold": 0.42,
+    "threshold": 0.45,
     "accuracy": 0.9979166666666667,
     "precision": 0.9937888198757764,
     "recall": 1.0,
@@ -134,22 +134,25 @@
         "support": 480.0
       }
     },
-    "roc_auc": 0.9998242187499999,
-    "pr_auc": 0.9996416227969037
+    "roc_auc": 0.9996484375000001,
+    "pr_auc": 0.9992614394902187
   },
   "cross_validation_summary": {
-    "f1_test_mean": 0.9929960618194432,
-    "f1_test_std": 0.0029118712083664984,
-    "f1_train_mean": 0.9947430713984285,
-    "f1_gap_train_test": 0.0017470095789853257,
-    "recall_test_mean": 1.0,
-    "recall_test_std": 0.0,
-    "precision_test_mean": 0.9861061419200954,
-    "precision_test_std": 0.005737413399798934,
-    "roc_auc_test_mean": 0.999951123628821,
-    "roc_auc_test_std": 4.568752305761001e-05
+    "f1_test_mean": 0.9937559611098987,
+    "f1_test_std": 0.003993398793079302,
+    "f1_train_mean": 0.9949344164016036,
+    "f1_gap_train_test": 0.0011784552917049052,
+    "recall_test_mean": 0.9984251968503937,
+    "recall_test_std": 0.003149606299212593,
+    "precision_test_mean": 0.9891469141323792,
+    "precision_test_std": 0.00620229576624925,
+    "roc_auc_test_mean": 0.9999388442283029,
+    "roc_auc_test_std": 6.418693690021015e-05
   },
   "overfit_gap_train_val_f1": 0.0,
-  "selection_score": 1.21,
-  "note": "Brecha train-validación cercana a cero indica menor riesgo de sobreentrenamiento."
+  "selection_score": 1.206,
+  "alerts": [
+    "Las métricas de test superan 0.98. Esto puede indicar señales muy directas del target o la necesidad de validación externa adicional."
+  ],
+  "note": "Brecha train-validación cercana a cero indica menor riesgo de sobreentrenamiento, pero no reemplaza validacion externa."
 }

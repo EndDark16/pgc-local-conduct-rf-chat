@@ -32,41 +32,42 @@
         "conduct_onset_before_10",
         "sex_assigned_at_birth"
       ],
-      "cv_selected_index": 2,
+      "cv_selected_index": 28,
       "cv_selected_score_f1": 0.9961238549473843,
       "cv_selected_params": {
-        "model__n_estimators": 200,
-        "model__min_samples_split": 30,
+        "model__n_estimators": 100,
+        "model__min_samples_split": 40,
         "model__min_samples_leaf": 4,
-        "model__max_samples": 0.8,
+        "model__max_samples": 0.55,
         "model__max_features": "log2",
-        "model__max_depth": 6,
-        "model__criterion": "gini",
+        "model__max_depth": 8,
+        "model__criterion": "entropy",
         "model__class_weight": "balanced",
-        "model__ccp_alpha": 0.0,
+        "model__ccp_alpha": 0.001,
         "model__bootstrap": true
       },
       "cv_selection_diagnostics": {
         "mean_test_f1": 0.9961238549473843,
         "mean_test_recall": 1.0,
         "mean_test_precision": 0.9923216841603053,
-        "mean_train_f1": 0.9967430885075982,
-        "overfit_gap_cv": 0.0006192335602138721,
+        "mean_train_f1": 0.9960945899767536,
+        "overfit_gap_cv": 0.0,
         "std_test_f1": 0.004728817398576547,
-        "selection_score": 1.205285524466136
+        "selection_score": 1.2056570646022644
       },
-      "model_selection_score": 1.21,
+      "model_selection_score": 1.206,
       "overfit_gap_train_val_f1": 0.0,
+      "extreme_val_metric_penalty": 0.020000000000000018,
       "train_metrics_threshold_0_5": {
         "threshold": 0.5,
-        "accuracy": 0.9973958333333334,
-        "precision": 0.9922178988326849,
+        "accuracy": 0.99609375,
+        "precision": 0.9883720930232558,
         "recall": 1.0,
-        "f1": 0.99609375,
+        "f1": 0.9941520467836257,
         "confusion_matrix": [
           [
-            1022,
-            4
+            1020,
+            6
           ],
           [
             0,
@@ -76,35 +77,35 @@
         "classification_report": {
           "0": {
             "precision": 1.0,
-            "recall": 0.9961013645224172,
-            "f1-score": 0.998046875,
+            "recall": 0.9941520467836257,
+            "f1-score": 0.9970674486803519,
             "support": 1026.0
           },
           "1": {
-            "precision": 0.9922178988326849,
+            "precision": 0.9883720930232558,
             "recall": 1.0,
-            "f1-score": 0.99609375,
+            "f1-score": 0.9941520467836257,
             "support": 510.0
           },
-          "accuracy": 0.9973958333333334,
+          "accuracy": 0.99609375,
           "macro avg": {
-            "precision": 0.9961089494163424,
-            "recall": 0.9980506822612085,
-            "f1-score": 0.9970703125,
+            "precision": 0.9941860465116279,
+            "recall": 0.9970760233918128,
+            "f1-score": 0.9956097477319887,
             "support": 1536.0
           },
           "weighted avg": {
-            "precision": 0.9974160992217899,
-            "recall": 0.9973958333333334,
-            "f1-score": 0.9973983764648438,
+            "precision": 0.9961391715116279,
+            "recall": 0.99609375,
+            "f1-score": 0.9960994441443295,
             "support": 1536.0
           }
         },
-        "roc_auc": 0.9999541337002636,
-        "pr_auc": 0.9999061460360137
+        "roc_auc": 0.9999025341130604,
+        "pr_auc": 0.9998004735408991
       },
       "train_metrics_final": {
-        "threshold": 0.42,
+        "threshold": 0.45,
         "accuracy": 0.9928385416666666,
         "precision": 0.9788867562380038,
         "recall": 1.0,
@@ -146,49 +147,49 @@
             "support": 1536.0
           }
         },
-        "roc_auc": 0.9999541337002636,
-        "pr_auc": 0.9999061460360137
+        "roc_auc": 0.9999025341130604,
+        "pr_auc": 0.9998004735408991
       },
       "validation_metrics_threshold_0_5": {
         "threshold": 0.5,
-        "accuracy": 0.9921875,
+        "accuracy": 0.9947916666666666,
         "precision": 1.0,
-        "recall": 0.9765625,
-        "f1": 0.9881422924901185,
+        "recall": 0.984375,
+        "f1": 0.9921259842519685,
         "confusion_matrix": [
           [
             256,
             0
           ],
           [
-            3,
-            125
+            2,
+            126
           ]
         ],
         "classification_report": {
           "0": {
-            "precision": 0.9884169884169884,
+            "precision": 0.9922480620155039,
             "recall": 1.0,
-            "f1-score": 0.9941747572815534,
+            "f1-score": 0.9961089494163424,
             "support": 256.0
           },
           "1": {
             "precision": 1.0,
-            "recall": 0.9765625,
-            "f1-score": 0.9881422924901185,
+            "recall": 0.984375,
+            "f1-score": 0.9921259842519685,
             "support": 128.0
           },
-          "accuracy": 0.9921875,
+          "accuracy": 0.9947916666666666,
           "macro avg": {
-            "precision": 0.9942084942084942,
-            "recall": 0.98828125,
-            "f1-score": 0.9911585248858359,
+            "precision": 0.9961240310077519,
+            "recall": 0.9921875,
+            "f1-score": 0.9941174668341555,
             "support": 384.0
           },
           "weighted avg": {
-            "precision": 0.9922779922779923,
-            "recall": 0.9921875,
-            "f1-score": 0.9921639356844084,
+            "precision": 0.9948320413436692,
+            "recall": 0.9947916666666666,
+            "f1-score": 0.9947812943615512,
             "support": 384.0
           }
         },
@@ -196,7 +197,7 @@
         "pr_auc": 1.0
       },
       "validation_metrics_final": {
-        "threshold": 0.42,
+        "threshold": 0.45,
         "accuracy": 1.0,
         "precision": 1.0,
         "recall": 1.0,
@@ -242,15 +243,15 @@
         "pr_auc": 1.0
       },
       "thresholds": {
-        "best_f1": 0.42,
-        "best_recall": 0.42,
-        "final": 0.42
+        "best_f1": 0.45,
+        "best_recall": 0.45,
+        "final": 0.45
       }
     }
   ],
   "selected_strategy": "base_contract_selection",
   "selected_validation_metrics": {
-    "threshold": 0.42,
+    "threshold": 0.45,
     "accuracy": 1.0,
     "precision": 1.0,
     "recall": 1.0,

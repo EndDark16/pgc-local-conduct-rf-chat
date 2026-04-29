@@ -121,6 +121,10 @@ def _should_exclude_col(col: str, target_col: str) -> Tuple[bool, str]:
         return True, "derived_eng_feature_exclusion"
     if c.endswith("_count"):
         return True, "derived_count_exclusion"
+    if c.endswith("_sum") or c.endswith("_index") or c.endswith("_total"):
+        return True, "derived_aggregate_exclusion"
+    if "derived" in c or "composite" in c:
+        return True, "derived_feature_exclusion"
     if any(h in c for h in SENSITIVE_ID_HINTS):
         return True, "identifier_exclusion"
     return False, ""
@@ -243,4 +247,3 @@ def select_features(
     }
     save_json(ARTIFACTS_DIR / "selected_features.json", report)
     return report
-

@@ -108,3 +108,11 @@ Plan de contingencia:
 - La experiencia final es conversacional en modo oscuro y con carga automática.
 - El parser local interpreta lenguaje natural según el tipo de escala y solicita aclaración cuando corresponde.
 
+
+## Nota de cierre técnico
+
+- Target por defecto: `target_domain_conduct_final`.
+- Preguntas filtradas por dominio del target (sin mezcla ADHD cuando el target es conducta).
+- Parser NLP local por escalas con aclaración contextual.
+- Flujo conversacional completo: preguntas, confirmación, impresión orientativa y preguntas post-resultado.
+- Arquitectura 100% local, sin APIs externas ni servicios pagos.

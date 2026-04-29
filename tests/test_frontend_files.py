@@ -20,7 +20,16 @@ def test_frontend_chat_contract_and_no_forbidden_texts():
     assert "/static/css/styles.css" in html
     assert "/static/js/app.js" in html
 
-    for required in ["app-shell", "chat-panel", "chat-messages", "quick-actions", "chat-input-form"]:
+    for required in [
+        "app-shell",
+        "chat-panel",
+        "chat-messages",
+        "quick-actions",
+        "chat-input-form",
+        "metricsChart",
+        "confusionChart",
+        "importanceChart",
+    ]:
         assert required in html
 
     forbidden = [
@@ -29,18 +38,21 @@ def test_frontend_chat_contract_and_no_forbidden_texts():
         "Pulsa \"Cargar preguntas\"",
         "Pulsa Cargar preguntas",
         "Input for",
+        "response_options_json",
     ]
     for token in forbidden:
         assert token not in html
         assert token not in js
 
-    raw_json_fragments = ["[{'value':", "response_options_json", "feature_name"]
-    for token in raw_json_fragments:
+    # no raw JSON options rendered in html/js literals for user text
+    for token in ["[{'value':", '[{"value": 0, "label": "No"}']:
         assert token not in html
+        assert token not in js
 
     for color in ["#080b12", "#101624", "#151c2e", "#27324a", "#7c5cff", "#22d3ee"]:
         assert color in css.lower()
 
+    assert "initializeChatFlow" in js
     assert "/api/questions" in js
-    assert "initializeChatFlow()" in js
-    assert "renderQuickChips" in js
+    assert "/api/chat/result-question" in js
+    assert "STATE.RESULT_QA" in js

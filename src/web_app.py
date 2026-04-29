@@ -1,4 +1,4 @@
-﻿"""FastAPI local web application with conversational chat flow."""
+﻿"""FastAPI local web app with robust conversational flow and result QA."""
 
 from __future__ import annotations
 
@@ -20,16 +20,16 @@ from .config import ARTIFACTS_DIR, MEDICAL_DISCLAIMER, MODELS_DIR, WEB_STATIC_DI
 from .data_loader import load_main_dataset
 from .feature_selection import DEFAULT_CONDUCT_FEATURES, is_feature_allowed_for_target, select_features
 from .nlp_interpreter import interpret_answer, is_help_request
-from .predictor import predict_from_answers
+from .predictor import answer_result_question, predict_from_answers
 from .preprocessing import build_feature_schema
 from .question_explainer import explain_question
-from .questionnaire_loader import load_questionnaire
 from .question_generator import question_for_feature
+from .questionnaire_loader import load_questionnaire
 from .response_options import format_response_options
 from .utils import as_bool, load_json, normalize_text
 
 
-app = FastAPI(title="PGC Local Conduct Estimator", version="3.0.0")
+app = FastAPI(title="PGC Local Conduct Estimator", version="4.0.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -63,6 +63,7 @@ class SessionState:
     answers_confirmed: Dict[str, Any] = field(default_factory=dict)
     attempts_by_feature: Dict[str, int] = field(default_factory=dict)
     last_interpretation_by_feature: Dict[str, Dict[str, Any]] = field(default_factory=dict)
+    latest_prediction: Dict[str, Any] = field(default_factory=dict)
 
 
 SESSIONS: Dict[str, SessionState] = {}
@@ -102,6 +103,11 @@ class ResetRequest(BaseModel):
     session_id: str = "default"
 
 
+class ResultQuestionRequest(BaseModel):
+    question: str
+    session_id: str = "default"
+
+
 class AuditRequest(BaseModel):
     event: str
     payload: Dict[str, Any] = Field(default_factory=dict)
@@ -136,8 +142,6 @@ def _looks_technical_text(text: str) -> bool:
     norm = normalize_text(text)
     if not norm:
         return False
-    if "input for" in norm:
-        return True
     for pattern in TECH_TEXT_PATTERNS:
         if re.search(pattern, norm):
             return True
@@ -178,12 +182,10 @@ def _schema_is_inconsistent(schema: Dict[str, Any], target_col: str) -> bool:
         return True
     stats = _schema_domain_stats(schema)
     if target_col == "target_domain_conduct_final":
-        if stats["adhd"] > stats["conduct"]:
+        if stats["adhd"] > 0:
             return True
-        for item in schema.get("features", []):
-            feature = str(item.get("feature", ""))
-            if feature.startswith("adhd_"):
-                return True
+        if stats["conduct"] == 0:
+            return True
     return False
 
 
@@ -195,18 +197,14 @@ def _build_schema_from_contract() -> Dict[str, Any]:
     selected_report = select_features(dataset_df, questionnaire_df, target_col=target_col)
     selected = [f for f in selected_report.get("features_used", []) if f in feature_meta]
     if not selected:
-        selected = [f for f in DEFAULT_CONDUCT_FEATURES if f in feature_meta and f in dataset_df.columns]
+        selected = [f for f in DEFAULT_CONDUCT_FEATURES if f in dataset_df.columns and f in feature_meta]
     if not selected:
         raise RuntimeError(
             "No se encontraron preguntas para el target seleccionado. "
             "Revisa artifacts/feature_schema.json o ejecuta python train.py."
         )
 
-    schema = build_feature_schema(
-        selected_features=selected,
-        feature_to_metadata=feature_meta,
-        persist=True,
-    )
+    schema = build_feature_schema(selected_features=selected, feature_to_metadata=feature_meta, persist=True)
     audit_event(
         "schema_regenerated_from_contract",
         {
@@ -285,34 +283,34 @@ def _build_question_payload(meta: Dict[str, Any], role: str, idx: int, total: in
         max_value=meta.get("max_value"),
     )
 
-    payload = {
-        "feature": str(meta.get("feature")),
-        "question": question_text,
-        "help_text": help_text,
-        "scale_guidance": scale_guidance,
-        "response_options": options_payload["options_list"],
-        "feature_label_human": _safe_user_text(meta.get("feature_label_human"), default_text=""),
-        "term_explanation": _safe_user_text(meta.get("term_explanation"), default_text=""),
-        "examples": explanation.get("examples") or [],
-        "simple_explanation": explanation.get("simple_explanation") or "",
-        "human_options_text": options_payload["human_options_text"],
-        "quick_chips": options_payload["quick_chips"],
-        "scale_type": options_payload["scale_type"],
-        "progress_index": idx,
-        "progress_total": total,
-        "target_column": target_col,
-        "is_required": bool(as_bool(meta.get("is_required", True)) if "is_required" in meta else True),
-    }
-    return _sanitize_jsonable(payload)
+    return _sanitize_jsonable(
+        {
+            "feature": str(meta.get("feature")),
+            "question": question_text,
+            "help_text": help_text,
+            "scale_guidance": scale_guidance,
+            "response_options": options_payload["options_list"],
+            "response_type": meta.get("response_type"),
+            "min_value": meta.get("min_value"),
+            "max_value": meta.get("max_value"),
+            "feature_label_human": _safe_user_text(meta.get("feature_label_human"), default_text=""),
+            "term_explanation": _safe_user_text(meta.get("term_explanation"), default_text=""),
+            "examples": explanation.get("examples") or [],
+            "simple_explanation": explanation.get("simple_explanation") or "",
+            "human_options_text": options_payload["human_options_text"],
+            "quick_chips": options_payload["quick_chips"],
+            "scale_type": options_payload["scale_type"],
+            "progress_index": idx,
+            "progress_total": total,
+            "target_column": target_col,
+            "is_required": bool(as_bool(meta.get("is_required", True)) if "is_required" in meta else True),
+        }
+    )
 
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request) -> HTMLResponse:
-    return templates.TemplateResponse(
-        request,
-        "index.html",
-        {"medical_disclaimer": MEDICAL_DISCLAIMER},
-    )
+    return templates.TemplateResponse(request, "index.html", {"medical_disclaimer": MEDICAL_DISCLAIMER})
 
 
 @app.get("/api/model-status")
@@ -327,19 +325,12 @@ async def model_status() -> Dict[str, Any]:
         "threshold_final": metadata.get("thresholds", {}).get("final"),
         "features_count": metadata.get("n_features_used"),
         "medical_disclaimer": MEDICAL_DISCLAIMER,
-        "message": (
-            "Modelo listo para predicción."
-            if model_exists
-            else "Modelo no entrenado. Ejecuta python train.py"
-        ),
+        "message": "Modelo listo para predicción." if model_exists else "Modelo no entrenado. Ejecuta python train.py",
     }
 
 
 @app.get("/api/questions")
-async def get_questions(
-    role: str = Query(default="caregiver"),
-    session_id: str = Query(default="default"),
-) -> Dict[str, Any]:
+async def get_questions(role: str = Query(default="caregiver"), session_id: str = Query(default="default")) -> Dict[str, Any]:
     role_resolved = _normalize_role(role)
     target_col = _resolve_target_for_runtime()
     schema = _load_schema()
@@ -370,6 +361,8 @@ async def get_questions(
 
     session = _get_session(session_id)
     session.role = role_resolved
+    session.latest_prediction = {}
+
     audit_event(
         "chat_questions_loaded",
         {
@@ -380,6 +373,7 @@ async def get_questions(
             "features": [q.get("feature") for q in questions],
         },
     )
+
     return {
         "role": role_resolved,
         "target_column": target_col,
@@ -401,13 +395,7 @@ async def api_chat_explain(payload: ChatExplainRequest) -> Dict[str, Any]:
         raise HTTPException(status_code=404, detail="No se encontró la pregunta solicitada.")
 
     explanation = explain_question(feature, meta)
-    audit_event(
-        "chat_question_explained",
-        {
-            "feature": feature,
-            "mode": payload.mode,
-        },
-    )
+    audit_event("chat_question_explained", {"feature": feature, "mode": payload.mode})
     return _sanitize_jsonable(explanation)
 
 
@@ -448,22 +436,16 @@ async def api_chat_interpret(payload: ChatInterpretRequest) -> Dict[str, Any]:
             "message": "Te explico la pregunta en palabras más simples.",
         }
 
-    interpreted = interpret_answer(
-        feature_name=feature,
-        raw_answer=payload.answer,
-        metadata=merged_meta,
-        attempt=attempt,
-        max_attempts=3,
-    )
-    is_required = as_bool(merged_meta.get("is_required", True)) if "is_required" in merged_meta else True
-    interpreted["is_required"] = is_required
+    interpreted = interpret_answer(feature_name=feature, raw_answer=payload.answer, metadata=merged_meta, attempt=attempt, max_attempts=3)
+    interpreted["is_required"] = bool(as_bool(merged_meta.get("is_required", True)))
     interpreted["attempt"] = attempt
     interpreted["allow_missing_value"] = bool(
-        interpreted.get("needs_clarification") and attempt >= 3 and not is_required
+        interpreted.get("needs_clarification") and attempt >= 3 and not interpreted["is_required"]
     )
     interpreted["max_attempts_reached"] = bool(attempt >= 3)
 
     session.last_interpretation_by_feature[feature] = interpreted
+
     audit_event(
         "chat_answer_interpreted",
         {
@@ -475,13 +457,10 @@ async def api_chat_interpret(payload: ChatInterpretRequest) -> Dict[str, Any]:
             "attempt": attempt,
             "session_id": payload.session_id,
             "needs_clarification": interpreted.get("needs_clarification"),
+            "scale_type": interpreted.get("scale_type"),
         },
     )
-    return {
-        "ok": True,
-        "interpreted": _sanitize_jsonable(interpreted),
-        "needs_explanation": False,
-    }
+    return {"ok": True, "interpreted": _sanitize_jsonable(interpreted), "needs_explanation": False}
 
 
 @app.post("/api/chat/confirm")
@@ -490,9 +469,14 @@ async def api_chat_confirm(payload: ConfirmRequest) -> Dict[str, Any]:
     if not feature:
         raise HTTPException(status_code=400, detail="Feature no especificada para confirmar.")
 
+    session = _get_session(payload.session_id)
+    last = session.last_interpretation_by_feature.get(feature)
+    if not last and payload.parsed_value is None:
+        raise HTTPException(status_code=400, detail="No hay una interpretación previa para confirmar.")
+
     schema = _load_schema()
     meta = _schema_map(schema).get(feature, {})
-    is_required = as_bool(meta.get("is_required", True)) if "is_required" in meta else True
+    is_required = bool(as_bool(meta.get("is_required", True)) if "is_required" in meta else True)
 
     if payload.parsed_value is None and is_required:
         raise HTTPException(
@@ -500,23 +484,29 @@ async def api_chat_confirm(payload: ConfirmRequest) -> Dict[str, Any]:
             detail="Este dato es importante para hacer la estimación. Necesito una respuesta más clara.",
         )
 
-    session = _get_session(payload.session_id)
-    session.answers_confirmed[feature] = payload.parsed_value
+    parsed_value = payload.parsed_value
+    if parsed_value is None and last:
+        parsed_value = last.get("parsed_value")
+
+    if parsed_value is None and is_required:
+        raise HTTPException(status_code=400, detail="No se puede confirmar sin un valor válido.")
+
+    session.answers_confirmed[feature] = parsed_value
+    session.attempts_by_feature[feature] = 0
+
     audit_event(
         "chat_answer_confirmed",
         {
             "feature": feature,
-            "parsed_value": payload.parsed_value,
+            "parsed_value": parsed_value,
             "raw_answer": payload.raw_answer,
             "confidence": payload.confidence,
             "session_id": payload.session_id,
             "is_required": is_required,
         },
     )
-    return {
-        "ok": True,
-        "confirmed_answers_count": len(session.answers_confirmed),
-    }
+
+    return {"ok": True, "confirmed_answers_count": len(session.answers_confirmed)}
 
 
 @app.post("/api/predict")
@@ -541,6 +531,8 @@ async def api_predict(payload: PredictRequest) -> Dict[str, Any]:
             "medical_disclaimer": MEDICAL_DISCLAIMER,
         }
 
+    session.latest_prediction = prediction
+
     audit_event(
         "chat_prediction_generated",
         {
@@ -549,16 +541,52 @@ async def api_predict(payload: PredictRequest) -> Dict[str, Any]:
             "threshold_used": prediction.get("threshold_used"),
             "internal_class": prediction.get("internal_class"),
             "answers_count": len(answers),
+            "overfit_warning": prediction.get("overfit_warning"),
         },
     )
+
     return {"ok": True, "prediction": _sanitize_jsonable(prediction)}
+
+
+@app.post("/api/chat/result-question")
+async def api_chat_result_question(payload: ResultQuestionRequest) -> Dict[str, Any]:
+    session = _get_session(payload.session_id)
+    if not session.latest_prediction:
+        raise HTTPException(status_code=400, detail="Aún no hay resultado final para explicar.")
+
+    metrics = load_json(ARTIFACTS_DIR / "metrics.json", default={})
+    feature_importance = load_json(ARTIFACTS_DIR / "feature_importance.json", default={})
+    report = session.latest_prediction.get("orientative_report", {})
+
+    answer_payload = answer_result_question(
+        question=payload.question,
+        prediction_report=report,
+        metrics=metrics,
+        feature_importance=feature_importance,
+        answers=session.answers_confirmed,
+    )
+
+    audit_event(
+        "chat_result_question_answered",
+        {
+            "session_id": payload.session_id,
+            "question": payload.question,
+            "answer": answer_payload.get("answer"),
+        },
+    )
+
+    return {
+        "ok": True,
+        "answer": answer_payload.get("answer", ""),
+        "chips": session.latest_prediction.get("result_qa_chips", []),
+    }
 
 
 @app.post("/api/reset-session")
 async def api_reset_session(payload: ResetRequest) -> Dict[str, Any]:
     SESSIONS[payload.session_id] = SessionState()
     audit_event("chat_session_reset", {"session_id": payload.session_id})
-    return {"ok": True}
+    return {"ok": True, "message": "Sesión reiniciada"}
 
 
 @app.get("/api/metrics")
@@ -566,12 +594,23 @@ async def api_metrics() -> Dict[str, Any]:
     metrics = load_json(ARTIFACTS_DIR / "metrics.json", default={})
     if not metrics:
         return {"ok": False, "message": "No existen métricas aún. Ejecuta python train.py"}
+
+    warning = None
+    test_final = metrics.get("test_metrics_threshold_final", {})
+    if any(float(test_final.get(k) or 0.0) > 0.98 for k in ["accuracy", "precision", "recall", "f1"]):
+        warning = (
+            "Las métricas son muy altas. Esto puede indicar que el dataset contiene señales muy directas "
+            "del target o que se requiere validación externa adicional."
+        )
+
     return {
         "ok": True,
         "target_column": metrics.get("target_column"),
         "features_count": metrics.get("features_count"),
         "threshold_0_5": _sanitize_jsonable(metrics.get("test_metrics_threshold_0_5", {})),
-        "threshold_final": _sanitize_jsonable(metrics.get("test_metrics_threshold_final", {})),
+        "threshold_final": _sanitize_jsonable(test_final),
+        "confusion_matrix": _sanitize_jsonable(test_final.get("confusion_matrix")),
+        "overfit_warning": warning,
     }
 
 

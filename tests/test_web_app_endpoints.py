@@ -69,3 +69,11 @@ def test_questions_interpret_explain_endpoints_human_and_conduct_safe():
     explain_data = explain.json()
     assert "simple_explanation" in explain_data
     assert "Input for" not in explain_data["simple_explanation"]
+
+
+def test_result_question_requires_prediction():
+    response = client.post(
+        "/api/chat/result-question",
+        json={"session_id": "new-session-no-result", "question": "que significa este resultado"},
+    )
+    assert response.status_code == 400

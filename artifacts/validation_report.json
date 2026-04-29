@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-04-28T05:00:31.257898+00:00",
+  "generated_at_utc": "2026-04-29T02:08:12.059676+00:00",
   "project_root": "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC",
   "checks": {
     "required_dirs_ok": true,
@@ -29,7 +29,7 @@
     "quick_tests": {
       "executed": true,
       "return_code": 0,
-      "stdout_tail": ".                                                                        [100%]\n1 passed in 0.03s",
+      "stdout_tail": ".                                                                        [100%]\n1 passed in 0.11s",
       "stderr_tail": ""
     },
     "backend_smoke": {
@@ -39,7 +39,8 @@
         "model_status": {
           "model_trained": true,
           "target_column": "target_domain_conduct_final",
-          "threshold_final": 0.42,
+          "target_intro": "Te haré preguntas sobre comportamientos observables relacionados con normas, convivencia y conducta.",
+          "threshold_final": 0.45,
           "features_count": 23,
           "medical_disclaimer": "Este resultado no es un diagnóstico médico y debe ser revisado por un profesional calificado.",
           "message": "Modelo listo para predicción."

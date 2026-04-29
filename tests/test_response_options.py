@@ -1,4 +1,4 @@
-from src.response_options import format_response_options
+﻿from src.response_options import format_response_options
 
 
 def test_binary_options_are_humanized():
@@ -25,3 +25,11 @@ def test_frequency_scale_human_text_and_chips():
     assert "casi siempre" in payload["human_options_text"].lower()
     assert "Frecuente" in payload["quick_chips"]
 
+
+def test_irregular_string_options_are_normalized():
+    payload = format_response_options(
+        response_options="0=No; 1=Sí",
+        response_type="yes_no",
+    )
+    assert payload["options_list"]
+    assert payload["scale_type"] == "binary"

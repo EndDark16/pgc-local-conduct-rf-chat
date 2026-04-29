@@ -15,7 +15,12 @@
       "feature_type": "basic_demographic",
       "feature_role": "unspecified",
       "response_type": "integer",
-      "response_options": [],
+      "response_options": [
+        {
+          "value": null,
+          "label": "nan"
+        }
+      ],
       "min_value": 6.0,
       "max_value": 11.0,
       "unit": "años",
@@ -35,11 +40,16 @@
           6.0,
           11.0
         ],
-        "options": [],
-        "human_options_text": "Puedes responder con tus palabras."
+        "options": [
+          {
+            "value": null,
+            "label": "nan"
+          }
+        ],
+        "human_options_text": "Responde con un numero dentro del rango esperado."
       },
       "fallback_question": "¿Qué edad tiene el niño o la niña, en años cumplidos?",
-      "human_options_text": "Puedes responder con tus palabras.",
+      "human_options_text": "Responde con un numero dentro del rango esperado.",
       "quick_chips": [
         "No entiendo"
       ],
@@ -107,14 +117,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
       },
       "fallback_question": "¿Ha intimidado, amenazado o acosado repetidamente a otras personas?",
-      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
       "quick_chips": [
-        "No ocurrió",
-        "Ocurrió antes",
-        "Ocurrió recientemente",
+        "No ocurrio",
+        "Ocurrio antes",
+        "Ocurrio recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -181,14 +191,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
       },
       "fallback_question": "¿Ha iniciado peleas físicas?",
-      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
       "quick_chips": [
-        "No ocurrió",
-        "Ocurrió antes",
-        "Ocurrió recientemente",
+        "No ocurrio",
+        "Ocurrio antes",
+        "Ocurrio recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -255,14 +265,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
       },
       "fallback_question": "¿Ha usado un objeto o arma que pudiera causar daño grave?",
-      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
       "quick_chips": [
-        "No ocurrió",
-        "Ocurrió antes",
-        "Ocurrió recientemente",
+        "No ocurrio",
+        "Ocurrio antes",
+        "Ocurrio recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -329,14 +339,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
       },
       "fallback_question": "¿Ha sido físicamente cruel con otras personas?",
-      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
       "quick_chips": [
-        "No ocurrió",
-        "Ocurrió antes",
-        "Ocurrió recientemente",
+        "No ocurrio",
+        "Ocurrio antes",
+        "Ocurrio recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -403,14 +413,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
       },
       "fallback_question": "¿Ha sido físicamente cruel con animales?",
-      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
       "quick_chips": [
-        "No ocurrió",
-        "Ocurrió antes",
-        "Ocurrió recientemente",
+        "No ocurrio",
+        "Ocurrio antes",
+        "Ocurrio recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -477,14 +487,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
       },
       "fallback_question": "¿Ha robado algo usando amenaza, fuerza o intimidación contra otra persona?",
-      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
       "quick_chips": [
-        "No ocurrió",
-        "Ocurrió antes",
-        "Ocurrió recientemente",
+        "No ocurrio",
+        "Ocurrio antes",
+        "Ocurrio recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -551,14 +561,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
       },
       "fallback_question": "¿Ha forzado a otra persona a una actividad sexual?",
-      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
       "quick_chips": [
-        "No ocurrió",
-        "Ocurrió antes",
-        "Ocurrió recientemente",
+        "No ocurrio",
+        "Ocurrio antes",
+        "Ocurrio recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -625,14 +635,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
       },
       "fallback_question": "¿Ha provocado incendios deliberadamente con intención de causar daño o problemas serios?",
-      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
       "quick_chips": [
-        "No ocurrió",
-        "Ocurrió antes",
-        "Ocurrió recientemente",
+        "No ocurrio",
+        "Ocurrio antes",
+        "Ocurrio recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -699,14 +709,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
       },
       "fallback_question": "¿Ha destruido deliberadamente propiedad ajena?",
-      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
       "quick_chips": [
-        "No ocurrió",
-        "Ocurrió antes",
-        "Ocurrió recientemente",
+        "No ocurrio",
+        "Ocurrio antes",
+        "Ocurrio recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -773,14 +783,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
       },
       "fallback_question": "¿Ha entrado por la fuerza a una casa, edificio o vehículo que no le pertenecía?",
-      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
       "quick_chips": [
-        "No ocurrió",
-        "Ocurrió antes",
-        "Ocurrió recientemente",
+        "No ocurrio",
+        "Ocurrio antes",
+        "Ocurrio recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -847,14 +857,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
       },
       "fallback_question": "¿Miente con frecuencia para obtener beneficios, evitar consecuencias o librarse de obligaciones?",
-      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
       "quick_chips": [
-        "No ocurrió",
-        "Ocurrió antes",
-        "Ocurrió recientemente",
+        "No ocurrio",
+        "Ocurrio antes",
+        "Ocurrio recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -921,14 +931,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
       },
       "fallback_question": "¿Ha robado objetos sin usar amenaza, fuerza ni contacto directo con la persona afectada?",
-      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
       "quick_chips": [
-        "No ocurrió",
-        "Ocurrió antes",
-        "Ocurrió recientemente",
+        "No ocurrio",
+        "Ocurrio antes",
+        "Ocurrio recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -995,14 +1005,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
       },
       "fallback_question": "¿Se ha quedado fuera de casa durante la noche sin permiso?",
-      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
       "quick_chips": [
-        "No ocurrió",
-        "Ocurrió antes",
-        "Ocurrió recientemente",
+        "No ocurrio",
+        "Ocurrio antes",
+        "Ocurrio recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -1069,14 +1079,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
       },
       "fallback_question": "¿Se ha escapado de casa pasando la noche fuera?",
-      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
       "quick_chips": [
-        "No ocurrió",
-        "Ocurrió antes",
-        "Ocurrió recientemente",
+        "No ocurrio",
+        "Ocurrio antes",
+        "Ocurrio recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -1143,14 +1153,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
+        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
       },
       "fallback_question": "¿Ha faltado al colegio sin permiso?",
-      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
       "quick_chips": [
-        "No ocurrió",
-        "Ocurrió antes",
-        "Ocurrió recientemente",
+        "No ocurrio",
+        "Ocurrio antes",
+        "Ocurrio recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"

@@ -1,10 +1,10 @@
 {
-  "generated_at_utc": "2026-04-28T05:00:31.255896+00:00",
+  "generated_at_utc": "2026-04-29T02:08:12.053073+00:00",
   "status": "error",
   "summary": {
     "total_items": 20,
-    "passed_items": 19,
-    "failed_items": 1
+    "passed_items": 18,
+    "failed_items": 2
   },
   "items": [
     {
@@ -178,7 +178,7 @@
     {
       "id": "frontend_required_controls",
       "description": "Frontend contiene botones de ayuda y flujo de confirmaciÃ³n",
-      "passed": true,
+      "passed": false,
       "evidence": "No entiendo la pregunta / Dame un ejemplo / Explicar con palabras mÃ¡s simples / Enviar / Reiniciar"
     },
     {
@@ -202,7 +202,7 @@
       "evidence": {
         "executed": true,
         "return_code": 0,
-        "stdout_tail": ".                                                                        [100%]\n1 passed in 0.03s",
+        "stdout_tail": ".                                                                        [100%]\n1 passed in 0.11s",
         "stderr_tail": ""
       }
     },
@@ -217,7 +217,8 @@
           "model_status": {
             "model_trained": true,
             "target_column": "target_domain_conduct_final",
-            "threshold_final": 0.42,
+            "target_intro": "Te haré preguntas sobre comportamientos observables relacionados con normas, convivencia y conducta.",
+            "threshold_final": 0.45,
             "features_count": 23,
             "medical_disclaimer": "Este resultado no es un diagnóstico médico y debe ser revisado por un profesional calificado.",
             "message": "Modelo listo para predicción."

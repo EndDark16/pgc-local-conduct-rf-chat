@@ -12,8 +12,9 @@
         <div class="project-block">
           <p class="eyebrow">PGC · Asistente local</p>
           <h1 class="project-title">Estimación preliminar conversacional</h1>
-          <p class="project-subtitle">Flujo local con Random Forest y NLP basado en reglas.</p>
+          <p class="project-subtitle">Random Forest local + NLP basado en reglas + auditoría completa.</p>
         </div>
+
         <div class="status-grid">
           <div class="status-item">
             <span class="status-label">Estado del modelo</span>
@@ -46,14 +47,14 @@
       <section class="model-missing-card hidden" id="modelMissingCard">
         <h2>Modelo no entrenado</h2>
         <p>Para iniciar la experiencia conversacional necesitas entrenar primero el modelo local.</p>
-        <pre>python train.py</pre>
+        <code>python train.py</code>
       </section>
 
       <section class="chat-panel" id="chatPanel">
         <div class="chat-messages" id="chatMessages" aria-live="polite"></div>
+        <div class="typing-indicator hidden" id="typingIndicator">Asistente procesando...</div>
 
         <div class="context-actions hidden" id="contextActions"></div>
-
         <div class="quick-actions" id="quickActions"></div>
 
         <form id="chatInputForm" class="chat-input-form">
@@ -70,11 +71,32 @@
       <details class="tech-details" id="technicalDetails">
         <summary>Detalles técnicos</summary>
         <div class="tech-actions">
-          <button id="loadMetricsBtn" class="btn btn-ghost" type="button">Ver métricas</button>
-          <button id="loadImportanceBtn" class="btn btn-ghost" type="button">Ver importancia</button>
+          <button id="loadMetricsBtn" class="btn btn-ghost" type="button">Actualizar métricas</button>
+          <button id="loadImportanceBtn" class="btn btn-ghost" type="button">Actualizar importancia</button>
         </div>
-        <pre id="metricsBox" class="json-box hidden"></pre>
-        <pre id="importanceBox" class="json-box hidden"></pre>
+
+        <div class="metric-cards" id="metricCards"></div>
+        <p class="overfit-note hidden" id="overfitNote"></p>
+
+        <div class="chart-grid">
+          <section class="chart-card">
+            <h3>Métricas principales</h3>
+            <canvas id="metricsChart" height="220"></canvas>
+          </section>
+          <section class="chart-card">
+            <h3>Matriz de confusión</h3>
+            <canvas id="confusionChart" height="220"></canvas>
+          </section>
+        </div>
+
+        <section class="chart-card">
+          <h3>Importancia de variables (top)</h3>
+          <canvas id="importanceChart" height="280"></canvas>
+          <div class="importance-list" id="importanceList"></div>
+          <p class="note-inline">
+            Estas variables fueron relevantes para el modelo, pero no significan causa directa.
+          </p>
+        </section>
       </details>
     </main>
 

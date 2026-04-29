@@ -1,17 +1,69 @@
 {
-  "status": "pass",
-  "questions_total": 55,
-  "confirmed": 55,
-  "clarifications": 0,
-  "errors": [],
-  "prediction": {
-    "probability_estimated": 0.001443,
-    "threshold_used": 0.39,
-    "internal_class": 0,
-    "compatibility_text": "patrón no compatible",
-    "risk_text": "riesgo estimado bajo",
-    "missing_features": [],
-    "explanation": "La estimación se basa en respuestas interpretadas y confirmadas por el usuario. Este resultado expresa probabilidad estimada, no una conclusión clínica.",
-    "medical_disclaimer": "Este resultado no es un diagnóstico médico y debe ser revisado por un profesional calificado."
-  }
+  "steps": [
+    {
+      "step": "model-status",
+      "ok": true,
+      "detail": {
+        "model_trained": true,
+        "target_column": "target_domain_conduct_final",
+        "target_intro": "Te haré preguntas sobre comportamientos observables relacionados con normas, convivencia y conducta.",
+        "threshold_final": 0.45,
+        "features_count": 23,
+        "medical_disclaimer": "Este resultado no es un diagnóstico médico y debe ser revisado por un profesional calificado.",
+        "message": "Modelo listo para predicción."
+      }
+    },
+    {
+      "step": "questions",
+      "ok": true,
+      "detail": {
+        "status": 200
+      }
+    },
+    {
+      "step": "help-intent",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "step": "confirm-loop",
+      "ok": true,
+      "detail": {
+        "confirmed": 23,
+        "total": 23
+      }
+    },
+    {
+      "step": "predict",
+      "ok": true,
+      "detail": {
+        "threshold": 0.45,
+        "prob": 0.998775
+      }
+    },
+    {
+      "step": "result-qa",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "answer": "El resultado indica compatibilidad alta. Compatibilidad significa que las respuestas se parecen, en mayor o menor medida, al patron que el modelo aprendio para este dominio.",
+        "chips": [
+          "¿Que significa este resultado?",
+          "¿Por que salio asi?",
+          "¿Que debo hacer ahora?",
+          "¿Esto es un diagnostico?",
+          "Ver indicadores principales",
+          "Repetir encuesta"
+        ]
+      }
+    },
+    {
+      "step": "reset",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "message": "Sesión reiniciada"
+      }
+    }
+  ]
 }

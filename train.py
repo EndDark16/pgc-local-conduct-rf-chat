@@ -388,6 +388,44 @@ def _normalize_target_binary(y: pd.Series) -> Tuple[pd.Series, Dict[str, int]]:
     return y.map(mapping), {str(k): v for k, v in mapping.items()}
 
 
+def _max_primary_metric(metrics: Dict[str, Any]) -> float:
+    values = [
+        float(metrics.get("accuracy") or 0.0),
+        float(metrics.get("precision") or 0.0),
+        float(metrics.get("recall") or 0.0),
+        float(metrics.get("f1") or 0.0),
+    ]
+    return max(values) if values else 0.0
+
+
+def _build_generalization_alerts(
+    train_metrics: Dict[str, Any],
+    validation_metrics: Dict[str, Any],
+    test_metrics: Dict[str, Any],
+) -> List[str]:
+    alerts: List[str] = []
+    max_test = _max_primary_metric(test_metrics)
+    if max_test > 0.98:
+        alerts.append(
+            "Las métricas de test superan 0.98. Esto puede indicar señales muy directas del target "
+            "o la necesidad de validación externa adicional."
+        )
+
+    train_test_gap_f1 = float(train_metrics.get("f1") or 0.0) - float(test_metrics.get("f1") or 0.0)
+    if train_test_gap_f1 > 0.08:
+        alerts.append(
+            "La brecha F1 train-test es alta (>0.08). Conviene reforzar regularización o revisar features."
+        )
+
+    val_test_gap_f1 = abs(float(validation_metrics.get("f1") or 0.0) - float(test_metrics.get("f1") or 0.0))
+    if val_test_gap_f1 > 0.06:
+        alerts.append(
+            "La brecha F1 validación-test es alta (>0.06). Se recomienda revisión adicional de generalización."
+        )
+
+    return alerts
+
+
 def main() -> int:
     ensure_required_dirs()
     audit_event("training_started", {})
@@ -524,11 +562,13 @@ def main() -> int:
                 0.0,
                 float(train_metrics_final["f1"]) - float(val_metrics_final["f1"]),
             )
+            extreme_val_metric_penalty = max(0.0, _max_primary_metric(val_metrics_final) - 0.98)
             model_selection_score = (
                 float(val_metrics_final["f1"])
                 + 0.18 * float(val_metrics_final["recall"])
                 + 0.03 * float(val_metrics_final["precision"])
                 - 0.60 * overfit_gap_train_val
+                - 0.20 * extreme_val_metric_penalty
             )
 
             candidate_result = {
@@ -542,6 +582,7 @@ def main() -> int:
                 "cv_selection_diagnostics": cv_diagnostics,
                 "model_selection_score": float(model_selection_score),
                 "overfit_gap_train_val_f1": float(overfit_gap_train_val),
+                "extreme_val_metric_penalty": float(extreme_val_metric_penalty),
                 "train_metrics_threshold_0_5": train_metrics_05,
                 "train_metrics_final": train_metrics_final,
                 "validation_metrics_threshold_0_5": val_metrics_05,
@@ -626,6 +667,11 @@ def main() -> int:
         )
         metrics_final = evaluate_binary_metrics(
             y_test.to_numpy(), y_test_prob, threshold=threshold_summary.final_threshold
+        )
+        generalization_alerts = _build_generalization_alerts(
+            train_metrics=chosen_candidate["train_metrics_final"],
+            validation_metrics=chosen_candidate["validation_metrics_final"],
+            test_metrics=metrics_final,
         )
 
         # Save model artifacts.
@@ -719,6 +765,7 @@ def main() -> int:
             "overfit_gap_train_val_f1": chosen_candidate["overfit_gap_train_val_f1"],
             "model_selection_score": chosen_candidate["model_selection_score"],
             "generalization_cv": generalization_cv,
+            "generalization_alerts": generalization_alerts,
             "test_metrics_threshold_0_5": metrics_at_05,
             "test_metrics_threshold_best_f1": metrics_at_best_f1,
             "test_metrics_threshold_best_recall": metrics_at_best_recall,
@@ -734,7 +781,8 @@ def main() -> int:
                 "cross_validation_summary": generalization_cv,
                 "overfit_gap_train_val_f1": chosen_candidate["overfit_gap_train_val_f1"],
                 "selection_score": chosen_candidate["model_selection_score"],
-                "note": "Brecha train-validación cercana a cero indica menor riesgo de sobreentrenamiento.",
+                "alerts": generalization_alerts,
+                "note": "Brecha train-validación cercana a cero indica menor riesgo de sobreentrenamiento, pero no reemplaza validacion externa.",
             },
         )
 
@@ -770,6 +818,7 @@ def main() -> int:
                 "generalization_cv_f1_mean": generalization_cv["f1_test_mean"],
                 "generalization_cv_f1_std": generalization_cv["f1_test_std"],
                 "generalization_cv_f1_gap_train_test": generalization_cv["f1_gap_train_test"],
+                "generalization_alerts": generalization_alerts,
             },
             "preprocessing_info": preproc_info,
             "contract_summary": {
@@ -801,6 +850,7 @@ def main() -> int:
                     "selection_rule": "best_f1_with_high_recall",
                 },
                 "metrics_final": metadata["metrics_summary"],
+                "generalization_alerts": generalization_alerts,
                 "hyperparameters": chosen_candidate["cv_selected_params"],
                 "model_hash_sha256": metadata.get("model_hash_sha256"),
             },
