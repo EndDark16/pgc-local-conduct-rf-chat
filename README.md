@@ -147,6 +147,7 @@ La función proxy enviará:
 - etc.
 
 Si `BACKEND_API_URL` no existe, el sitio abrirá pero las llamadas API devolverán error controlado (no 404 de página).
+Además, el frontend mostrará una pantalla de configuración para ingresar la URL del backend manualmente y guardarla en el navegador.
 
 ### Cómo desplegar
 

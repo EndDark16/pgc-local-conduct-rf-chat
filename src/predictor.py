@@ -1,6 +1,4 @@
-"""Prediction utilities and orientative reporting for the local chat application."""
-
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import re
 from dataclasses import dataclass
@@ -20,6 +18,8 @@ TECH_PATTERNS = [
     r"\b[a-z]+_[a-z0-9_]+\b",
     r"\binput for\b",
     r"\btarget_domain_\w+\b",
+    r"^(conduct|adhd|anxiety|depression|elimination)\s+\d{1,2}\b",
+    r"\blpe\s*\d{1,2}\b",
 ]
 
 CONDUCT_FALLBACK_LABELS = {
@@ -61,6 +61,12 @@ def _looks_technical(text: str) -> bool:
     norm = normalize_text(text)
     if not norm:
         return False
+    if norm.startswith("input for "):
+        return True
+    if re.search(r"^(conduct|adhd|anxiety|depression|elimination)\s+\d{1,2}\b", norm):
+        return True
+    if re.search(r"\b(lpe|hypimp|inatt|context)\b", norm):
+        return True
     for pattern in TECH_PATTERNS:
         if re.search(pattern, norm):
             return True
@@ -92,9 +98,14 @@ def humanize_feature_name(feature: str, schema: Dict[str, Any]) -> str:
     if feature in CONDUCT_FALLBACK_LABELS:
         return CONDUCT_FALLBACK_LABELS[feature]
 
-    clean = re.sub(r"^(conduct|adhd|anxiety|depression|elimination)_", "", feature)
+    normalized_candidate = normalize_text(feature).replace(" ", "_")
+    if normalized_candidate in CONDUCT_FALLBACK_LABELS:
+        return CONDUCT_FALLBACK_LABELS[normalized_candidate]
+
+    clean = re.sub(r"^(conduct|adhd|anxiety|depression|elimination)_", "", feature, flags=re.I)
     clean = re.sub(r"^\d+_", "", clean)
     clean = clean.replace("_", " ").strip()
+    clean = re.sub(r"^(conduct|adhd|anxiety|depression|elimination)\s+", "", clean, flags=re.I)
     clean = re.sub(r"\s+", " ", clean)
     return clean if clean else "indicador observado"
 
@@ -412,9 +423,7 @@ def predict_with_assets(answers: Dict[str, Any], assets: ModelAssets) -> Dict[st
     ]
     missing_required = [f for f in required_features if f not in answers or answers.get(f) is None]
     if missing_required:
-        raise ValueError(
-            "Faltan respuestas obligatorias para generar la estimación: " + ", ".join(missing_required[:10])
-        )
+        raise ValueError("Faltan respuestas obligatorias para generar la estimación: " + ", ".join(missing_required[:10]))
 
     X = _ordered_input_frame(answers, feature_order)
     X_t = assets.preprocessor.transform(X)

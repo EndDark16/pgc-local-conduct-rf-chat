@@ -27,6 +27,7 @@ function json(statusCode, payload) {
 function normalizeBaseUrl(value) {
   const raw = String(value || "").trim();
   if (!raw) return "";
+  if (!/^https?:\/\//i.test(raw)) return "";
   return raw.endsWith("/") ? raw.slice(0, -1) : raw;
 }
 
@@ -64,12 +65,16 @@ function buildForwardHeaders(eventHeaders) {
 }
 
 exports.handler = async (event) => {
-  const backendBase = normalizeBaseUrl(process.env.BACKEND_API_URL);
+  const headerBackend = normalizeBaseUrl(
+    (event.headers && (event.headers["x-backend-url"] || event.headers["X-Backend-Url"])) || ""
+  );
+  const envBackend = normalizeBaseUrl(process.env.BACKEND_API_URL);
+  const backendBase = envBackend || headerBackend;
   if (!backendBase) {
     return json(503, {
       ok: false,
       detail:
-        "Backend no configurado en Netlify. Define BACKEND_API_URL con la URL pública del backend FastAPI (sin slash final).",
+        "Backend no configurado. Define BACKEND_API_URL en Netlify o envía x-backend-url con la URL pública del backend FastAPI (sin slash final).",
       example: "https://tu-backend-ejemplo.onrender.com",
     });
   }

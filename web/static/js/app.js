@@ -51,6 +51,7 @@ const state = {
   role: "caregiver",
   modelReady: false,
   targetColumn: "target_domain_conduct_final",
+  targetLabel: "Conducta y convivencia",
   targetIntro: "",
   questions: [],
   currentIndex: 0,
@@ -61,6 +62,7 @@ const state = {
   autoPredictTriggered: false,
   technicalLoaded: false,
   technicalLoading: false,
+  backendApiUrl: "",
 };
 
 const el = {
@@ -204,6 +206,12 @@ function setInputEnabled(enabled) {
   el.sendBtn.disabled = !enabled;
 }
 
+function backendHeader() {
+  const value = (state.backendApiUrl || localStorage.getItem("backendApiUrl") || "").trim();
+  if (!value) return {};
+  return { "x-backend-url": value };
+}
+
 function currentQuestion() {
   return state.questions[state.currentIndex] || null;
 }
@@ -234,7 +242,11 @@ async function emitAudit(event, payload = {}) {
 }
 
 async function fetchJson(url, options = {}) {
-  const response = await fetch(url, options);
+  const headers = {
+    ...(options.headers || {}),
+    ...backendHeader(),
+  };
+  const response = await fetch(url, { ...options, headers });
   if (!response.ok) {
     let message = `${response.status} ${response.statusText}`;
     try {
@@ -310,9 +322,10 @@ async function loadModelStatus() {
   state.modelReady = Boolean(payload.model_trained);
   state.targetColumn = payload.target_column || state.targetColumn;
   state.targetIntro = payload.target_intro || "";
+  state.targetLabel = payload.target_label || "Conducta y convivencia";
 
   el.modelStatusText.textContent = payload.message || "Estado no disponible";
-  el.targetText.textContent = state.targetColumn;
+  el.targetText.textContent = state.targetLabel;
   return payload;
 }
 
@@ -335,7 +348,9 @@ async function loadQuestions() {
   state.lastPrediction = null;
   state.autoPredictTriggered = false;
   if (data.target_column) state.targetColumn = data.target_column;
+  if (data.target_label) state.targetLabel = data.target_label;
   if (data.intro_text) state.targetIntro = data.intro_text;
+  el.targetText.textContent = state.targetLabel || "Dominio evaluado";
   updateProgressLabel();
 }
 
@@ -346,6 +361,48 @@ function introMessages() {
   );
   addMessage("assistant", state.targetIntro || "Te haré preguntas relacionadas con el dominio seleccionado.");
   addMessage("assistant", "Avanzaremos paso a paso y confirmaré cada respuesta antes de continuar.");
+}
+
+function renderNetlifyBackendSetup(errorMessage = "") {
+  setState(STATE.MODEL_MISSING);
+  ensureVisible(el.modelMissingCard, true);
+  ensureVisible(el.chatPanel, false);
+  el.modelStatusText.textContent = "Configuración pendiente";
+  el.targetText.textContent = "Conducta y convivencia";
+  el.progressText.textContent = "Esperando configuración";
+
+  const saved = (state.backendApiUrl || localStorage.getItem("backendApiUrl") || "").trim();
+  el.modelMissingCard.innerHTML = `
+    <h2>Conexión de backend pendiente</h2>
+    <p>El frontend está desplegado en Netlify, pero falta la URL pública del backend FastAPI.</p>
+    <p>Ingresa la URL del backend (ejemplo: <code>https://tu-backend.onrender.com</code>) para continuar.</p>
+    <div class="backend-config-row">
+      <input id="backendUrlInput" class="backend-url-input" type="url" placeholder="https://tu-backend.onrender.com" value="${saved}" />
+      <button id="backendUrlSaveBtn" class="btn btn-primary" type="button">Conectar</button>
+    </div>
+    <p class="backend-config-help">También puedes definir la variable <code>BACKEND_API_URL</code> en Netlify para no ingresarla manualmente.</p>
+    ${errorMessage ? `<p class="backend-config-error">${errorMessage}</p>` : ""}
+  `;
+
+  const input = document.getElementById("backendUrlInput");
+  const btn = document.getElementById("backendUrlSaveBtn");
+  const submit = async () => {
+    const value = (input?.value || "").trim().replace(/\/+$/, "");
+    if (!/^https?:\/\//i.test(value)) {
+      renderNetlifyBackendSetup("La URL no es válida. Debe iniciar con http:// o https://");
+      return;
+    }
+    state.backendApiUrl = value;
+    localStorage.setItem("backendApiUrl", value);
+    await initializeChatFlow();
+  };
+  btn?.addEventListener("click", submit);
+  input?.addEventListener("keydown", async (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      await submit();
+    }
+  });
 }
 
 function askCurrentQuestion() {
@@ -1033,9 +1090,11 @@ function drawImportance(importancePayload) {
   el.importanceList.innerHTML = rows
     .map(
       (row) =>
-        `<div class="importance-item"><span>${row.label || row.feature}</span><strong>${(Number(
-          row.importance || 0
-        ) * 100).toFixed(2)}%</strong></div>`
+        `<div class="importance-item">
+          <span><code>${row.technical_name || row.feature || ""}</code> · ${row.label || row.feature || ""}</span>
+          <strong>${(Number(row.importance || 0) * 100).toFixed(2)}%</strong>
+          <small>${row.plain_explanation || ""}</small>
+        </div>`
     )
     .join("");
 }
@@ -1136,6 +1195,7 @@ async function initializeChatFlow() {
   updateProgressLabel();
 
   try {
+    state.backendApiUrl = (state.backendApiUrl || localStorage.getItem("backendApiUrl") || "").trim();
     const status = await loadModelStatus();
     await emitAudit("frontend_model_status_loaded", {
       session_id: state.sessionId,
@@ -1155,10 +1215,20 @@ async function initializeChatFlow() {
     introMessages();
     askCurrentQuestion();
   } catch (error) {
+    const message = (error && error.message ? error.message : "Error desconocido").toString();
+    const normalized = normalizeText(message);
+    if (normalized.includes("backend no configurado")) {
+      renderNetlifyBackendSetup(message);
+      await emitAudit("frontend_netlify_backend_missing", {
+        session_id: state.sessionId,
+        message,
+      });
+      return;
+    }
     setState(STATE.ERROR);
     addMessage(
       "assistant",
-      error.message || "Ocurrió un problema al preparar el chat. Revisa el esquema y vuelve a entrenar.",
+      message || "Ocurrió un problema al preparar el chat. Revisa el esquema y vuelve a entrenar.",
       "error"
     );
     setInputEnabled(false);

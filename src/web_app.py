@@ -46,6 +46,8 @@ TECH_TEXT_PATTERNS = [
     r"\bfeature_name\b",
     r"\btarget_domain_\w+\b",
     r"\b[a-z]+_[a-z0-9_]+\b",
+    r"^(conduct|adhd|anxiety|depression|elimination)\s+\d{1,2}\b",
+    r"\blpe\s*\d{1,2}\b",
 ]
 
 TARGET_INTROS = {
@@ -54,6 +56,14 @@ TARGET_INTROS = {
     "target_domain_anxiety_final": "Te haré preguntas sobre preocupaciones, miedos o señales de ansiedad.",
     "target_domain_depression_final": "Te haré preguntas sobre estado de ánimo, interés y energía.",
     "target_domain_elimination_final": "Te haré preguntas relacionadas con control de esfínteres y situaciones asociadas.",
+}
+
+TARGET_LABELS = {
+    "target_domain_conduct_final": "Conducta y convivencia",
+    "target_domain_adhd_final": "Atención e hiperactividad (ADHD)",
+    "target_domain_anxiety_final": "Ansiedad",
+    "target_domain_depression_final": "Estado de ánimo (depresión)",
+    "target_domain_elimination_final": "Eliminación / control de esfínteres",
 }
 
 
@@ -376,6 +386,7 @@ async def model_status() -> Dict[str, Any]:
     return {
         "model_trained": model_exists,
         "target_column": target_column,
+        "target_label": TARGET_LABELS.get(target_column, "Dominio evaluado"),
         "target_intro": TARGET_INTROS.get(target_column, TARGET_INTROS["target_domain_conduct_final"]),
         "threshold_final": metadata.get("thresholds", {}).get("final"),
         "features_count": metadata.get("n_features_used"),
@@ -435,6 +446,7 @@ async def get_questions(role: str = Query(default="caregiver"), session_id: str 
     return {
         "role": role_resolved,
         "target_column": target_col,
+        "target_label": TARGET_LABELS.get(target_col, "Dominio evaluado"),
         "intro_text": TARGET_INTROS.get(target_col, TARGET_INTROS["target_domain_conduct_final"]),
         "total": len(questions),
         "questions": questions,
@@ -719,6 +731,7 @@ async def api_feature_importance() -> Dict[str, Any]:
     if not data:
         return {"ok": False, "message": "No existe importancia de variables aún. Ejecuta python train.py"}
     schema = _load_schema()
+    schema_map = _schema_map(schema)
     rows = data.get("feature_importance_aggregated", [])[:20]
     normalized_rows = []
     for row in rows:
@@ -726,10 +739,19 @@ async def api_feature_importance() -> Dict[str, Any]:
         label = str(row.get("label") or "").strip()
         if not label or _looks_technical_text(label):
             label = humanize_feature_name(feature, schema)
+        meta = schema_map.get(feature, {})
+        explanation = _safe_user_text(
+            meta.get("feature_description"),
+            meta.get("help_text"),
+            meta.get("term_explanation"),
+            default_text=f"Esta variable resume señales observables relacionadas con: {label}.",
+        )
         normalized_rows.append(
             {
                 "feature": feature,
+                "technical_name": feature,
                 "label": label,
+                "plain_explanation": explanation,
                 "importance": row.get("importance"),
             }
         )
