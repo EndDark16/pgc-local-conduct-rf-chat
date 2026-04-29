@@ -123,6 +123,8 @@ def _normalize_option_list(raw: Any) -> List[Dict[str, Any]]:
         label = _clean_label(option.get("label"))
         if not label:
             continue
+        if normalize_text(label) in {"nan", "none", "null"}:
+            continue
         value = option.get("value")
         key = (normalize_text(label), str(value))
         if key in seen:

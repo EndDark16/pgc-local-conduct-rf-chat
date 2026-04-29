@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import re
 import unicodedata
 from pathlib import Path
@@ -35,6 +36,53 @@ def _json_default(value: Any) -> Any:
     if isinstance(value, Path):
         return str(value)
     return str(value)
+
+
+def _sanitize_json_value(value: Any) -> Any:
+    """Convert non-JSON-safe values (NaN/Inf/pd.NA/np types) into valid JSON."""
+    if value is None:
+        return None
+
+    if isinstance(value, dict):
+        return {str(k): _sanitize_json_value(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [_sanitize_json_value(v) for v in value]
+    if isinstance(value, tuple):
+        return [_sanitize_json_value(v) for v in value]
+
+    try:
+        import numpy as np
+
+        if isinstance(value, (np.integer,)):
+            return int(value)
+        if isinstance(value, (np.floating,)):
+            val = float(value)
+            if not np.isfinite(val):
+                return None
+            return val
+        if isinstance(value, (np.bool_,)):
+            return bool(value)
+        if isinstance(value, (np.ndarray,)):
+            return [_sanitize_json_value(v) for v in value.tolist()]
+    except Exception:
+        pass
+
+    if isinstance(value, float):
+        if math.isnan(value) or math.isinf(value):
+            return None
+        return value
+
+    if isinstance(value, Path):
+        return str(value)
+
+    # Pandas missing scalar types (pd.NA, NaT, etc.)
+    try:
+        if pd.isna(value) and not isinstance(value, (str, bytes)):
+            return None
+    except Exception:
+        pass
+
+    return value
 
 
 def normalize_text(value: Any) -> str:
@@ -78,15 +126,27 @@ def hash_dataframe(df: pd.DataFrame) -> str:
 
 def save_json(path: Path, data: Dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
+    payload = _sanitize_json_value(data)
     with path.open("w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2, default=_json_default)
+        json.dump(payload, f, ensure_ascii=False, indent=2, default=_json_default, allow_nan=False)
 
 
 def load_json(path: Path, default: Dict[str, Any] | None = None) -> Dict[str, Any]:
     if not path.exists():
         return default or {}
-    with path.open("r", encoding="utf-8") as f:
-        return json.load(f)
+    try:
+        with path.open("r", encoding="utf-8") as f:
+            return json.load(f)
+    except json.JSONDecodeError:
+        # Backward compatibility for legacy artifacts serialized with NaN/Infinity.
+        try:
+            raw = path.read_text(encoding="utf-8")
+            raw = re.sub(r"\bNaN\b", "null", raw)
+            raw = re.sub(r"\bInfinity\b", "null", raw)
+            raw = re.sub(r"\b-Infinity\b", "null", raw)
+            return json.loads(raw)
+        except Exception:
+            return default or {}
 
 
 def as_bool(value: Any) -> bool:

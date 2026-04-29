@@ -244,8 +244,120 @@ function loadJsonFile(relativeFile, fallbackValue = {}) {
   try {
     return JSON.parse(fs.readFileSync(p, "utf8"));
   } catch (_) {
-    return fallbackValue;
+    try {
+      const raw = fs.readFileSync(p, "utf8");
+      const sanitized = raw
+        .replace(/\bNaN\b/g, "null")
+        .replace(/\bInfinity\b/g, "null")
+        .replace(/\b-Infinity\b/g, "null");
+      return JSON.parse(sanitized);
+    } catch (_) {
+      return fallbackValue;
+    }
   }
+}
+
+function fallbackQuestionByFeature(feature) {
+  if (feature === "age_years") {
+    return "¿Qué edad tiene el niño o la niña, en años cumplidos?";
+  }
+  if (feature === "sex_assigned_at_birth") {
+    return "¿Cuál es el sexo asignado al nacer?";
+  }
+  if (feature === "conduct_onset_before_10") {
+    return "¿Las primeras conductas problemáticas relevantes empezaron antes de los 10 años?";
+  }
+  if (feature.startsWith("conduct_lpe_")) {
+    return `En relación con ${humanizeFeatureName(feature, { feature })}, ¿dirías que no se observa, se observa a veces, o se observa claramente?`;
+  }
+  if (feature.startsWith("conduct_")) {
+    return `En relación con ${humanizeFeatureName(feature, { feature })}, ¿no ocurrió, ocurrió antes, u ocurrió recientemente?`;
+  }
+  return `¿Puedes describir lo que observas sobre ${humanizeFeatureName(feature, { feature })}?`;
+}
+
+function buildFallbackSchemaFromMetadata() {
+  const features = Array.isArray(cache.metadata.features_used) ? cache.metadata.features_used : [];
+  if (!features.length) return { features: [] };
+
+  const items = features.map((feature) => {
+    const item = {
+      feature,
+      question_text_primary: fallbackQuestionByFeature(feature),
+      caregiver_question: fallbackQuestionByFeature(feature),
+      psychologist_question: fallbackQuestionByFeature(feature),
+      feature_label_human: CONDUCT_FALLBACK_LABELS[feature] || feature,
+      feature_description: "",
+      term_explanation: "",
+      section_name: "Cuestionario",
+      domains_final: "conduct",
+      is_required: true,
+    };
+
+    if (feature === "age_years") {
+      item.response_type = "integer";
+      item.min_value = 6;
+      item.max_value = 11;
+      item.scale_guidance = "Ingresa la edad en años cumplidos, entre 6 y 11.";
+      item.help_text = "Se usa solo como dato demográfico básico.";
+      item.response_options = [];
+      return item;
+    }
+
+    if (feature === "sex_assigned_at_birth") {
+      item.response_type = "single_choice";
+      item.scale_guidance = "Selecciona la opción que corresponda.";
+      item.help_text = "Dato demográfico básico para el análisis estadístico.";
+      item.response_options = [
+        { value: 0, label: "Femenino" },
+        { value: 1, label: "Masculino" },
+      ];
+      return item;
+    }
+
+    if (feature === "conduct_onset_before_10") {
+      item.response_type = "yes_no";
+      item.scale_guidance = "Responde Sí o No.";
+      item.help_text = "Ayuda a identificar si el inicio fue temprano.";
+      item.response_options = [
+        { value: 0, label: "No" },
+        { value: 1, label: "Sí" },
+      ];
+      return item;
+    }
+
+    if (feature.startsWith("conduct_lpe_")) {
+      item.response_type = "single_choice";
+      item.scale_guidance = "0 = No se observa, 1 = Se observa a veces o hay duda, 2 = Se observa claramente.";
+      item.help_text = "Responde según lo observado en situaciones cotidianas.";
+      item.response_options = [
+        { value: 0, label: "0 = No se observa" },
+        { value: 1, label: "1 = Se observa a veces o hay duda" },
+        { value: 2, label: "2 = Se observa claramente" },
+      ];
+      return item;
+    }
+
+    if (feature.startsWith("conduct_")) {
+      item.response_type = "single_choice";
+      item.scale_guidance = "0 = No ocurrió, 1 = Ocurrió antes pero no recientemente, 2 = Ocurrió recientemente.";
+      item.help_text = "Responde según el periodo en que ocurrió la conducta.";
+      item.response_options = [
+        { value: 0, label: "0 = No ocurrió" },
+        { value: 1, label: "1 = Ocurrió antes, pero no recientemente" },
+        { value: 2, label: "2 = Ocurrió en los últimos 6 meses" },
+      ];
+      return item;
+    }
+
+    item.response_type = "categorical";
+    item.scale_guidance = "Responde con la opción que mejor describa la situación.";
+    item.help_text = "";
+    item.response_options = [];
+    return item;
+  });
+
+  return { features: items, feature_order: features };
 }
 
 function ensureCacheLoaded() {
@@ -255,6 +367,12 @@ function ensureCacheLoaded() {
   cache.featureImportance = loadJsonFile("artifacts/feature_importance.json", {});
   cache.schema = loadJsonFile("artifacts/feature_schema.json", {});
   cache.targetColumn = String(cache.metadata.target_column || "target_domain_conduct_final");
+
+  const hasSchemaFeatures = Array.isArray(cache.schema.features) && cache.schema.features.length > 0;
+  if (!hasSchemaFeatures) {
+    cache.schema = buildFallbackSchemaFromMetadata();
+  }
+
   cache.loaded = true;
 }
 

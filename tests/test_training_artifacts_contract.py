@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 
 import pytest
 
@@ -39,3 +40,15 @@ def test_overfit_guard_report_shape():
     assert report.get("overfit_guard_applied") is True
     assert "selected_model_variant" in report
     assert "selected_model_reason" in report
+
+
+@pytest.mark.skipif(not _has_artifact("feature_schema.json"), reason="feature_schema.json not available")
+def test_feature_schema_is_strict_json_without_nan_constants():
+    raw = (ROOT / "artifacts" / "feature_schema.json").read_text(encoding="utf-8")
+
+    def _raise_constant(value: str):  # pragma: no cover - only called when invalid constants appear
+        raise ValueError(value)
+
+    parsed = json.loads(raw, parse_constant=_raise_constant)
+    assert isinstance(parsed, dict)
+    assert "features" in parsed
