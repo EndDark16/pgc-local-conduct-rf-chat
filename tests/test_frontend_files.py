@@ -26,6 +26,7 @@ def test_frontend_chat_contract_and_no_forbidden_texts():
         "chat-messages",
         "quick-actions",
         "chat-input-form",
+        "technicalDetails",
         "metricsChart",
         "confusionChart",
         "importanceChart",
@@ -39,6 +40,10 @@ def test_frontend_chat_contract_and_no_forbidden_texts():
         "Pulsa Cargar preguntas",
         "Input for",
         "response_options_json",
+        "Actualizar métricas",
+        "Actualizar importancia",
+        "loadMetricsBtn",
+        "loadImportanceBtn",
     ]
     for token in forbidden:
         assert token not in html
@@ -56,3 +61,4 @@ def test_frontend_chat_contract_and_no_forbidden_texts():
     assert "/api/questions" in js
     assert "/api/chat/result-question" in js
     assert "STATE.RESULT_QA" in js
+    assert 'technicalDetails.addEventListener("toggle"' in js

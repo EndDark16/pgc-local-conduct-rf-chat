@@ -448,6 +448,10 @@ def main() -> int:
         "Pregunta 0 de 0",
         "Pulsa Cargar preguntas",
         "Pulsa \"Cargar preguntas\"",
+        "Actualizar métricas",
+        "Actualizar importancia",
+        "loadMetricsBtn",
+        "loadImportanceBtn",
         "Input for",
         "[{'value': 0, 'label': 'No'}",
     ]

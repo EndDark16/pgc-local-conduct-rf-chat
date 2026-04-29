@@ -252,6 +252,61 @@ def _normalize_role(role: str) -> str:
     return "caregiver"
 
 
+def _to_confusion_payload(matrix: Any) -> Dict[str, Any]:
+    try:
+        arr = matrix or []
+        if len(arr) >= 2 and len(arr[0]) >= 2 and len(arr[1]) >= 2:
+            tn = int(arr[0][0])
+            fp = int(arr[0][1])
+            fn = int(arr[1][0])
+            tp = int(arr[1][1])
+            return {
+                "tn": tn,
+                "fp": fp,
+                "fn": fn,
+                "tp": tp,
+                "matrix": [[tn, fp], [fn, tp]],
+            }
+    except Exception:
+        pass
+    return {"tn": None, "fp": None, "fn": None, "tp": None, "matrix": None}
+
+
+def _resolve_metrics_block(metrics: Dict[str, Any]) -> Dict[str, Any]:
+    candidates = [
+        metrics.get("test_metrics_threshold_final"),
+        metrics.get("test_metrics"),
+        metrics.get("metrics_test"),
+        metrics,
+    ]
+    for block in candidates:
+        if isinstance(block, dict) and any(k in block for k in ["f1", "recall", "precision", "accuracy"]):
+            return block
+    return {}
+
+
+def _resolve_confusion_matrix(metrics: Dict[str, Any], metrics_block: Dict[str, Any]) -> Any:
+    if isinstance(metrics_block, dict) and metrics_block.get("confusion_matrix") is not None:
+        return metrics_block.get("confusion_matrix")
+    if metrics.get("confusion_matrix") is not None:
+        return metrics.get("confusion_matrix")
+    nested = [
+        metrics.get("test_metrics_threshold_final", {}).get("confusion_matrix")
+        if isinstance(metrics.get("test_metrics_threshold_final"), dict)
+        else None,
+        metrics.get("test_metrics", {}).get("confusion_matrix")
+        if isinstance(metrics.get("test_metrics"), dict)
+        else None,
+        metrics.get("metrics_test", {}).get("confusion_matrix")
+        if isinstance(metrics.get("metrics_test"), dict)
+        else None,
+    ]
+    for item in nested:
+        if item is not None:
+            return item
+    return None
+
+
 def _question_allowed(meta: Dict[str, Any], target_col: str) -> bool:
     feature = str(meta.get("feature") or "").strip()
     if not feature:
@@ -516,6 +571,32 @@ async def api_predict(payload: PredictRequest) -> Dict[str, Any]:
     if not answers:
         raise HTTPException(status_code=400, detail="Aún no hay respuestas confirmadas.")
 
+    schema = _load_schema()
+    missing_required_human: List[str] = []
+    for item in schema.get("features", []):
+        feature = str(item.get("feature") or "").strip()
+        if not feature:
+            continue
+        is_required = bool(as_bool(item.get("is_required", True)) if "is_required" in item else True)
+        if not is_required:
+            continue
+        if feature not in answers or answers.get(feature) is None:
+            label = _safe_user_text(
+                item.get("feature_label_human"),
+                item.get("caregiver_question"),
+                item.get("question_text_primary"),
+                default_text="Pregunta obligatoria pendiente",
+            )
+            missing_required_human.append(label)
+
+    if missing_required_human:
+        return {
+            "ok": False,
+            "message": "Faltan algunos datos importantes para generar la impresión orientativa.",
+            "missing_required_questions": missing_required_human[:12],
+            "medical_disclaimer": MEDICAL_DISCLAIMER,
+        }
+
     try:
         prediction = predict_from_answers(answers)
     except FileNotFoundError:
@@ -595,9 +676,12 @@ async def api_metrics() -> Dict[str, Any]:
     if not metrics:
         return {"ok": False, "message": "No existen métricas aún. Ejecuta python train.py"}
 
+    metrics_block = _resolve_metrics_block(metrics)
+    confusion_raw = _resolve_confusion_matrix(metrics, metrics_block)
+    confusion_payload = _to_confusion_payload(confusion_raw)
+
     warning = None
-    test_final = metrics.get("test_metrics_threshold_final", {})
-    if any(float(test_final.get(k) or 0.0) > 0.98 for k in ["accuracy", "precision", "recall", "f1"]):
+    if any(float(metrics_block.get(k) or 0.0) > 0.98 for k in ["accuracy", "precision", "recall", "f1"]):
         warning = (
             "Las métricas son muy altas. Esto puede indicar que el dataset contiene señales muy directas "
             "del target o que se requiere validación externa adicional."
@@ -608,8 +692,9 @@ async def api_metrics() -> Dict[str, Any]:
         "target_column": metrics.get("target_column"),
         "features_count": metrics.get("features_count"),
         "threshold_0_5": _sanitize_jsonable(metrics.get("test_metrics_threshold_0_5", {})),
-        "threshold_final": _sanitize_jsonable(test_final),
-        "confusion_matrix": _sanitize_jsonable(test_final.get("confusion_matrix")),
+        "threshold_final": _sanitize_jsonable(metrics_block),
+        "confusion_matrix": _sanitize_jsonable(confusion_payload.get("matrix")),
+        "confusion_matrix_detail": _sanitize_jsonable(confusion_payload),
         "overfit_warning": warning,
     }
 

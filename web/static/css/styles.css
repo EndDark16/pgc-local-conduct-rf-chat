@@ -344,11 +344,24 @@ summary:focus-visible {
   user-select: none;
 }
 
-.tech-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
+.tech-loader {
+  margin: 2px 0 10px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(124, 92, 255, 0.38);
+  background: rgba(124, 92, 255, 0.11);
+  color: #d9d4ff;
+  font-size: 0.86rem;
+}
+
+.tech-error {
+  margin: 2px 0 10px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  background: rgba(239, 68, 68, 0.14);
+  color: #fecaca;
+  font-size: 0.86rem;
 }
 
 .metric-cards {

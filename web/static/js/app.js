@@ -18,6 +18,7 @@ const HELP_TERMS = [
   "no entiendo",
   "no comprendo",
   "explicame",
+  "explica",
   "explicar",
   "que significa",
   "que quiere decir",
@@ -26,10 +27,22 @@ const HELP_TERMS = [
   "ayuda",
   "no se que responder",
   "explicame con palabras simples",
+  "explicar con palabras mas simples",
 ];
 
-const CONFIRM_TERMS = ["si", "de acuerdo", "correcto", "continuar", "ok", "dale", "confirmo"];
-const DENY_TERMS = ["no", "corregir", "cambiar", "no es correcto", "no exactamente"];
+const CONFIRM_TERMS = [
+  "si",
+  "correcto",
+  "guardar",
+  "continuar",
+  "asi es",
+  "ok",
+  "vale",
+  "esta bien",
+  "de acuerdo",
+  "confirmo",
+];
+const DENY_TERMS = ["no", "corregir", "cambiar", "me equivoque", "modificar", "no es correcto", "no exactamente"];
 
 const state = {
   machine: STATE.LOADING,
@@ -45,6 +58,8 @@ const state = {
   lastPrediction: null,
   waitingPrediction: false,
   autoPredictTriggered: false,
+  technicalLoaded: false,
+  technicalLoading: false,
 };
 
 const el = {
@@ -62,8 +77,9 @@ const el = {
   chatInputForm: document.getElementById("chatInputForm"),
   chatInput: document.getElementById("chatInput"),
   sendBtn: document.getElementById("sendBtn"),
-  loadMetricsBtn: document.getElementById("loadMetricsBtn"),
-  loadImportanceBtn: document.getElementById("loadImportanceBtn"),
+  technicalDetails: document.getElementById("technicalDetails"),
+  techLoader: document.getElementById("techLoader"),
+  techError: document.getElementById("techError"),
   metricCards: document.getElementById("metricCards"),
   metricsChart: document.getElementById("metricsChart"),
   confusionChart: document.getElementById("confusionChart"),
@@ -87,17 +103,31 @@ function normalizeText(value) {
 function looksLikeHelpIntent(text) {
   const norm = normalizeText(text);
   if (!norm) return false;
-  return HELP_TERMS.some((term) => norm.includes(term));
+  if (HELP_TERMS.includes(norm)) return true;
+  return [
+    "no entiendo",
+    "no comprendo",
+    "que significa",
+    "que quiere decir",
+    "dame un ejemplo",
+    "explicame con palabras simples",
+    "explicar con palabras mas simples",
+    "no se que responder",
+  ].some((term) => norm.includes(term));
 }
 
 function isAffirmative(text) {
   const norm = normalizeText(text);
-  return CONFIRM_TERMS.some((term) => norm === term || norm.startsWith(`${term} `));
+  if (!norm) return false;
+  if (CONFIRM_TERMS.some((term) => norm === term || norm.startsWith(`${term} `))) return true;
+  return /^(si|correcto|continuar|guardar|ok|vale|asi es|esta bien)\b/.test(norm);
 }
 
 function isNegative(text) {
   const norm = normalizeText(text);
-  return DENY_TERMS.some((term) => norm === term || norm.startsWith(`${term} `));
+  if (!norm) return false;
+  if (DENY_TERMS.some((term) => norm === term || norm.startsWith(`${term} `))) return true;
+  return /^(no|corregir|cambiar|modificar|me equivoque)\b/.test(norm);
 }
 
 function confidenceLabel(value) {
@@ -643,7 +673,9 @@ async function generatePrediction() {
     ]);
 
     setInputEnabled(true);
-    await refreshTechnicalPanels();
+    if (el.technicalDetails && el.technicalDetails.open) {
+      await refreshTechnicalPanels();
+    }
   } finally {
     state.waitingPrediction = false;
     setTyping(false);
@@ -706,7 +738,12 @@ async function processUserMessage(rawText) {
       return;
     }
 
-    // If user typed something else, treat as correction answer (no loops).
+    if (looksLikeHelpIntent(norm)) {
+      await explainCurrentQuestion("simple");
+      return;
+    }
+
+    // If user typed something else, treat as correction answer and re-interpret.
     correctionFlow();
     await interpretCurrentAnswer(text);
     return;
@@ -736,10 +773,25 @@ async function restartSession() {
   state.lastPrediction = null;
   state.waitingPrediction = false;
   state.autoPredictTriggered = false;
+  state.technicalLoaded = false;
+  state.technicalLoading = false;
 
   clearContextActions();
   clearChat();
   renderQuickChips([]);
+  el.metricCards.innerHTML = "";
+  el.importanceList.innerHTML = "";
+  clearCanvas(el.metricsChart);
+  clearCanvas(el.confusionChart);
+  clearCanvas(el.importanceChart);
+  ensureVisible(el.overfitNote, false);
+  if (el.techError) {
+    el.techError.textContent = "";
+    ensureVisible(el.techError, false);
+  }
+  if (el.techLoader) {
+    ensureVisible(el.techLoader, false);
+  }
   updateProgressLabel();
 
   await emitAudit("frontend_session_restarted", { session_id: state.sessionId });
@@ -754,6 +806,8 @@ function renderMetricCards(metricsPayload) {
     { label: "Precision", value: metrics.precision },
     { label: "Accuracy", value: metrics.accuracy },
     { label: "Threshold", value: metrics.threshold },
+    { label: "ROC-AUC", value: metrics.roc_auc ?? "N/A" },
+    { label: "PR-AUC", value: metrics.pr_auc ?? "N/A" },
   ];
 
   el.metricCards.innerHTML = "";
@@ -822,13 +876,21 @@ function drawMetricBars(metricsPayload) {
 function drawConfusionMatrix(metricsPayload) {
   const canvas = el.confusionChart;
   const ctx = fitCanvas(canvas);
-  const matrix = metricsPayload.confusion_matrix || [[0, 0], [0, 0]];
+  const detail = metricsPayload.confusion_matrix_detail || {};
+  const matrix = detail.matrix || metricsPayload.confusion_matrix || null;
 
   const w = canvas.clientWidth;
   const h = canvas.clientHeight;
   ctx.clearRect(0, 0, w, h);
   ctx.fillStyle = "#0f1628";
   ctx.fillRect(0, 0, w, h);
+
+  if (!Array.isArray(matrix) || matrix.length < 2 || !Array.isArray(matrix[0]) || !Array.isArray(matrix[1])) {
+    ctx.fillStyle = "#aab4c5";
+    ctx.font = "13px Segoe UI";
+    ctx.fillText("No hay matriz de confusion disponible.", 12, 24);
+    return;
+  }
 
   const boxW = (w - 100) / 2;
   const boxH = (h - 80) / 2;
@@ -842,7 +904,7 @@ function drawConfusionMatrix(metricsPayload) {
     for (let c = 0; c < 2; c += 1) {
       const x = startX + c * boxW;
       const y = startY + r * boxH;
-      const value = Number(matrix[r]?.[c] || 0);
+      const value = Number(matrix[r]?.[c] ?? 0);
       const alpha = 0.2 + (value / max) * 0.65;
       ctx.fillStyle = `rgba(124, 92, 255, ${alpha.toFixed(3)})`;
       ctx.fillRect(x, y, boxW - 4, boxH - 4);
@@ -857,10 +919,19 @@ function drawConfusionMatrix(metricsPayload) {
 
   ctx.fillStyle = "#aab4c5";
   ctx.font = "12px Segoe UI";
-  ctx.fillText("Pred 0", startX + 10, h - 10);
-  ctx.fillText("Pred 1", startX + boxW + 10, h - 10);
+  ctx.fillText("Pred 0 (negativo)", startX + 8, h - 10);
+  ctx.fillText("Pred 1 (positivo)", startX + boxW + 8, h - 10);
   ctx.fillText("Real 0", 4, startY + 18);
   ctx.fillText("Real 1", 4, startY + boxH + 18);
+
+  if (detail && detail.matrix) {
+    ctx.fillStyle = "#dbe5fa";
+    ctx.font = "11px Segoe UI";
+    ctx.fillText(`VN: ${detail.tn ?? "-"}`, 10, h - 32);
+    ctx.fillText(`FP: ${detail.fp ?? "-"}`, 100, h - 32);
+    ctx.fillText(`FN: ${detail.fn ?? "-"}`, 190, h - 32);
+    ctx.fillText(`VP: ${detail.tp ?? "-"}`, 280, h - 32);
+  }
 }
 
 function drawImportance(importancePayload) {
@@ -951,22 +1022,54 @@ async function loadImportancePanel() {
   return data;
 }
 
+function setTechLoading(visible) {
+  if (!el.techLoader) return;
+  ensureVisible(el.techLoader, visible);
+}
+
+function setTechError(message = "") {
+  if (!el.techError) return;
+  if (!message) {
+    el.techError.textContent = "";
+    ensureVisible(el.techError, false);
+    return;
+  }
+  el.techError.textContent = message;
+  ensureVisible(el.techError, true);
+}
+
 async function refreshTechnicalPanels() {
+  if (state.technicalLoading) return;
+  state.technicalLoading = true;
+  setTechLoading(true);
+  setTechError("");
   try {
     await loadMetricsPanel();
     await loadImportancePanel();
+    state.technicalLoaded = true;
   } catch (error) {
-    addMessage("assistant", `No pude actualizar detalles técnicos: ${error.message}`, "error");
+    setTechError(`No pude cargar los detalles técnicos: ${error.message}`);
+    await emitAudit("frontend_technical_error", {
+      session_id: state.sessionId,
+      message: error.message || "error desconocido",
+    });
+  } finally {
+    state.technicalLoading = false;
+    setTechLoading(false);
   }
 }
 
 async function initializeChatFlow() {
   setState(STATE.LOADING);
+  state.technicalLoaded = false;
+  state.technicalLoading = false;
   ensureVisible(el.modelMissingCard, false);
   ensureVisible(el.chatPanel, true);
   clearContextActions();
   clearChat();
   renderQuickChips([]);
+  setTechError("");
+  setTechLoading(false);
   setInputEnabled(false);
   updateProgressLabel();
 
@@ -1027,18 +1130,21 @@ function attachEvents() {
   el.resetBtn.addEventListener("click", () => restartSession());
   el.roleSelect.addEventListener("change", () => restartSession());
 
-  el.loadMetricsBtn.addEventListener("click", async () => {
-    await loadMetricsPanel();
-    await emitAudit("frontend_metrics_viewed", { session_id: state.sessionId });
-  });
-
-  el.loadImportanceBtn.addEventListener("click", async () => {
-    await loadImportancePanel();
-    await emitAudit("frontend_importance_viewed", { session_id: state.sessionId });
-  });
+  if (el.technicalDetails) {
+    el.technicalDetails.addEventListener("toggle", async () => {
+      if (!el.technicalDetails.open) return;
+      if (!state.technicalLoaded) {
+        await refreshTechnicalPanels();
+      }
+      await emitAudit("frontend_technical_opened", {
+        session_id: state.sessionId,
+        loaded: state.technicalLoaded,
+      });
+    });
+  }
 
   window.addEventListener("resize", () => {
-    if (state.lastPrediction) {
+    if (state.lastPrediction && el.technicalDetails && el.technicalDetails.open && state.technicalLoaded) {
       refreshTechnicalPanels();
     }
   });

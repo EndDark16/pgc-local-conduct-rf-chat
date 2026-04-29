@@ -70,10 +70,8 @@
 
       <details class="tech-details" id="technicalDetails">
         <summary>Detalles técnicos</summary>
-        <div class="tech-actions">
-          <button id="loadMetricsBtn" class="btn btn-ghost" type="button">Actualizar métricas</button>
-          <button id="loadImportanceBtn" class="btn btn-ghost" type="button">Actualizar importancia</button>
-        </div>
+        <div class="tech-loader hidden" id="techLoader">Cargando métricas y gráficos...</div>
+        <p class="tech-error hidden" id="techError"></p>
 
         <div class="metric-cards" id="metricCards"></div>
         <p class="overfit-note hidden" id="overfitNote"></p>

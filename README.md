@@ -129,6 +129,12 @@ http://127.0.0.1:8000
 8. Luego permite preguntas sobre el resultado (`result_qa`).
 9. El botón de reinicio limpia toda la sesión y comienza desde cero.
 
+## Detalles técnicos en la interfaz
+
+- La sección **Detalles técnicos** inicia colapsada.
+- Al desplegarla por primera vez, carga automáticamente métricas, importancia y matriz de confusión.
+- No existen botones “Actualizar métricas” ni “Actualizar importancia”.
+
 ## Métricas y control de sobreajuste
 
 - Optimización principal: **F1**.

@@ -14,6 +14,11 @@ def _has_questionnaire() -> bool:
     return any(data_dir.glob("questionnaire*.csv"))
 
 
+def _has_model() -> bool:
+    root = Path(__file__).resolve().parent.parent
+    return (root / "models" / "model.joblib").exists() and (root / "models" / "preprocessor.joblib").exists()
+
+
 def test_home_endpoint():
     response = client.get("/")
     assert response.status_code == 200
@@ -77,3 +82,59 @@ def test_result_question_requires_prediction():
         json={"session_id": "new-session-no-result", "question": "que significa este resultado"},
     )
     assert response.status_code == 400
+
+
+def test_metrics_endpoint_confusion_payload_shape():
+    response = client.get("/api/metrics")
+    assert response.status_code == 200
+    payload = response.json()
+    assert "ok" in payload
+    if payload.get("ok"):
+        assert "confusion_matrix_detail" in payload
+        detail = payload["confusion_matrix_detail"]
+        assert "matrix" in detail
+        assert {"tn", "fp", "fn", "tp"}.issubset(detail.keys())
+
+
+@pytest.mark.skipif(not (_has_questionnaire() and _has_model()), reason="No questionnaire/model available")
+def test_can_confirm_all_questions_and_predict_result():
+    session = "flow-complete-test"
+    response = client.get(f"/api/questions?role=caregiver&session_id={session}")
+    assert response.status_code == 200
+    payload = response.json()
+    questions = payload["questions"]
+    assert questions
+
+    answers = {}
+    for q in questions:
+        feature = q["feature"]
+        options = q.get("response_options") or []
+        value = None
+        if options:
+            first = options[0]
+            value = first.get("value")
+            if value is None:
+                value = first.get("label")
+        if value is None:
+            value = q.get("min_value")
+        if value is None:
+            value = 0
+
+        confirm = client.post(
+            "/api/chat/confirm",
+            json={
+                "feature": feature,
+                "parsed_value": value,
+                "raw_answer": str(value),
+                "confidence": 0.8,
+                "session_id": session,
+            },
+        )
+        assert confirm.status_code == 200, confirm.text
+        answers[feature] = value
+
+    pred = client.post("/api/predict", json={"session_id": session, "answers": answers})
+    assert pred.status_code == 200
+    pred_payload = pred.json()
+    assert pred_payload.get("ok") is True
+    assert "prediction" in pred_payload

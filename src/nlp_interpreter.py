@@ -15,6 +15,7 @@ HELP_TERMS = [
     "no entiendo",
     "no comprendo",
     "explicame",
+    "explica",
     "explicar",
     "que significa",
     "que quiere decir",
@@ -22,6 +23,7 @@ HELP_TERMS = [
     "ejemplo",
     "ayuda",
     "no se que responder",
+    "explicar con palabras mas simples",
     "explicame con palabras simples",
 ]
 
@@ -62,6 +64,9 @@ UNCERTAINTY_TERMS = [
     "no se",
     "no estoy seguro",
     "no estoy segura",
+    "creo que",
+    "quizas si",
+    "quizas no",
     "tal vez",
     "puede ser",
     "en ocasiones",
@@ -112,8 +117,8 @@ OBSERVATION_TERMS = {
 
 IMPACT_TERMS = {
     0: ["sin impacto", "no afecta", "nada", "no hay problema"],
-    1: ["leve", "poco", "afecta un poco", "manejable"],
-    2: ["moderado", "medio", "afecta bastante", "interfiere"],
+    1: ["leve", "poco", "afecta un poco", "manejable", "no mucho"],
+    2: ["moderado", "medio", "afecta bastante", "interfiere", "bastante"],
     3: ["marcado", "fuerte", "grave", "severo", "afecta mucho", "impide actividades"],
 }
 
@@ -176,10 +181,42 @@ def detect_help_intent(text: str) -> bool:
     norm = normalize_text(text)
     if not norm:
         return False
-    if _any_phrase(norm, HELP_TERMS):
+
+    # Strict intent detection only; avoid broad fuzzy matching that confuses "si/no".
+    strict_full_match_terms = {
+        "no entiendo",
+        "no comprendo",
+        "explicame",
+        "explica",
+        "explicar",
+        "que significa",
+        "que quiere decir",
+        "dame un ejemplo",
+        "ejemplo",
+        "ayuda",
+        "no se que responder",
+        "explicar con palabras mas simples",
+        "explicame con palabras simples",
+    }
+    if norm in strict_full_match_terms:
         return True
-    _, score = _best_fuzzy(norm, HELP_TERMS)
-    return score >= 91.0
+
+    phrase_terms = [
+        "no entiendo",
+        "no comprendo",
+        "explicame",
+        "explica",
+        "explicar",
+        "que significa",
+        "que quiere decir",
+        "dame un ejemplo",
+        "ejemplo",
+        "ayuda",
+        "no se que responder",
+        "explicar con palabras mas simples",
+        "explicame con palabras simples",
+    ]
+    return _any_phrase(norm, phrase_terms)
 
 
 def detect_user_does_not_understand(text: str) -> bool:
@@ -190,8 +227,12 @@ def detect_affirmation(text: str) -> bool:
     norm = normalize_text(text)
     if not norm:
         return False
+    if _any_phrase(norm, ["no se observa", "no ocurre", "no afecta", "no ha pasado", "no suele pasar"]):
+        return False
     if _any_phrase(norm, AFFIRMATION_TERMS):
         return True
+    if len(norm) <= 3:
+        return norm == "si"
     fuzzy_terms = [term for term in AFFIRMATION_TERMS if len(term.replace(" ", "")) >= 4]
     _, score = _best_fuzzy(norm, fuzzy_terms)
     return score >= 88.0
@@ -217,8 +258,23 @@ def detect_uncertainty(text: str) -> bool:
         return False
     if _any_phrase(norm, UNCERTAINTY_TERMS):
         return True
-    _, score = _best_fuzzy(norm, UNCERTAINTY_TERMS)
-    return score >= 86.0
+    # Fuzzy uncertainty only when there is a true uncertainty clue,
+    # avoiding accidental matches for short answers like "si"/"no".
+    uncertainty_clues = [
+        "creo",
+        "quizas",
+        "tal vez",
+        "depende",
+        "a veces",
+        "ocasional",
+        "seguro",
+        "puede ser",
+    ]
+    if len(norm) < 5 or not _any_phrase(norm, uncertainty_clues):
+        return False
+    fuzzy_terms = [term for term in UNCERTAINTY_TERMS if len(term.replace(" ", "")) >= 6]
+    _, score = _best_fuzzy(norm, fuzzy_terms)
+    return score >= 88.0
 
 
 def detect_occurrence(text: str) -> Optional[bool]:
@@ -275,6 +331,32 @@ def detect_impact_level(text: str) -> Optional[int]:
 
 def detect_binary_value(text: str) -> Optional[int]:
     norm = normalize_text(text)
+    if _any_phrase(
+        norm,
+        [
+            "no se observa",
+            "no ocurre",
+            "no ha pasado",
+            "no afecta",
+            "no suele pasar",
+            "casi nunca",
+            "para nada",
+        ],
+    ):
+        return 0
+    if _any_phrase(
+        norm,
+        [
+            "si se observa",
+            "si ocurre",
+            "si ha pasado",
+            "si afecta",
+            "si suele pasar",
+            "afirmativo",
+            "verdadero",
+        ],
+    ):
+        return 1
     aff = detect_affirmation(norm)
     neg = detect_negation(norm)
 
@@ -356,32 +438,49 @@ def build_contextual_clarification(scale_type: str, context: Optional[Dict[str, 
     return "Necesito una respuesta un poco mas clara para continuar."
 
 
-def parse_binary_answer(text: str) -> Dict[str, Any]:
-    parsed = detect_binary_value(text)
+def parse_binary_answer(text: str, metadata: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    norm = normalize_text(text)
+    parsed = detect_binary_value(norm)
+    has_uncertainty = detect_uncertainty(norm)
+    metadata = metadata or {}
+    question_text = normalize_text(
+        metadata.get("question")
+        or metadata.get("question_text_primary")
+        or metadata.get("caregiver_question")
+        or metadata.get("psychologist_question")
+    )
+    onset_before_ten = "antes de los 10" in question_text or "before 10" in question_text
+
     if parsed == 1:
+        friendly = "Lo entendi como: si."
+        if onset_before_ten:
+            friendly = "Lo entendi como: si, empezo antes de los 10 anos."
         return {
             "parsed_value": 1,
-            "confidence": 0.92,
+            "confidence": 0.78 if has_uncertainty else 0.93,
             "needs_clarification": False,
             "reasoning_summary": "Se detecto una afirmacion clara para una escala binaria.",
-            "user_friendly_interpretation": "Lo entendi como: si.",
+            "user_friendly_interpretation": friendly,
             "value_explanation": "Para esta escala equivale al valor 1.",
-            "answer_category": "respuesta clara",
-            "context": {},
+            "answer_category": "respuesta parcialmente clara" if has_uncertainty else "respuesta clara",
+            "context": {"uncertain": has_uncertainty},
         }
     if parsed == 0:
+        friendly = "Lo entendi como: no."
+        if onset_before_ten:
+            friendly = "Lo entendi como: no, no empezo antes de los 10 anos."
         return {
             "parsed_value": 0,
-            "confidence": 0.92,
+            "confidence": 0.78 if has_uncertainty else 0.93,
             "needs_clarification": False,
             "reasoning_summary": "Se detecto una negacion clara para una escala binaria.",
-            "user_friendly_interpretation": "Lo entendi como: no.",
+            "user_friendly_interpretation": friendly,
             "value_explanation": "Para esta escala equivale al valor 0.",
-            "answer_category": "respuesta clara",
-            "context": {},
+            "answer_category": "respuesta parcialmente clara" if has_uncertainty else "respuesta clara",
+            "context": {"uncertain": has_uncertainty},
         }
 
-    if detect_uncertainty(text):
+    if detect_uncertainty(norm):
         return {
             "parsed_value": None,
             "confidence": 0.45,
@@ -521,7 +620,31 @@ def parse_frequency_0_3(text: str) -> Dict[str, Any]:
 
 
 def parse_observation_0_2(text: str) -> Dict[str, Any]:
-    level = detect_observation_level(text)
+    norm = normalize_text(text)
+    level = detect_observation_level(norm)
+
+    # Semantic inversion helper for traits framed as "lack of ..." (e.g., lack of remorse/empathy).
+    if level is None:
+        if _any_phrase(
+            norm,
+            [
+                "muestra culpa",
+                "siente culpa",
+                "muestra empatia",
+                "tiene empatia",
+                "se arrepiente",
+            ],
+        ):
+            return {
+                "parsed_value": 0,
+                "confidence": 0.7,
+                "needs_clarification": True,
+                "reasoning_summary": "La respuesta sugiere presencia de culpa/empatia; podria implicar baja presencia del rasgo evaluado.",
+                "user_friendly_interpretation": "Entiendo que si muestra culpa o empatia en varias situaciones.",
+                "value_explanation": "Lo ubico como baja presencia del rasgo evaluado (valor 0), salvo que quieras corregirlo.",
+                "answer_category": "respuesta parcialmente clara",
+                "context": {},
+            }
     if level is None:
         return {
             "parsed_value": None,
@@ -548,7 +671,8 @@ def parse_observation_0_2(text: str) -> Dict[str, Any]:
 
 
 def parse_impact_0_3(text: str) -> Dict[str, Any]:
-    level = detect_impact_level(text)
+    norm = normalize_text(text)
+    level = detect_impact_level(norm)
     if level is None:
         return {
             "parsed_value": None,
@@ -688,7 +812,7 @@ def parse_categorical(text: str, options_list: List[Dict[str, Any]]) -> Dict[str
 
 def interpret_open_answer(scale_type: str, text: str, metadata: Dict[str, Any], options_payload: Dict[str, Any]) -> Dict[str, Any]:
     if scale_type == "binary":
-        return parse_binary_answer(text)
+        return parse_binary_answer(text, metadata=metadata)
     if scale_type == "temporal_0_2":
         return parse_temporal_0_2(text)
     if scale_type == "frequency_0_3":

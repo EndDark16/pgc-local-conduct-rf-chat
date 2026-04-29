@@ -75,12 +75,26 @@ def test_help_request_detection_strict():
     assert is_help_request("No entiendo la pregunta")
     assert detect_user_does_not_understand("no se que responder")
     assert not is_help_request("no se observa")
+    assert not is_help_request("si")
+    assert not is_help_request("no")
+    assert not is_help_request("no ocurrio")
+    assert not is_help_request("no ha pasado")
+    assert not is_help_request("a veces")
 
 
 def test_binary_yes_phrase_maps_to_1():
     result = interpret_answer("x", "si suele pasar", BINARY_META)
     assert result["parsed_value"] == 1
     assert result["needs_clarification"] is False
+
+
+def test_binary_si_no_direct_maps_cleanly():
+    yes = interpret_answer("x", "si", BINARY_META)
+    no = interpret_answer("x", "no", BINARY_META)
+    assert yes["parsed_value"] == 1
+    assert yes["needs_clarification"] is False
+    assert no["parsed_value"] == 0
+    assert no["needs_clarification"] is False
 
 
 def test_binary_a_veces_requests_clarification():
@@ -120,6 +134,15 @@ def test_temporal_recently_maps_to_2():
     assert result["parsed_value"] == 2
 
 
+def test_temporal_common_phrases_map():
+    r0 = interpret_answer("x", "no ha pasado", TEMPORAL_META)
+    r1 = interpret_answer("x", "pasó hace tiempo", TEMPORAL_META)
+    r2 = interpret_answer("x", "una vez hace poco", TEMPORAL_META)
+    assert r0["parsed_value"] == 0
+    assert r1["parsed_value"] == 1
+    assert r2["parsed_value"] == 2
+
+
 def test_observation_no_se_observa_maps_to_0():
     result = interpret_answer("x", "no se observa", OBS_META)
     assert result["parsed_value"] == 0
@@ -128,6 +151,28 @@ def test_observation_no_se_observa_maps_to_0():
 def test_impact_natural_phrase_maps_to_3():
     result = interpret_answer("x", "afecta mucho en casa y en el colegio", IMPACT_META)
     assert result["parsed_value"] == 3
+
+
+def test_impact_no_mucho_is_not_generic_failure():
+    result = interpret_answer("x", "no mucho", IMPACT_META)
+    assert result["parsed_value"] in {0, 1, None}
+    if result["parsed_value"] is None:
+        assert result["needs_clarification"] is True
+        assert "afecta" in normalize_text(result["clarification_question"])
+
+
+def test_observation_semantic_inversion_or_clarification():
+    result = interpret_answer("conduct_lpe_01_lack_remorse_guilt", "suele mostrar culpa", OBS_META)
+    assert result["parsed_value"] in {0, None}
+    if result["parsed_value"] is None:
+        assert result["needs_clarification"] is True
+
+
+def test_observation_a_veces_does_not_block():
+    result = interpret_answer("x", "a veces", OBS_META)
+    assert result["parsed_value"] in {1, None}
+    if result["parsed_value"] is None:
+        assert result["needs_clarification"] is True
 
 
 def test_numeric_value_extraction_inside_text():

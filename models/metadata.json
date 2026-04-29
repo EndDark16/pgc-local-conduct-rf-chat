@@ -1,5 +1,5 @@
 {
-  "trained_at_utc": "2026-04-29T02:02:07.493378+00:00",
+  "trained_at_utc": "2026-04-29T02:37:46.187422+00:00",
   "model_type": "RandomForestClassifier",
   "dataset_file": "hybrid_no_external_scores_dataset_ready(1).csv",
   "dataset_hash_sha256": "ff76e9235a0a538452f92004e878ca7a75db23e28a69cee7a805b241d7ab7473",
