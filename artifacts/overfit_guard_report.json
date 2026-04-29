@@ -1,0 +1,141 @@
+{
+  "max_acceptable_metric": 0.98,
+  "overfit_guard_applied": true,
+  "overfit_warning": false,
+  "selected_model_variant": "sin_alta_correlacion",
+  "selected_model_reason": "Se seleccionó la variante con mejor F1/recall dentro del límite máximo aceptable y con brecha de generalización controlada.",
+  "selected_metrics_above_limit": [],
+  "evaluated_variants": [
+    {
+      "variant_name": "sin_alta_correlacion",
+      "guard_score": 2.402242815686804,
+      "within_limit": true,
+      "metrics_above_limit": [],
+      "overflow_sum": 0.0,
+      "overfit_gap_train_test_f1": 0.0284363297060789,
+      "importance_concentration": 0.11665488877178243,
+      "complexity_score": 1.4000000000000001
+    },
+    {
+      "variant_name": "sin_deterministicas_regla",
+      "guard_score": 2.402242815686804,
+      "within_limit": true,
+      "metrics_above_limit": [],
+      "overflow_sum": 0.0,
+      "overfit_gap_train_test_f1": 0.0284363297060789,
+      "importance_concentration": 0.11665488877178243,
+      "complexity_score": 1.4000000000000001
+    },
+    {
+      "variant_name": "sin_importancia_dominante",
+      "guard_score": 2.402242815686804,
+      "within_limit": true,
+      "metrics_above_limit": [],
+      "overflow_sum": 0.0,
+      "overfit_gap_train_test_f1": 0.0284363297060789,
+      "importance_concentration": 0.11665488877178243,
+      "complexity_score": 1.4000000000000001
+    },
+    {
+      "variant_name": "regularizacion_estricta",
+      "guard_score": 0.6732804238993684,
+      "within_limit": false,
+      "metrics_above_limit": [
+        {
+          "metric": "f1",
+          "value": 0.9876543209876543
+        },
+        {
+          "metric": "recall",
+          "value": 1.0
+        },
+        {
+          "metric": "accuracy",
+          "value": 0.9916666666666667
+        },
+        {
+          "metric": "roc_auc",
+          "value": 0.9996484375
+        },
+        {
+          "metric": "pr_auc",
+          "value": 0.9992614394902186
+        }
+      ],
+      "overflow_sum": 0.07823086464453965,
+      "overfit_gap_train_test_f1": 0.0,
+      "importance_concentration": 0.4081166872928582,
+      "complexity_score": 1.33
+    },
+    {
+      "variant_name": "baseline_conservador",
+      "guard_score": 0.5419764907529228,
+      "within_limit": false,
+      "metrics_above_limit": [
+        {
+          "metric": "f1",
+          "value": 0.9968847352024922
+        },
+        {
+          "metric": "recall",
+          "value": 1.0
+        },
+        {
+          "metric": "precision",
+          "value": 0.9937888198757764
+        },
+        {
+          "metric": "accuracy",
+          "value": 0.9979166666666667
+        },
+        {
+          "metric": "roc_auc",
+          "value": 0.9996875
+        },
+        {
+          "metric": "pr_auc",
+          "value": 0.9993479457162724
+        }
+      ],
+      "overflow_sum": 0.10762566746120772,
+      "overfit_gap_train_test_f1": 0.0,
+      "importance_concentration": 0.38764246958044946,
+      "complexity_score": 1.81
+    },
+    {
+      "variant_name": "reducido_menos_redundante",
+      "guard_score": 0.5419764907529228,
+      "within_limit": false,
+      "metrics_above_limit": [
+        {
+          "metric": "f1",
+          "value": 0.9968847352024922
+        },
+        {
+          "metric": "recall",
+          "value": 1.0
+        },
+        {
+          "metric": "precision",
+          "value": 0.9937888198757764
+        },
+        {
+          "metric": "accuracy",
+          "value": 0.9979166666666667
+        },
+        {
+          "metric": "roc_auc",
+          "value": 0.9996875
+        },
+        {
+          "metric": "pr_auc",
+          "value": 0.9993479457162724
+        }
+      ],
+      "overflow_sum": 0.10762566746120772,
+      "overfit_gap_train_test_f1": 0.0,
+      "importance_concentration": 0.38764246958044946,
+      "complexity_score": 1.81
+    }
+  ]
+}

@@ -289,7 +289,7 @@
     },
     {
       "feature": "social_anxiety_children_peer_only_flag",
-      "reason": "out_of_target_domain"
+      "reason": "derived_score_flag_exclusion"
     },
     {
       "feature": "social_anxiety_disproportionate",

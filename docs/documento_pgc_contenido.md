@@ -222,3 +222,11 @@ umeric_range, categorical).
 - Manejo de intención de ayuda separado de respuestas válidas.
 - Flujo chat con confirmación obligatoria, aclaraciones contextuales y QA posterior al resultado.
 - Sin uso de APIs externas, sin modelos LLM remotos, sin dependencias pagas.
+
+## Actualización técnica: overfit guard y leakage audit
+
+- Se incorporó auditoría automática de fuga de información previa al entrenamiento (`artifacts/leakage_audit.json`).
+- Se comparan variantes conservadoras del modelo (`artifacts/model_comparison.json`).
+- Se aplica regla explícita `MAX_ACCEPTABLE_METRIC = 0.98` como criterio de selección, no como manipulación de resultados.
+- Si una métrica supera 0.98, se reporta el valor real y se activa advertencia de validación externa.
+- El reporte de selección queda en `artifacts/overfit_guard_report.json`.

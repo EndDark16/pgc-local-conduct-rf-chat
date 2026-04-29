@@ -62,3 +62,4 @@ def test_frontend_chat_contract_and_no_forbidden_texts():
     assert "/api/chat/result-question" in js
     assert "STATE.RESULT_QA" in js
     assert 'technicalDetails.addEventListener("toggle"' in js
+    assert "Generar impresión orientativa" in js

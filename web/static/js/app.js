@@ -13,6 +13,7 @@
   RESTARTING: "restarting",
   ERROR: "error",
 };
+const MAX_ACCEPTABLE_METRIC = 0.98;
 
 const HELP_TERMS = [
   "no entiendo",
@@ -86,7 +87,15 @@ const el = {
   importanceChart: document.getElementById("importanceChart"),
   importanceList: document.getElementById("importanceList"),
   overfitNote: document.getElementById("overfitNote"),
+  techMeta: document.getElementById("techMeta"),
 };
+
+function formatMetric(value) {
+  if (value === null || value === undefined || value === "") return "N/A";
+  const n = Number(value);
+  if (Number.isNaN(n)) return String(value);
+  return n.toFixed(3);
+}
 
 function normalizeText(value) {
   return (value || "")
@@ -596,23 +605,48 @@ function correctionFlow() {
 function reportHtml(report, prediction) {
   const indicators = Array.isArray(report.observed_indicators) ? report.observed_indicators : [];
   const indicatorList = indicators.length
-    ? `<ul>${indicators.map((item) => `<li>${item}</li>`).join("")}</ul>`
+    ? `<ul class="report-indicators">${indicators.map((item) => `<li>${item}</li>`).join("")}</ul>`
     : "<p>No se registraron indicadores destacados.</p>";
 
   const probability = Number(prediction.probability_estimated || 0) * 100;
-  const threshold = prediction.threshold_used;
+  const threshold = Number(prediction.threshold_used ?? 0);
 
   return `
-    <strong>${report.title || "Impresión orientativa"}</strong><br />
-    <span>${report.clinical_style_summary || ""}</span><br /><br />
-    <strong>Nivel:</strong> ${report.compatibility_level || "No disponible"}<br />
-    <strong>Probabilidad estimada:</strong> ${probability.toFixed(2)}%<br />
-    <strong>Threshold usado:</strong> ${threshold ?? "No disponible"}<br /><br />
-    <strong>Indicadores observados:</strong>
-    ${indicatorList}
-    <strong>Impacto funcional:</strong> ${report.functional_impact || ""}<br /><br />
-    <strong>Recomendación profesional:</strong> ${report.professional_recommendation || ""}<br /><br />
-    <strong>Aclaración importante:</strong> ${report.important_clarification || ""}
+    <article class="report-card">
+      <h3>${report.title || "Impresión psicológica orientativa"}</h3>
+      <section class="report-section">
+        <strong>Síntesis general</strong>
+        <span>${report.general_synthesis || report.clinical_style_summary || ""}</span>
+      </section>
+      <section class="report-section">
+        <strong>Nivel de compatibilidad</strong>
+        <span>${report.compatibility_level || "No disponible"}</span>
+      </section>
+      <section class="report-section">
+        <strong>Probabilidad estimada</strong>
+        <span>${probability.toFixed(2)}%</span>
+      </section>
+      <section class="report-section">
+        <strong>Indicadores principales observados</strong>
+        ${indicatorList}
+      </section>
+      <section class="report-section">
+        <strong>Impacto funcional</strong>
+        <span>${report.functional_impact || ""}</span>
+      </section>
+      <section class="report-section">
+        <strong>Recomendación profesional</strong>
+        <span>${report.professional_recommendation || ""}</span>
+      </section>
+      <section class="report-section">
+        <strong>Aclaración importante</strong>
+        <span>${report.important_clarification || ""}</span>
+      </section>
+      <section class="report-section">
+        <strong>Detalles técnicos</strong>
+        <span>Threshold usado: ${Number.isFinite(threshold) ? threshold.toFixed(3) : "No disponible"}.</span>
+      </section>
+    </article>
   `;
 }
 
@@ -792,6 +826,9 @@ async function restartSession() {
   if (el.techLoader) {
     ensureVisible(el.techLoader, false);
   }
+  if (el.techMeta) {
+    el.techMeta.innerHTML = "";
+  }
   updateProgressLabel();
 
   await emitAudit("frontend_session_restarted", { session_id: state.sessionId });
@@ -813,10 +850,28 @@ function renderMetricCards(metricsPayload) {
   el.metricCards.innerHTML = "";
   rows.forEach((row) => {
     const card = document.createElement("article");
-    card.className = "metric-card";
-    card.innerHTML = `<div class="label">${row.label}</div><div class="value">${row.value ?? "N/A"}</div>`;
+    const isScoreMetric = ["F1", "Recall", "Precision", "Accuracy", "ROC-AUC", "PR-AUC"].includes(row.label);
+    const numericValue = Number(row.value);
+    const warn = isScoreMetric && Number.isFinite(numericValue) && numericValue > MAX_ACCEPTABLE_METRIC;
+    card.className = `metric-card ${warn ? "warn" : ""}`.trim();
+    card.innerHTML = `<div class="label">${row.label}</div><div class="value">${formatMetric(row.value)}</div>`;
     el.metricCards.appendChild(card);
   });
+
+  if (el.techMeta) {
+    const leakage = metricsPayload.leakage_audit_summary || {};
+    const metaItems = [
+      `Variante seleccionada: <strong>${metricsPayload.model_variant_selected || "N/A"}</strong>`,
+      `Overfit guard aplicado: <strong>${metricsPayload.overfit_guard_applied ? "Sí" : "No"}</strong>`,
+      `Variables excluidas por auditoría de leakage: <strong>${leakage.excluded_count ?? 0}</strong>`,
+      metricsPayload.selected_model_reason
+        ? `Criterio de selección: ${metricsPayload.selected_model_reason}`
+        : "",
+    ].filter(Boolean);
+    el.techMeta.innerHTML = metaItems
+      .map((text) => `<div class="tech-meta-item">${text}</div>`)
+      .join("");
+  }
 }
 
 function clearCanvas(canvas) {
@@ -888,7 +943,7 @@ function drawConfusionMatrix(metricsPayload) {
   if (!Array.isArray(matrix) || matrix.length < 2 || !Array.isArray(matrix[0]) || !Array.isArray(matrix[1])) {
     ctx.fillStyle = "#aab4c5";
     ctx.font = "13px Segoe UI";
-    ctx.fillText("No hay matriz de confusion disponible.", 12, 24);
+    ctx.fillText("No hay matriz de confusión disponible.", 12, 24);
     return;
   }
 
@@ -994,6 +1049,7 @@ async function loadMetricsPanel() {
     clearCanvas(el.metricsChart);
     clearCanvas(el.confusionChart);
     ensureVisible(el.overfitNote, false);
+    if (el.techMeta) el.techMeta.innerHTML = "";
     return null;
   }
 
@@ -1001,8 +1057,11 @@ async function loadMetricsPanel() {
   drawMetricBars(data);
   drawConfusionMatrix(data);
 
-  if (data.overfit_warning) {
-    el.overfitNote.textContent = data.overfit_warning;
+  if (data.overfit_warning || (Array.isArray(data.metrics_above_limit) && data.metrics_above_limit.length > 0)) {
+    const warningText =
+      data.overfit_warning ||
+      "Las métricas son muy altas. Esto puede indicar señales muy directas del target y requiere validación externa.";
+    el.overfitNote.textContent = warningText;
     ensureVisible(el.overfitNote, true);
   } else {
     ensureVisible(el.overfitNote, false);
@@ -1070,6 +1129,9 @@ async function initializeChatFlow() {
   renderQuickChips([]);
   setTechError("");
   setTechLoading(false);
+  if (el.techMeta) {
+    el.techMeta.innerHTML = "";
+  }
   setInputEnabled(false);
   updateProgressLabel();
 

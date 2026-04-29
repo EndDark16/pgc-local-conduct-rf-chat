@@ -116,3 +116,9 @@ Plan de contingencia:
 - Parser NLP local por escalas con aclaración contextual.
 - Flujo conversacional completo: preguntas, confirmación, impresión orientativa y preguntas post-resultado.
 - Arquitectura 100% local, sin APIs externas ni servicios pagos.
+
+## Nota adicional: control de sobreajuste
+
+- Se añadió `overfit guard` con límite `0.98` para seleccionar la variante final del modelo.
+- Las métricas se reportan con su valor real (no se recortan ni maquillan).
+- Si el rendimiento permanece extremadamente alto, se comunica como posible target casi determinístico y se recomienda validación externa.

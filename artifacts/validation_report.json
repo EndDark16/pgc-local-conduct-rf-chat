@@ -1,9 +1,9 @@
 {
-  "generated_at_utc": "2026-04-29T02:08:12.059676+00:00",
+  "generated_at_utc": "2026-04-29T03:41:47.368330+00:00",
   "project_root": "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC",
   "checks": {
     "required_dirs_ok": true,
-    "essential_files_checked": 27,
+    "essential_files_checked": 28,
     "main_dataset_found": "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC\\data\\hybrid_no_external_scores_dataset_ready(1).csv",
     "questionnaire_found": "C:\\Users\\andre\\Documents\\Workspace Academic\\PGC\\data\\questionnaire_v16_4_visible_questions_excel_utf8.csv",
     "imports": {
@@ -29,7 +29,7 @@
     "quick_tests": {
       "executed": true,
       "return_code": 0,
-      "stdout_tail": ".                                                                        [100%]\n1 passed in 0.11s",
+      "stdout_tail": ".                                                                        [100%]\n1 passed in 0.02s",
       "stderr_tail": ""
     },
     "backend_smoke": {
@@ -40,8 +40,8 @@
           "model_trained": true,
           "target_column": "target_domain_conduct_final",
           "target_intro": "Te haré preguntas sobre comportamientos observables relacionados con normas, convivencia y conducta.",
-          "threshold_final": 0.45,
-          "features_count": 23,
+          "threshold_final": 0.41,
+          "features_count": 22,
           "medical_disclaimer": "Este resultado no es un diagnóstico médico y debe ser revisado por un profesional calificado.",
           "message": "Modelo listo para predicción."
         },
@@ -60,7 +60,7 @@
     "banned_import_hits": [],
     "domain_coherence": {
       "target": "target_domain_conduct_final",
-      "schema_feature_count": 23,
+      "schema_feature_count": 22,
       "selected_feature_count": 23,
       "adhd_in_schema": [],
       "adhd_in_selected": [],

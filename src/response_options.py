@@ -241,8 +241,8 @@ def _default_human_payload(scale_type: str) -> Dict[str, Any]:
         }
     if scale_type == "temporal_0_2":
         return {
-            "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
-            "quick_chips": ["No ocurrio", "Ocurrio antes", "Ocurrio recientemente", "No entiendo"],
+            "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
+            "quick_chips": ["No ocurrió", "Ocurrió antes", "Ocurrió recientemente", "No entiendo"],
         }
     if scale_type == "observation_0_2":
         return {
@@ -261,7 +261,7 @@ def _default_human_payload(scale_type: str) -> Dict[str, Any]:
         }
     if scale_type == "numeric_range":
         return {
-            "human_options_text": "Responde con un numero dentro del rango esperado.",
+            "human_options_text": "Responde con un número dentro del rango esperado.",
             "quick_chips": ["No entiendo"],
         }
     if scale_type == "categorical":

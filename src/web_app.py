@@ -20,7 +20,7 @@ from .config import ARTIFACTS_DIR, MEDICAL_DISCLAIMER, MODELS_DIR, WEB_STATIC_DI
 from .data_loader import load_main_dataset
 from .feature_selection import DEFAULT_CONDUCT_FEATURES, is_feature_allowed_for_target, select_features
 from .nlp_interpreter import interpret_answer, is_help_request
-from .predictor import answer_result_question, predict_from_answers
+from .predictor import answer_result_question, humanize_feature_name, predict_from_answers
 from .preprocessing import build_feature_schema
 from .question_explainer import explain_question
 from .question_generator import question_for_feature
@@ -379,6 +379,9 @@ async def model_status() -> Dict[str, Any]:
         "target_intro": TARGET_INTROS.get(target_column, TARGET_INTROS["target_domain_conduct_final"]),
         "threshold_final": metadata.get("thresholds", {}).get("final"),
         "features_count": metadata.get("n_features_used"),
+        "model_variant_selected": metadata.get("model_variant_selected"),
+        "overfit_guard_applied": bool(metadata.get("overfit_guard_applied", False)),
+        "overfit_warning": bool(metadata.get("overfit_warning", False)),
         "medical_disclaimer": MEDICAL_DISCLAIMER,
         "message": "Modelo listo para predicción." if model_exists else "Modelo no entrenado. Ejecuta python train.py",
     }
@@ -673,6 +676,7 @@ async def api_reset_session(payload: ResetRequest) -> Dict[str, Any]:
 @app.get("/api/metrics")
 async def api_metrics() -> Dict[str, Any]:
     metrics = load_json(ARTIFACTS_DIR / "metrics.json", default={})
+    metadata = load_json(MODELS_DIR / "metadata.json", default={})
     if not metrics:
         return {"ok": False, "message": "No existen métricas aún. Ejecuta python train.py"}
 
@@ -686,6 +690,11 @@ async def api_metrics() -> Dict[str, Any]:
             "Las métricas son muy altas. Esto puede indicar que el dataset contiene señales muy directas "
             "del target o que se requiere validación externa adicional."
         )
+    elif bool(metadata.get("overfit_warning", False)):
+        warning = (
+            "El modelo fue marcado con advertencia de sobreajuste potencial tras aplicar overfit guard. "
+            "Se recomienda validación externa adicional."
+        )
 
     return {
         "ok": True,
@@ -696,6 +705,11 @@ async def api_metrics() -> Dict[str, Any]:
         "confusion_matrix": _sanitize_jsonable(confusion_payload.get("matrix")),
         "confusion_matrix_detail": _sanitize_jsonable(confusion_payload),
         "overfit_warning": warning,
+        "overfit_guard_applied": bool(metadata.get("overfit_guard_applied", False)),
+        "model_variant_selected": metadata.get("model_variant_selected"),
+        "metrics_above_limit": _sanitize_jsonable(metadata.get("metrics_above_limit", [])),
+        "selected_model_reason": metadata.get("selected_model_reason"),
+        "leakage_audit_summary": _sanitize_jsonable(metadata.get("leakage_audit_summary", {})),
     }
 
 
@@ -704,9 +718,24 @@ async def api_feature_importance() -> Dict[str, Any]:
     data = load_json(ARTIFACTS_DIR / "feature_importance.json", default={})
     if not data:
         return {"ok": False, "message": "No existe importancia de variables aún. Ejecuta python train.py"}
+    schema = _load_schema()
+    rows = data.get("feature_importance_aggregated", [])[:20]
+    normalized_rows = []
+    for row in rows:
+        feature = str(row.get("feature") or "")
+        label = str(row.get("label") or "").strip()
+        if not label or _looks_technical_text(label):
+            label = humanize_feature_name(feature, schema)
+        normalized_rows.append(
+            {
+                "feature": feature,
+                "label": label,
+                "importance": row.get("importance"),
+            }
+        )
     return {
         "ok": True,
-        "feature_importance_aggregated": _sanitize_jsonable(data.get("feature_importance_aggregated", [])[:20]),
+        "feature_importance_aggregated": _sanitize_jsonable(normalized_rows),
         "note": "Estas variables fueron relevantes para el modelo, pero no significan causa directa.",
     }
 

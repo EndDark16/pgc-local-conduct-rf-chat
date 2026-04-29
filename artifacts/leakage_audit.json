@@ -1,0 +1,313 @@
+{
+  "target_column": "target_domain_conduct_final",
+  "reviewed_count": 23,
+  "reviewed_columns": [
+    {
+      "feature": "age_years",
+      "name_suspicious": false,
+      "correlation_with_target": 0.018951550961080154,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 51
+      },
+      "flags": []
+    },
+    {
+      "feature": "conduct_01_bullies_threatens_intimidates",
+      "name_suspicious": false,
+      "correlation_with_target": 0.6517881422772578,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 3
+      },
+      "flags": []
+    },
+    {
+      "feature": "conduct_02_initiates_fights",
+      "name_suspicious": false,
+      "correlation_with_target": 0.6818852786347939,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 3
+      },
+      "flags": []
+    },
+    {
+      "feature": "conduct_03_weapon_use",
+      "name_suspicious": false,
+      "correlation_with_target": 0.7058449698636817,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 3
+      },
+      "flags": []
+    },
+    {
+      "feature": "conduct_04_physical_cruelty_people",
+      "name_suspicious": false,
+      "correlation_with_target": 0.6633119974081436,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 3
+      },
+      "flags": []
+    },
+    {
+      "feature": "conduct_05_physical_cruelty_animals",
+      "name_suspicious": false,
+      "correlation_with_target": 0.6872139012054144,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 3
+      },
+      "flags": []
+    },
+    {
+      "feature": "conduct_06_steals_confronting_victim",
+      "name_suspicious": false,
+      "correlation_with_target": 0.689380955129578,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 3
+      },
+      "flags": []
+    },
+    {
+      "feature": "conduct_07_forced_sex",
+      "name_suspicious": false,
+      "correlation_with_target": 0.6908974809909468,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 3
+      },
+      "flags": []
+    },
+    {
+      "feature": "conduct_08_fire_setting",
+      "name_suspicious": false,
+      "correlation_with_target": 0.6858572763277746,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 3
+      },
+      "flags": []
+    },
+    {
+      "feature": "conduct_09_property_destruction",
+      "name_suspicious": false,
+      "correlation_with_target": 0.7262213402993136,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 3
+      },
+      "flags": []
+    },
+    {
+      "feature": "conduct_10_breaks_into_house_building_car",
+      "name_suspicious": false,
+      "correlation_with_target": 0.6646053752249083,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 3
+      },
+      "flags": []
+    },
+    {
+      "feature": "conduct_11_lies_to_obtain_or_avoid",
+      "name_suspicious": false,
+      "correlation_with_target": 0.6882383287588669,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 3
+      },
+      "flags": []
+    },
+    {
+      "feature": "conduct_12_steals_without_confrontation",
+      "name_suspicious": false,
+      "correlation_with_target": 0.6645898807337243,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 3
+      },
+      "flags": []
+    },
+    {
+      "feature": "conduct_13_stays_out_at_night_before_13",
+      "name_suspicious": false,
+      "correlation_with_target": 0.6823285592623217,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 3
+      },
+      "flags": []
+    },
+    {
+      "feature": "conduct_14_runs_away_overnight",
+      "name_suspicious": false,
+      "correlation_with_target": 0.6737597123511211,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 3
+      },
+      "flags": []
+    },
+    {
+      "feature": "conduct_15_truancy_before_13",
+      "name_suspicious": false,
+      "correlation_with_target": 0.6882548189567437,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 3
+      },
+      "flags": []
+    },
+    {
+      "feature": "conduct_impairment_global",
+      "name_suspicious": false,
+      "correlation_with_target": 0.9246474320522995,
+      "deterministic_like": true,
+      "deterministic_detail": {
+        "coverage": 0.87875,
+        "strong_groups": 3,
+        "groups_total": 4
+      },
+      "flags": [
+        "high_correlation",
+        "near_deterministic_separation"
+      ]
+    },
+    {
+      "feature": "conduct_lpe_01_lack_remorse_guilt",
+      "name_suspicious": false,
+      "correlation_with_target": 0.6561492145349589,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 3
+      },
+      "flags": []
+    },
+    {
+      "feature": "conduct_lpe_02_callous_lack_empathy",
+      "name_suspicious": false,
+      "correlation_with_target": 0.6625781476232884,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 3
+      },
+      "flags": []
+    },
+    {
+      "feature": "conduct_lpe_03_unconcerned_performance",
+      "name_suspicious": false,
+      "correlation_with_target": 0.6703894791483053,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 3
+      },
+      "flags": []
+    },
+    {
+      "feature": "conduct_lpe_04_shallow_deficient_affect",
+      "name_suspicious": false,
+      "correlation_with_target": 0.6770832354994968,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 3
+      },
+      "flags": []
+    },
+    {
+      "feature": "conduct_onset_before_10",
+      "name_suspicious": false,
+      "correlation_with_target": 0.3928879485023188,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 2
+      },
+      "flags": []
+    },
+    {
+      "feature": "sex_assigned_at_birth",
+      "name_suspicious": false,
+      "correlation_with_target": null,
+      "deterministic_like": false,
+      "deterministic_detail": {
+        "coverage": 0.0,
+        "strong_groups": 0,
+        "groups_total": 3
+      },
+      "flags": []
+    }
+  ],
+  "high_correlation_features": [
+    {
+      "feature": "conduct_impairment_global",
+      "abs_correlation": 0.9246474320522995
+    }
+  ],
+  "suspicious_features": [
+    {
+      "feature": "conduct_impairment_global",
+      "flags": [
+        "high_correlation",
+        "near_deterministic_separation"
+      ],
+      "correlation_with_target": 0.9246474320522995,
+      "deterministic_detail": {
+        "coverage": 0.87875,
+        "strong_groups": 3,
+        "groups_total": 4
+      }
+    }
+  ],
+  "columns_excluded": [],
+  "summary": {
+    "excluded_count": 0,
+    "high_correlation_count": 1,
+    "suspicious_count": 1
+  },
+  "decision": "Se excluyen automáticamente las variables con patrones de nombre típicos de fuga. Las variables altamente correlacionadas o casi determinísticas se marcan para variantes conservadoras."
+}

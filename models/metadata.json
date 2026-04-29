@@ -1,5 +1,5 @@
 {
-  "trained_at_utc": "2026-04-29T02:37:46.187422+00:00",
+  "trained_at_utc": "2026-04-29T03:41:29.313851+00:00",
   "model_type": "RandomForestClassifier",
   "dataset_file": "hybrid_no_external_scores_dataset_ready(1).csv",
   "dataset_hash_sha256": "ff76e9235a0a538452f92004e878ca7a75db23e28a69cee7a805b241d7ab7473",
@@ -24,7 +24,6 @@
     "conduct_13_stays_out_at_night_before_13",
     "conduct_14_runs_away_overnight",
     "conduct_15_truancy_before_13",
-    "conduct_impairment_global",
     "conduct_lpe_01_lack_remorse_guilt",
     "conduct_lpe_02_callous_lack_empathy",
     "conduct_lpe_03_unconcerned_performance",
@@ -32,85 +31,50 @@
     "conduct_onset_before_10",
     "sex_assigned_at_birth"
   ],
-  "n_features_used": 23,
-  "feature_strategy_selected": "base_contract_selection",
-  "feature_candidates_tested": 1,
-  "hyperparameters": {
-    "model__n_estimators": 100,
-    "model__min_samples_split": 40,
-    "model__min_samples_leaf": 4,
-    "model__max_samples": 0.55,
-    "model__max_features": "log2",
-    "model__max_depth": 8,
-    "model__criterion": "entropy",
-    "model__class_weight": "balanced",
-    "model__ccp_alpha": 0.001,
-    "model__bootstrap": true
+  "n_features_used": 22,
+  "model_variant_selected": "sin_alta_correlacion",
+  "max_acceptable_metric": 0.98,
+  "overfit_guard_applied": true,
+  "overfit_warning": false,
+  "metrics_above_limit": [],
+  "selected_model_reason": "Se seleccionó la variante con mejor F1/recall dentro del límite máximo aceptable y con brecha de generalización controlada.",
+  "leakage_audit_summary": {
+    "excluded_count": 0,
+    "high_correlation_count": 1,
+    "suspicious_count": 1
   },
-  "cv_selection_diagnostics": {
-    "mean_test_f1": 0.9961238549473843,
-    "mean_test_recall": 1.0,
-    "mean_test_precision": 0.9923216841603053,
-    "mean_train_f1": 0.9960945899767536,
-    "overfit_gap_cv": 0.0,
-    "std_test_f1": 0.004728817398576547,
-    "selection_score": 1.2056570646022644
+  "hyperparameters": {
+    "model__n_estimators": 150,
+    "model__min_samples_split": 40,
+    "model__min_samples_leaf": 5,
+    "model__max_samples": 0.8,
+    "model__max_features": "log2",
+    "model__max_depth": 4,
+    "model__criterion": "entropy",
+    "model__class_weight": "balanced_subsample",
+    "model__ccp_alpha": 0.005,
+    "model__bootstrap": true
   },
   "thresholds": {
     "default": 0.5,
-    "best_f1": 0.45,
-    "best_recall": 0.45,
-    "final": 0.45
+    "best_f1": 0.41,
+    "best_recall": 0.11,
+    "final": 0.41
   },
   "metrics_summary": {
-    "precision_final": 0.9937888198757764,
-    "recall_final": 1.0,
-    "f1_final": 0.9968847352024922,
-    "accuracy_final": 0.9979166666666667,
-    "roc_auc_final": 0.9996484375000001,
-    "pr_auc_final": 0.9992614394902187,
-    "overfit_gap_train_val_f1": 0.0,
-    "generalization_cv_f1_mean": 0.9937559611098987,
-    "generalization_cv_f1_std": 0.003993398793079302,
-    "generalization_cv_f1_gap_train_test": 0.0011784552917049052,
-    "generalization_alerts": [
-      "Las métricas de test superan 0.98. Esto puede indicar señales muy directas del target o la necesidad de validación externa adicional."
-    ]
-  },
-  "preprocessing_info": {
-    "numeric_columns": [
-      "age_years",
-      "conduct_01_bullies_threatens_intimidates",
-      "conduct_02_initiates_fights",
-      "conduct_03_weapon_use",
-      "conduct_04_physical_cruelty_people",
-      "conduct_05_physical_cruelty_animals",
-      "conduct_06_steals_confronting_victim",
-      "conduct_07_forced_sex",
-      "conduct_08_fire_setting",
-      "conduct_09_property_destruction",
-      "conduct_10_breaks_into_house_building_car",
-      "conduct_11_lies_to_obtain_or_avoid",
-      "conduct_12_steals_without_confrontation",
-      "conduct_13_stays_out_at_night_before_13",
-      "conduct_14_runs_away_overnight",
-      "conduct_15_truancy_before_13",
-      "conduct_impairment_global",
-      "conduct_lpe_01_lack_remorse_guilt",
-      "conduct_lpe_02_callous_lack_empathy",
-      "conduct_lpe_03_unconcerned_performance",
-      "conduct_lpe_04_shallow_deficient_affect",
-      "conduct_onset_before_10"
-    ],
-    "boolean_columns": [],
-    "categorical_columns": [
-      "sex_assigned_at_birth"
-    ],
-    "excluded_text_columns": []
+    "precision_final": 0.7743589743589744,
+    "recall_final": 0.94375,
+    "f1_final": 0.8507042253521127,
+    "accuracy_final": 0.8895833333333333,
+    "roc_auc_final": 0.97328125,
+    "pr_auc_final": 0.948444484976424,
+    "overfit_gap_train_test_f1": 0.0284363297060789,
+    "generalization_cv_f1_mean": 0.8694926450942029,
+    "generalization_cv_f1_std": 0.01941321556978721
   },
   "contract_summary": {
     "matching_features_count": 146,
     "questionnaire_features_count": 146
   },
-  "model_hash_sha256": "d618bef68ebdb9f95f1f2b7e64dc61d44c22d42c6aae7deaadbda34dea5165f6"
+  "model_hash_sha256": "ad00ba39a169806df2f3dfde854fe16d544cc290e310f560870fabb861037e04"
 }

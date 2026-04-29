@@ -399,7 +399,7 @@ def build_contextual_clarification(scale_type: str, context: Optional[Dict[str, 
     if scale_type == "binary":
         if context.get("uncertain"):
             return (
-                "Entiendo que ocurre algunas veces. Para esta pregunta necesito una respuesta mas directa: "
+                "Entiendo que ocurre algunas veces. Para esta pregunta necesito una respuesta más directa: "
                 "¿dirias que si se observa de forma repetida en la vida diaria, o que no?"
             )
         return "Para esta pregunta necesito confirmar si la respuesta es si o no."
@@ -407,19 +407,19 @@ def build_contextual_clarification(scale_type: str, context: Optional[Dict[str, 
     if scale_type == "temporal_0_2":
         if context.get("occurrence") is True:
             return (
-                "Entiendo que si ocurrio. Para ubicarlo bien, necesito saber si fue algo anterior "
-                "o si ocurrio recientemente."
+                "Entiendo que sí ocurrió. Para ubicarlo bien, necesito saber si fue algo anterior "
+                "o si ocurrió recientemente."
             )
         return (
-            "Necesito saber cuando ocurrio: no ocurrio, ocurrio antes pero no recientemente, "
-            "u ocurrio en los ultimos 6 meses."
+            "Necesito saber cuándo ocurrió: no ocurrió, ocurrió antes pero no recientemente, "
+            "u ocurrió en los últimos 6 meses."
         )
 
     if scale_type == "frequency_0_3":
         if context.get("temporal_only"):
             return (
-                "Eso me dice cuando ocurrio, pero esta pregunta necesita saber que tan frecuente o marcado es. "
-                "¿Dirias que nunca, leve u ocasional, frecuente, o casi siempre?"
+                "Eso me dice cuándo ocurrió, pero esta pregunta necesita saber qué tan frecuente o marcado es. "
+                "¿Dirías que nunca, leve u ocasional, frecuente, o casi siempre?"
             )
         return "Necesito ubicarlo en frecuencia: nunca, ocasional, frecuente o casi siempre."
 
@@ -430,12 +430,12 @@ def build_contextual_clarification(scale_type: str, context: Optional[Dict[str, 
         return "Necesito saber cuanto afecta: no afecta, leve, moderado o marcado."
 
     if scale_type == "numeric_range":
-        return "Para esta pregunta necesito un numero dentro del rango esperado."
+        return "Para esta pregunta necesito un número dentro del rango esperado."
 
     if scale_type == "categorical":
-        return "Necesito una respuesta mas cercana a las opciones de esta pregunta."
+        return "Necesito una respuesta más cercana a las opciones de esta pregunta."
 
-    return "Necesito una respuesta un poco mas clara para continuar."
+    return "Necesito una respuesta un poco más clara para continuar."
 
 
 def parse_binary_answer(text: str, metadata: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
@@ -452,9 +452,9 @@ def parse_binary_answer(text: str, metadata: Optional[Dict[str, Any]] = None) ->
     onset_before_ten = "antes de los 10" in question_text or "before 10" in question_text
 
     if parsed == 1:
-        friendly = "Lo entendi como: si."
+        friendly = "Lo entendí como: sí."
         if onset_before_ten:
-            friendly = "Lo entendi como: si, empezo antes de los 10 anos."
+            friendly = "Lo entendí como: sí, empezó antes de los 10 años."
         return {
             "parsed_value": 1,
             "confidence": 0.78 if has_uncertainty else 0.93,
@@ -466,9 +466,9 @@ def parse_binary_answer(text: str, metadata: Optional[Dict[str, Any]] = None) ->
             "context": {"uncertain": has_uncertainty},
         }
     if parsed == 0:
-        friendly = "Lo entendi como: no."
+        friendly = "Lo entendí como: no."
         if onset_before_ten:
-            friendly = "Lo entendi como: no, no empezo antes de los 10 anos."
+            friendly = "Lo entendí como: no, no empezó antes de los 10 años."
         return {
             "parsed_value": 0,
             "confidence": 0.78 if has_uncertainty else 0.93,
@@ -496,8 +496,8 @@ def parse_binary_answer(text: str, metadata: Optional[Dict[str, Any]] = None) ->
         "parsed_value": None,
         "confidence": 0.35,
         "needs_clarification": True,
-        "reasoning_summary": "No se detecto una respuesta binaria clara.",
-        "user_friendly_interpretation": "Todavia no estoy seguro de si corresponde a si o no.",
+            "reasoning_summary": "No se detectó una respuesta binaria clara.",
+            "user_friendly_interpretation": "Todavía no estoy seguro de si corresponde a sí o no.",
         "value_explanation": "",
         "answer_category": "respuesta ambigua",
         "context": {},
@@ -513,8 +513,8 @@ def parse_temporal_0_2(text: str) -> Dict[str, Any]:
             "parsed_value": 0,
             "confidence": 0.9,
             "needs_clarification": False,
-            "reasoning_summary": "Se detecto que no ocurrio.",
-            "user_friendly_interpretation": "Lo entendi como: no ocurrio.",
+            "reasoning_summary": "Se detectó que no ocurrió.",
+            "user_friendly_interpretation": "Lo entendí como: no ocurrió.",
             "value_explanation": "Para esta escala equivale al valor 0.",
             "answer_category": "respuesta clara",
             "context": {},
@@ -524,8 +524,8 @@ def parse_temporal_0_2(text: str) -> Dict[str, Any]:
             "parsed_value": 1,
             "confidence": 0.9,
             "needs_clarification": False,
-            "reasoning_summary": "Se detecto ocurrencia anterior no reciente.",
-            "user_friendly_interpretation": "Lo entendi como: ocurrio antes, pero no recientemente.",
+            "reasoning_summary": "Se detectó ocurrencia anterior no reciente.",
+            "user_friendly_interpretation": "Lo entendí como: ocurrió antes, pero no recientemente.",
             "value_explanation": "Para esta escala equivale al valor 1.",
             "answer_category": "respuesta clara",
             "context": {},
@@ -535,8 +535,8 @@ def parse_temporal_0_2(text: str) -> Dict[str, Any]:
             "parsed_value": 2,
             "confidence": 0.92,
             "needs_clarification": False,
-            "reasoning_summary": "Se detecto ocurrencia reciente.",
-            "user_friendly_interpretation": "Lo entendi como: ocurrio recientemente.",
+            "reasoning_summary": "Se detectó ocurrencia reciente.",
+            "user_friendly_interpretation": "Lo entendí como: ocurrió recientemente.",
             "value_explanation": "Para esta escala equivale al valor 2.",
             "answer_category": "respuesta clara",
             "context": {},
@@ -547,8 +547,8 @@ def parse_temporal_0_2(text: str) -> Dict[str, Any]:
             "parsed_value": None,
             "confidence": 0.62,
             "needs_clarification": True,
-            "reasoning_summary": "Se detecto ocurrencia, pero falta temporalidad.",
-            "user_friendly_interpretation": "Entiendo que si ocurrio, pero aun necesito cuando.",
+            "reasoning_summary": "Se detectó ocurrencia, pero falta temporalidad.",
+            "user_friendly_interpretation": "Entiendo que sí ocurrió, pero aún necesito cuándo.",
             "value_explanation": "",
             "answer_category": "respuesta parcialmente clara",
             "context": {"occurrence": True},
@@ -558,8 +558,8 @@ def parse_temporal_0_2(text: str) -> Dict[str, Any]:
         "parsed_value": None,
         "confidence": 0.35,
         "needs_clarification": True,
-        "reasoning_summary": "No se logro identificar la temporalidad.",
-        "user_friendly_interpretation": "Todavia no puedo ubicar cuando ocurrio.",
+        "reasoning_summary": "No se logró identificar la temporalidad.",
+        "user_friendly_interpretation": "Todavía no puedo ubicar cuándo ocurrió.",
         "value_explanation": "",
         "answer_category": "respuesta ambigua",
         "context": {},
@@ -574,7 +574,7 @@ def parse_frequency_0_3(text: str) -> Dict[str, Any]:
             "confidence": 0.35,
             "needs_clarification": True,
             "reasoning_summary": "La respuesta describe temporalidad y no frecuencia.",
-            "user_friendly_interpretation": "Entiendo cuando ocurrio, pero aqui necesito que tan frecuente es.",
+            "user_friendly_interpretation": "Entiendo cuándo ocurrió, pero aquí necesito qué tan frecuente es.",
             "value_explanation": "",
             "answer_category": "respuesta parcialmente clara",
             "context": {"temporal_only": True},
@@ -588,7 +588,7 @@ def parse_frequency_0_3(text: str) -> Dict[str, Any]:
                 "confidence": 0.67,
                 "needs_clarification": True,
                 "reasoning_summary": "Se detecto una frecuencia ocasional con duda.",
-                "user_friendly_interpretation": "Lo entendi como: ocasional.",
+                "user_friendly_interpretation": "Lo entendí como: ocasional.",
                 "value_explanation": "Para esta escala equivale al nivel 1, salvo que quieras corregirlo.",
                 "answer_category": "respuesta parcialmente clara",
                 "context": {},
@@ -597,8 +597,8 @@ def parse_frequency_0_3(text: str) -> Dict[str, Any]:
             "parsed_value": None,
             "confidence": 0.34,
             "needs_clarification": True,
-            "reasoning_summary": "No se detecto frecuencia clara.",
-            "user_friendly_interpretation": "Todavia no puedo ubicar esta respuesta en frecuencia.",
+            "reasoning_summary": "No se detectó frecuencia clara.",
+            "user_friendly_interpretation": "Todavía no puedo ubicar esta respuesta en frecuencia.",
             "value_explanation": "",
             "answer_category": "respuesta ambigua",
             "context": {},
@@ -611,7 +611,7 @@ def parse_frequency_0_3(text: str) -> Dict[str, Any]:
         "needs_clarification": confidence < 0.65,
         "reasoning_summary": "Se detecto una expresion compatible con escala de frecuencia.",
         "user_friendly_interpretation": (
-            "Lo entendi como: casi siempre." if level == 3 else "Lo entendi como: frecuente." if level == 2 else "Lo entendi como: ocasional." if level == 1 else "Lo entendi como: nunca."
+            "Lo entendí como: casi siempre." if level == 3 else "Lo entendí como: frecuente." if level == 2 else "Lo entendí como: ocasional." if level == 1 else "Lo entendí como: nunca."
         ),
         "value_explanation": f"Para esta escala equivale al nivel {level}.",
         "answer_category": "respuesta clara" if confidence >= 0.8 else "respuesta parcialmente clara",
@@ -650,8 +650,8 @@ def parse_observation_0_2(text: str) -> Dict[str, Any]:
             "parsed_value": None,
             "confidence": 0.33,
             "needs_clarification": True,
-            "reasoning_summary": "No se detecto nivel de observacion claro.",
-            "user_friendly_interpretation": "Todavia no puedo ubicar esta respuesta en observacion.",
+            "reasoning_summary": "No se detectó nivel de observación claro.",
+            "user_friendly_interpretation": "Todavía no puedo ubicar esta respuesta en observación.",
             "value_explanation": "",
             "answer_category": "respuesta ambigua",
             "context": {},
@@ -663,7 +663,7 @@ def parse_observation_0_2(text: str) -> Dict[str, Any]:
         "confidence": confidence,
         "needs_clarification": confidence < 0.65,
         "reasoning_summary": "Se detecto una expresion compatible con escala de observacion.",
-        "user_friendly_interpretation": "Lo entendi como: no se observa." if level == 0 else "Lo entendi como: se observa a veces." if level == 1 else "Lo entendi como: se observa claramente.",
+        "user_friendly_interpretation": "Lo entendí como: no se observa." if level == 0 else "Lo entendí como: se observa a veces." if level == 1 else "Lo entendí como: se observa claramente.",
         "value_explanation": f"Para esta escala equivale al valor {level}.",
         "answer_category": "respuesta clara" if confidence >= 0.8 else "respuesta parcialmente clara",
         "context": {},
@@ -678,8 +678,8 @@ def parse_impact_0_3(text: str) -> Dict[str, Any]:
             "parsed_value": None,
             "confidence": 0.33,
             "needs_clarification": True,
-            "reasoning_summary": "No se detecto nivel de impacto claro.",
-            "user_friendly_interpretation": "Todavia no puedo ubicar cuanto impacto describe la respuesta.",
+            "reasoning_summary": "No se detectó nivel de impacto claro.",
+            "user_friendly_interpretation": "Todavía no puedo ubicar cuánto impacto describe la respuesta.",
             "value_explanation": "",
             "answer_category": "respuesta ambigua",
             "context": {},
@@ -691,7 +691,7 @@ def parse_impact_0_3(text: str) -> Dict[str, Any]:
         "confidence": confidence,
         "needs_clarification": confidence < 0.65,
         "reasoning_summary": "Se detecto una expresion compatible con escala de impacto.",
-        "user_friendly_interpretation": "Lo entendi como: sin impacto." if level == 0 else "Lo entendi como: impacto leve." if level == 1 else "Lo entendi como: impacto moderado." if level == 2 else "Lo entendi como: impacto marcado.",
+        "user_friendly_interpretation": "Lo entendí como: sin impacto." if level == 0 else "Lo entendí como: impacto leve." if level == 1 else "Lo entendí como: impacto moderado." if level == 2 else "Lo entendí como: impacto marcado.",
         "value_explanation": f"Para esta escala equivale al nivel {level}.",
         "answer_category": "respuesta clara" if confidence >= 0.8 else "respuesta parcialmente clara",
         "context": {},
@@ -708,8 +708,8 @@ def parse_numeric_range(text: str, min_value: Any, max_value: Any) -> Dict[str, 
             "parsed_value": None,
             "confidence": 0.3,
             "needs_clarification": True,
-            "reasoning_summary": "No se detecto un numero en la respuesta.",
-            "user_friendly_interpretation": "Necesito un numero para registrar esta respuesta.",
+            "reasoning_summary": "No se detectó un número en la respuesta.",
+            "user_friendly_interpretation": "Necesito un número para registrar esta respuesta.",
             "value_explanation": "",
             "answer_category": "respuesta insuficiente",
             "context": {},
@@ -721,7 +721,7 @@ def parse_numeric_range(text: str, min_value: Any, max_value: Any) -> Dict[str, 
             "confidence": 0.3,
             "needs_clarification": True,
             "reasoning_summary": "El valor esta por debajo del rango permitido.",
-            "user_friendly_interpretation": "El numero parece menor al minimo permitido.",
+            "user_friendly_interpretation": "El número parece menor al mínimo permitido.",
             "value_explanation": "",
             "answer_category": "respuesta ambigua",
             "validation_error": f"El valor esta por debajo del minimo permitido ({min_num}).",
@@ -734,7 +734,7 @@ def parse_numeric_range(text: str, min_value: Any, max_value: Any) -> Dict[str, 
             "confidence": 0.3,
             "needs_clarification": True,
             "reasoning_summary": "El valor esta por encima del rango permitido.",
-            "user_friendly_interpretation": "El numero parece mayor al maximo permitido.",
+            "user_friendly_interpretation": "El número parece mayor al máximo permitido.",
             "value_explanation": "",
             "answer_category": "respuesta ambigua",
             "validation_error": f"El valor esta por encima del maximo permitido ({max_num}).",
@@ -747,7 +747,7 @@ def parse_numeric_range(text: str, min_value: Any, max_value: Any) -> Dict[str, 
         "confidence": 0.92,
         "needs_clarification": False,
         "reasoning_summary": "Se detecto un valor numerico valido.",
-        "user_friendly_interpretation": f"Lo entendi como: {parsed}.",
+        "user_friendly_interpretation": f"Lo entendí como: {parsed}.",
         "value_explanation": "Guardare ese valor numerico.",
         "answer_category": "respuesta clara",
         "context": {},
@@ -761,7 +761,7 @@ def parse_categorical(text: str, options_list: List[Dict[str, Any]]) -> Dict[str
             "confidence": 0.3,
             "needs_clarification": True,
             "reasoning_summary": "No hay opciones disponibles para mapear.",
-            "user_friendly_interpretation": "Necesito una respuesta mas concreta para esta pregunta.",
+            "user_friendly_interpretation": "Necesito una respuesta más concreta para esta pregunta.",
             "value_explanation": "",
             "answer_category": "respuesta ambigua",
             "context": {},
@@ -788,7 +788,7 @@ def parse_categorical(text: str, options_list: List[Dict[str, Any]]) -> Dict[str
             "confidence": round(float(score) / 100.0, 3),
             "needs_clarification": True,
             "reasoning_summary": "La coincidencia con opciones fue baja.",
-            "user_friendly_interpretation": "Necesito una respuesta mas cercana a las opciones sugeridas.",
+            "user_friendly_interpretation": "Necesito una respuesta más cercana a las opciones sugeridas.",
             "value_explanation": "",
             "answer_category": "respuesta ambigua",
             "context": {},
@@ -803,7 +803,7 @@ def parse_categorical(text: str, options_list: List[Dict[str, Any]]) -> Dict[str
         "confidence": round(conf, 3),
         "needs_clarification": conf < 0.65,
         "reasoning_summary": "Se detecto una coincidencia con una opcion valida.",
-        "user_friendly_interpretation": f"Lo entendi como: {label}.",
+        "user_friendly_interpretation": f"Lo entendí como: {label}.",
         "value_explanation": "Guardare esa opcion para el modelo.",
         "answer_category": "respuesta clara" if conf >= 0.8 else "respuesta parcialmente clara",
         "context": {},
@@ -887,10 +887,10 @@ def interpret_answer(
             {
                 "confidence": 0.99,
                 "needs_clarification": True,
-                "clarification_question": "Te explico esta pregunta en palabras mas simples.",
+                "clarification_question": "Te explico esta pregunta en palabras más simples.",
                 "reasoning_summary": "Se detecto una solicitud de ayuda explicita.",
                 "user_friendly_interpretation": "Entiendo que quieres una explicacion antes de responder.",
-                "answer_category": "usuario no entendio la pregunta",
+                "answer_category": "usuario no entendió la pregunta",
             }
         )
         return result

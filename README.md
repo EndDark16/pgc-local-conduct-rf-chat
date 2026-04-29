@@ -140,9 +140,19 @@ http://127.0.0.1:8000
 - Optimización principal: **F1**.
 - Prioridad secundaria: **recall**.
 - Umbral optimizado por validación (threshold tuning).
+- Límite máximo aceptable por guardia de sobreajuste: `MAX_ACCEPTABLE_METRIC = 0.98`.
 - Reporte de brechas train/valid/test y validación cruzada.
+- Se ejecuta auditoría automática de leakage antes de entrenar.
+- Se entrenan variantes conservadoras y se selecciona modelo con `select_model_with_overfit_guard`.
 - Si métricas de test superan `0.98`, se registra y muestra advertencia de posible señal directa del target o necesidad de validación externa adicional.
 - No se capan métricas artificialmente: se reporta el valor real.
+
+### Artefactos de control
+
+- `artifacts/leakage_audit.json`
+- `artifacts/model_comparison.json`
+- `artifacts/model_comparison.png`
+- `artifacts/overfit_guard_report.json`
 
 ## Comandos rápidos
 

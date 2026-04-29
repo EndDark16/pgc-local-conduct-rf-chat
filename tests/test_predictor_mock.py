@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn.pipeline import Pipeline
 
 from src.model import build_random_forest
-from src.predictor import ModelAssets, answer_result_question, predict_with_assets
+from src.predictor import ModelAssets, answer_result_question, humanize_feature_name, predict_with_assets
 from src.preprocessing import build_preprocessor
 
 
@@ -75,6 +75,10 @@ def test_predict_with_assets_mock():
     assert "medical_disclaimer" in result
     assert "orientative_report" in result
     assert "compatibilidad" in result["orientative_report"]["compatibility_level"]
+    assert result["orientative_report"]["title"] == "Impresión psicológica orientativa"
+    assert "dictamen psicológico definitivo" in result["orientative_report"]["important_clarification"]
+    indicators = result["orientative_report"]["observed_indicators"]
+    assert all("conduct_" not in item for item in indicators)
 
 
 def test_answer_result_question_local_rules():
@@ -92,3 +96,17 @@ def test_answer_result_question_local_rules():
         answers={"conduct_02_initiates_fights": 2},
     )
     assert "No" in out["answer"] or "no" in out["answer"]
+
+
+def test_humanize_feature_name_no_technical_label():
+    schema = {
+        "features": [
+            {
+                "feature": "conduct_03_weapon_use",
+                "caregiver_question": "¿Ha usado objetos o armas para causar daño?",
+            }
+        ]
+    }
+    label = humanize_feature_name("conduct_03_weapon_use", schema)
+    assert "conduct_" not in label
+    assert "_" not in label

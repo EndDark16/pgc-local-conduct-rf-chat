@@ -46,10 +46,10 @@
             "label": "nan"
           }
         ],
-        "human_options_text": "Responde con un numero dentro del rango esperado."
+        "human_options_text": "Responde con un número dentro del rango esperado."
       },
       "fallback_question": "¿Qué edad tiene el niño o la niña, en años cumplidos?",
-      "human_options_text": "Responde con un numero dentro del rango esperado.",
+      "human_options_text": "Responde con un número dentro del rango esperado.",
       "quick_chips": [
         "No entiendo"
       ],
@@ -117,14 +117,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
       },
       "fallback_question": "¿Ha intimidado, amenazado o acosado repetidamente a otras personas?",
-      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
       "quick_chips": [
-        "No ocurrio",
-        "Ocurrio antes",
-        "Ocurrio recientemente",
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -191,14 +191,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
       },
       "fallback_question": "¿Ha iniciado peleas físicas?",
-      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
       "quick_chips": [
-        "No ocurrio",
-        "Ocurrio antes",
-        "Ocurrio recientemente",
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -265,14 +265,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
       },
       "fallback_question": "¿Ha usado un objeto o arma que pudiera causar daño grave?",
-      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
       "quick_chips": [
-        "No ocurrio",
-        "Ocurrio antes",
-        "Ocurrio recientemente",
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -339,14 +339,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
       },
       "fallback_question": "¿Ha sido físicamente cruel con otras personas?",
-      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
       "quick_chips": [
-        "No ocurrio",
-        "Ocurrio antes",
-        "Ocurrio recientemente",
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -413,14 +413,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
       },
       "fallback_question": "¿Ha sido físicamente cruel con animales?",
-      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
       "quick_chips": [
-        "No ocurrio",
-        "Ocurrio antes",
-        "Ocurrio recientemente",
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -487,14 +487,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
       },
       "fallback_question": "¿Ha robado algo usando amenaza, fuerza o intimidación contra otra persona?",
-      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
       "quick_chips": [
-        "No ocurrio",
-        "Ocurrio antes",
-        "Ocurrio recientemente",
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -561,14 +561,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
       },
       "fallback_question": "¿Ha forzado a otra persona a una actividad sexual?",
-      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
       "quick_chips": [
-        "No ocurrio",
-        "Ocurrio antes",
-        "Ocurrio recientemente",
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -635,14 +635,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
       },
       "fallback_question": "¿Ha provocado incendios deliberadamente con intención de causar daño o problemas serios?",
-      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
       "quick_chips": [
-        "No ocurrio",
-        "Ocurrio antes",
-        "Ocurrio recientemente",
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -709,14 +709,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
       },
       "fallback_question": "¿Ha destruido deliberadamente propiedad ajena?",
-      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
       "quick_chips": [
-        "No ocurrio",
-        "Ocurrio antes",
-        "Ocurrio recientemente",
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -783,14 +783,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
       },
       "fallback_question": "¿Ha entrado por la fuerza a una casa, edificio o vehículo que no le pertenecía?",
-      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
       "quick_chips": [
-        "No ocurrio",
-        "Ocurrio antes",
-        "Ocurrio recientemente",
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -857,14 +857,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
       },
       "fallback_question": "¿Miente con frecuencia para obtener beneficios, evitar consecuencias o librarse de obligaciones?",
-      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
       "quick_chips": [
-        "No ocurrio",
-        "Ocurrio antes",
-        "Ocurrio recientemente",
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -931,14 +931,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
       },
       "fallback_question": "¿Ha robado objetos sin usar amenaza, fuerza ni contacto directo con la persona afectada?",
-      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
       "quick_chips": [
-        "No ocurrio",
-        "Ocurrio antes",
-        "Ocurrio recientemente",
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -1005,14 +1005,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
       },
       "fallback_question": "¿Se ha quedado fuera de casa durante la noche sin permiso?",
-      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
       "quick_chips": [
-        "No ocurrio",
-        "Ocurrio antes",
-        "Ocurrio recientemente",
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -1079,14 +1079,14 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
       },
       "fallback_question": "¿Se ha escapado de casa pasando la noche fuera?",
-      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
       "quick_chips": [
-        "No ocurrio",
-        "Ocurrio antes",
-        "Ocurrio recientemente",
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
@@ -1153,100 +1153,17 @@
             "label": "2 = Ocurrió en los últimos 6 meses"
           }
         ],
-        "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente."
+        "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente."
       },
       "fallback_question": "¿Ha faltado al colegio sin permiso?",
-      "human_options_text": "Puedes responder: no ocurrio, ocurrio antes, u ocurrio recientemente.",
+      "human_options_text": "Puedes responder: no ocurrió, ocurrió antes, u ocurrió recientemente.",
       "quick_chips": [
-        "No ocurrio",
-        "Ocurrio antes",
-        "Ocurrio recientemente",
+        "No ocurrió",
+        "Ocurrió antes",
+        "Ocurrió recientemente",
         "No entiendo"
       ],
       "scale_type": "temporal_0_2"
-    },
-    {
-      "feature": "conduct_impairment_global",
-      "questionnaire_item_id": "Q027",
-      "question_text_primary": "En conjunto, ¿cuánto afectan estas conductas la vida diaria?",
-      "caregiver_question": "En conjunto, ¿cuánto afectan estas conductas la vida diaria?",
-      "psychologist_question": "En conjunto, ¿cuánto afectan estas conductas la vida diaria?",
-      "feature_label_human": "Conduct impairment global",
-      "feature_description": "Input for impairment - Conduct impairment global",
-      "term_explanation": NaN,
-      "section_name": "2. Atención, actividad e impulsividad",
-      "subsection_name": "Impacto en la vida diaria",
-      "domains_final": "adhd|conduct|elimination|depression",
-      "feature_type": "impairment_item",
-      "feature_role": "impairment_item",
-      "response_type": "single_choice",
-      "response_options": [
-        {
-          "value": 0,
-          "label": "0 = Sin impacto"
-        },
-        {
-          "value": 1,
-          "label": "1 = Impacto leve"
-        },
-        {
-          "value": 2,
-          "label": "2 = Impacto moderado"
-        },
-        {
-          "value": 3,
-          "label": "3 = Impacto marcado"
-        }
-      ],
-      "min_value": 0.0,
-      "max_value": 3.0,
-      "unit": NaN,
-      "scale_guidance": "0 sin impacto, 1 impacto leve, 2 impacto moderado, 3 impacto marcado.",
-      "help_text": "Responda de forma global, pensando en casa, colegio, convivencia, juego y actividades cotidianas.",
-      "who_answers": "Cuidador y/o psicólogo/a",
-      "respondent_expected": "caregiver_or_psychologist",
-      "administered_by": "caregiver_or_psychologist",
-      "requires_clinician_administration": false,
-      "requires_child_self_report": false,
-      "question_audit_status": "audited_v16_4",
-      "is_required": true,
-      "parser_rules": {
-        "response_type": "single_choice",
-        "scale_type": "impact_0_3",
-        "range": [
-          0.0,
-          3.0
-        ],
-        "options": [
-          {
-            "value": 0,
-            "label": "0 = Sin impacto"
-          },
-          {
-            "value": 1,
-            "label": "1 = Impacto leve"
-          },
-          {
-            "value": 2,
-            "label": "2 = Impacto moderado"
-          },
-          {
-            "value": 3,
-            "label": "3 = Impacto marcado"
-          }
-        ],
-        "human_options_text": "Puedes responder: no afecta, leve, moderado, o marcado."
-      },
-      "fallback_question": "En conjunto, ¿cuánto afectan estas conductas la vida diaria?",
-      "human_options_text": "Puedes responder: no afecta, leve, moderado, o marcado.",
-      "quick_chips": [
-        "No afecta",
-        "Leve",
-        "Moderado",
-        "Marcado",
-        "No entiendo"
-      ],
-      "scale_type": "impact_0_3"
     },
     {
       "feature": "conduct_lpe_01_lack_remorse_guilt",
@@ -1701,7 +1618,6 @@
     "conduct_13_stays_out_at_night_before_13",
     "conduct_14_runs_away_overnight",
     "conduct_15_truancy_before_13",
-    "conduct_impairment_global",
     "conduct_lpe_01_lack_remorse_guilt",
     "conduct_lpe_02_callous_lack_empathy",
     "conduct_lpe_03_unconcerned_performance",

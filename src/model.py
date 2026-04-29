@@ -10,10 +10,14 @@ from sklearn.ensemble import RandomForestClassifier
 def build_random_forest(params: Dict[str, Any] | None = None) -> RandomForestClassifier:
     """Create RandomForestClassifier with required defaults."""
     base = {
-        "n_estimators": 200,
-        "max_depth": None,
-        "min_samples_split": 2,
-        "min_samples_leaf": 1,
+        "n_estimators": 150,
+        "max_depth": 6,
+        "min_samples_split": 30,
+        "min_samples_leaf": 8,
+        "max_features": "sqrt",
+        "max_samples": 0.7,
+        "bootstrap": True,
+        "ccp_alpha": 0.001,
         "class_weight": "balanced",
         "random_state": 42,
         "n_jobs": -1,
@@ -26,14 +30,14 @@ def build_random_forest(params: Dict[str, Any] | None = None) -> RandomForestCla
 def hyperparameter_space() -> Dict[str, List[Any]]:
     """Regularized hyperparameter search space focused on generalization."""
     return {
-        "model__n_estimators": [100, 200, 300],
-        "model__max_depth": [4, 6, 8, 10, 14],
-        "model__min_samples_split": [10, 20, 40],
-        "model__min_samples_leaf": [2, 4, 8, 12],
-        "model__max_features": ["sqrt", "log2", 0.5],
+        "model__n_estimators": [100, 150, 200],
+        "model__max_depth": [3, 4, 5, 6],
+        "model__min_samples_split": [20, 30, 40, 60],
+        "model__min_samples_leaf": [5, 8, 10, 15],
+        "model__max_features": ["sqrt", "log2", 0.4, 0.5],
         "model__class_weight": ["balanced", "balanced_subsample"],
-        "model__criterion": ["gini", "entropy", "log_loss"],
+        "model__criterion": ["gini", "entropy"],
         "model__bootstrap": [True],
-        "model__max_samples": [0.55, 0.70, 0.85],
-        "model__ccp_alpha": [0.0, 1e-4, 5e-4, 1e-3, 2e-3, 5e-3, 1e-2],
+        "model__max_samples": [0.5, 0.6, 0.7, 0.8],
+        "model__ccp_alpha": [0.0, 0.001, 0.002, 0.005, 0.01],
     }

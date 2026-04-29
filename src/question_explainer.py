@@ -45,7 +45,7 @@ def _fallback_explanation(question: str, section_name: str) -> str:
     if any(term in q for term in ["pelea", "agres", "golpe", "amenaz", "intimid"]):
         return (
             "Esta pregunta busca identificar conductas de conflicto que se inician activamente, "
-            "diferenciandolas de situaciones en las que solo se responde para defenderse."
+            "diferenciándolas de situaciones en las que solo se responde para defenderse."
         )
 
     if any(term in q for term in ["escuela", "colegio", "norma", "convivencia"]):
@@ -57,12 +57,12 @@ def _fallback_explanation(question: str, section_name: str) -> str:
     if "conduct" in section or "convivencia" in section:
         return (
             "Esta pregunta ayuda a entender comportamientos observables relacionados con convivencia "
-            "y normas, para una estimacion preliminar."
+            "y normas, para una estimación preliminar."
         )
 
     return (
         "Esta pregunta busca ubicar una conducta observada en una escala clara para apoyar "
-        "una estimacion orientativa."
+        "una estimación orientativa."
     )
 
 
@@ -71,7 +71,7 @@ def _build_examples(scale_type: str, question: str) -> List[str]:
 
     if any(term in q for term in ["pelea", "agres", "golpe", "amenaz", "intimid"]):
         return [
-            "Cuenta si el nino inicia el conflicto y no solo si responde para defenderse.",
+            "Cuenta si el niño inicia el conflicto y no solo si responde para defenderse.",
             "Ejemplo: provoca, empuja o amenaza de forma intencional.",
             "Si fue algo aislado, puedes decirlo para dar contexto.",
         ]
@@ -86,8 +86,8 @@ def _build_examples(scale_type: str, question: str) -> List[str]:
     if scale_type == "temporal_0_2":
         return [
             "No ocurrio: no se ha presentado.",
-            "Ocurrio antes: paso en el ultimo ano, pero no en los ultimos 6 meses.",
-            "Ocurrio recientemente: paso en los ultimos 6 meses.",
+            "Ocurrió antes: pasó en el último año, pero no en los últimos 6 meses.",
+            "Ocurrió recientemente: pasó en los últimos 6 meses.",
         ]
 
     if scale_type == "frequency_0_3":
@@ -120,9 +120,9 @@ def _build_examples(scale_type: str, question: str) -> List[str]:
 
 def _expected_answer(scale_type: str, human_options_text: str) -> str:
     if scale_type in {"binary", "temporal_0_2", "frequency_0_3", "observation_0_2", "impact_0_3"}:
-        return f"{human_options_text} Tambien puedes responder con tus palabras."
+        return f"{human_options_text} También puedes responder con tus palabras."
     if scale_type == "numeric_range":
-        return "Responde con un numero. Si quieres, puedes agregar una breve aclaracion."
+        return "Responde con un número. Si quieres, puedes agregar una breve aclaración."
     return "Responde de forma breve y clara con tus palabras."
 
 
@@ -161,8 +161,8 @@ def explain_question(feature_name: str, metadata: Dict[str, Any]) -> Dict[str, A
         "simple_explanation": simple_explanation,
         "examples": _build_examples(options_payload["scale_type"], question),
         "not_about": [
-            "No se trata de juzgar al nino.",
-            "No significa un diagnostico confirmado.",
+            "No se trata de juzgar al niño.",
+            "No significa un diagnóstico confirmado.",
             "No busca culpar a la familia.",
         ],
         "expected_answer": _expected_answer(options_payload["scale_type"], options_payload["human_options_text"]),

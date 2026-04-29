@@ -94,6 +94,8 @@ def test_metrics_endpoint_confusion_payload_shape():
         detail = payload["confusion_matrix_detail"]
         assert "matrix" in detail
         assert {"tn", "fp", "fn", "tp"}.issubset(detail.keys())
+        assert "overfit_guard_applied" in payload
+        assert "model_variant_selected" in payload
 
 
 @pytest.mark.skipif(not (_has_questionnaire() and _has_model()), reason="No questionnaire/model available")

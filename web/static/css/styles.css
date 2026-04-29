@@ -378,6 +378,11 @@ summary:focus-visible {
   padding: 9px;
 }
 
+.metric-card.warn {
+  border-color: rgba(245, 158, 11, 0.75);
+  box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.22);
+}
+
 .metric-card .label {
   color: var(--text-muted);
   font-size: 0.73rem;
@@ -396,6 +401,48 @@ summary:focus-visible {
   background: rgba(245, 158, 11, 0.12);
   color: #fcd8a3;
   font-size: 0.88rem;
+}
+
+.tech-meta {
+  display: grid;
+  gap: 8px;
+  margin: 6px 0 10px;
+}
+
+.tech-meta-item {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: rgba(15, 22, 40, 0.65);
+  padding: 9px 10px;
+  color: #d7e0f4;
+  font-size: 0.84rem;
+}
+
+.report-card {
+  border: 1px solid rgba(124, 92, 255, 0.46);
+  border-radius: 14px;
+  background: linear-gradient(165deg, rgba(25, 34, 56, 0.96), rgba(18, 25, 44, 0.96));
+  padding: 12px 14px;
+}
+
+.report-card h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.report-section {
+  margin-top: 9px;
+}
+
+.report-section strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #e8eeff;
+}
+
+.report-indicators {
+  margin: 0;
+  padding-left: 18px;
 }
 
 .chart-grid {

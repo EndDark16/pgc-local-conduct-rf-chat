@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-04-29T02:08:12.053073+00:00",
+  "generated_at_utc": "2026-04-29T03:41:47.368330+00:00",
   "status": "error",
   "summary": {
     "total_items": 20,
@@ -43,6 +43,7 @@
         "src/data_loader.py",
         "src/questionnaire_loader.py",
         "src/feature_selection.py",
+        "src/leakage_audit.py",
         "src/preprocessing.py",
         "src/question_generator.py",
         "src/question_explainer.py",
@@ -84,7 +85,7 @@
       "passed": true,
       "evidence": {
         "target": "target_domain_conduct_final",
-        "schema_feature_count": 23,
+        "schema_feature_count": 22,
         "selected_feature_count": 23,
         "adhd_in_schema": [],
         "adhd_in_selected": [],
@@ -202,7 +203,7 @@
       "evidence": {
         "executed": true,
         "return_code": 0,
-        "stdout_tail": ".                                                                        [100%]\n1 passed in 0.11s",
+        "stdout_tail": ".                                                                        [100%]\n1 passed in 0.02s",
         "stderr_tail": ""
       }
     },
@@ -218,8 +219,8 @@
             "model_trained": true,
             "target_column": "target_domain_conduct_final",
             "target_intro": "Te haré preguntas sobre comportamientos observables relacionados con normas, convivencia y conducta.",
-            "threshold_final": 0.45,
-            "features_count": 23,
+            "threshold_final": 0.41,
+            "features_count": 22,
             "medical_disclaimer": "Este resultado no es un diagnóstico médico y debe ser revisado por un profesional calificado.",
             "message": "Modelo listo para predicción."
           },

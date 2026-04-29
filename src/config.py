@@ -56,6 +56,7 @@ TARGET_COLUMNS: List[str] = [
 ]
 
 DEFAULT_TARGET_COLUMN = "target_domain_conduct_final"
+MAX_ACCEPTABLE_METRIC = 0.98
 
 TARGET_DISORDER_MAP: Dict[str, str] = {
     "adhd": "target_domain_adhd_final",

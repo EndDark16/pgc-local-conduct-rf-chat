@@ -41,6 +41,7 @@ ESSENTIAL_FILES = [
     "src/data_loader.py",
     "src/questionnaire_loader.py",
     "src/feature_selection.py",
+    "src/leakage_audit.py",
     "src/preprocessing.py",
     "src/question_generator.py",
     "src/question_explainer.py",
@@ -101,6 +102,10 @@ ARTIFACTS_EXPECTED = [
     "artifacts/feature_importance.png",
     "artifacts/feature_importance.json",
     "artifacts/classification_report.json",
+    "artifacts/leakage_audit.json",
+    "artifacts/model_comparison.json",
+    "artifacts/model_comparison.png",
+    "artifacts/overfit_guard_report.json",
 ]
 
 MODEL_EXPECTED = [
