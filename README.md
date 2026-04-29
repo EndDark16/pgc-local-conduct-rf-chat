@@ -127,34 +127,27 @@ Este repositorio ahora incluye configuración lista para Netlify:
 
 ### Importante
 
-Netlify no ejecuta este backend Python/FastAPI directamente como app persistente.  
-Por eso, en Netlify se despliega:
+Netlify no ejecuta este backend Python/FastAPI como proceso persistente.  
+Para resolverlo, el proyecto ahora funciona en modo híbrido:
 
 1. Frontend estático (carpeta `web/`).
-2. Función serverless `api-proxy` que reenvía `/api/*` hacia un backend FastAPI público.
+2. Función serverless `api-proxy` en `netlify/functions/api-proxy.js`.
+3. Si existe `BACKEND_API_URL`, la función actúa como proxy al backend FastAPI público.
+4. Si **no** existe `BACKEND_API_URL`, la función activa un **backend embebido local** (fallback) usando los artefactos en `artifacts/` y `models/`.
 
-### Variable obligatoria en Netlify
+Resultado: el usuario final no tiene que ingresar ninguna URL manualmente para usar el chat.
 
-Define en **Site settings → Environment variables**:
+### Variable opcional en Netlify
 
-- `BACKEND_API_URL`: URL pública base de tu backend FastAPI  
-  Ejemplo: `https://tu-backend.onrender.com`
-
-La función proxy enviará:
-
-- `/api/model-status` -> `https://tu-backend.onrender.com/api/model-status`
-- `/api/questions` -> `https://tu-backend.onrender.com/api/questions`
-- etc.
-
-Si `BACKEND_API_URL` no existe, el sitio abrirá pero las llamadas API devolverán error controlado (no 404 de página).
-Además, el frontend mostrará una pantalla de configuración para ingresar la URL del backend manualmente y guardarla en el navegador.
+Puedes definir `BACKEND_API_URL` solo si quieres conectar un backend FastAPI externo.  
+Si no la defines, el sitio seguirá funcionando con el backend embebido de la función Netlify.
 
 ### Cómo desplegar
 
 1. Conecta el repo en Netlify.
 2. Build command: vacío (o `echo "static"`).
 3. Publish directory: se toma de `netlify.toml` (`web`).
-4. Agrega `BACKEND_API_URL`.
+4. (Opcional) agrega `BACKEND_API_URL` si deseas usar backend externo.
 5. Deploy.
 
 El 404 “Page not found” en rutas internas se corrige con el rewrite:

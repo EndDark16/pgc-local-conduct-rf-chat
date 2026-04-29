@@ -26,3 +26,5 @@ def test_netlify_files_exist_and_have_required_rules():
     proxy_text = proxy_fn.read_text(encoding="utf-8", errors="ignore")
     assert "BACKEND_API_URL" in proxy_text
     assert "/api/" in proxy_text
+    assert "netlify_local_fallback" in proxy_text
+    assert "Conexión de backend pendiente" not in proxy_text

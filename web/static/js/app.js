@@ -62,7 +62,6 @@ const state = {
   autoPredictTriggered: false,
   technicalLoaded: false,
   technicalLoading: false,
-  backendApiUrl: "",
 };
 
 const el = {
@@ -207,9 +206,7 @@ function setInputEnabled(enabled) {
 }
 
 function backendHeader() {
-  const value = (state.backendApiUrl || localStorage.getItem("backendApiUrl") || "").trim();
-  if (!value) return {};
-  return { "x-backend-url": value };
+  return {};
 }
 
 function currentQuestion() {
@@ -361,48 +358,6 @@ function introMessages() {
   );
   addMessage("assistant", state.targetIntro || "Te haré preguntas relacionadas con el dominio seleccionado.");
   addMessage("assistant", "Avanzaremos paso a paso y confirmaré cada respuesta antes de continuar.");
-}
-
-function renderNetlifyBackendSetup(errorMessage = "") {
-  setState(STATE.MODEL_MISSING);
-  ensureVisible(el.modelMissingCard, true);
-  ensureVisible(el.chatPanel, false);
-  el.modelStatusText.textContent = "Configuración pendiente";
-  el.targetText.textContent = "Conducta y convivencia";
-  el.progressText.textContent = "Esperando configuración";
-
-  const saved = (state.backendApiUrl || localStorage.getItem("backendApiUrl") || "").trim();
-  el.modelMissingCard.innerHTML = `
-    <h2>Conexión de backend pendiente</h2>
-    <p>El frontend está desplegado en Netlify, pero falta la URL pública del backend FastAPI.</p>
-    <p>Ingresa la URL del backend (ejemplo: <code>https://tu-backend.onrender.com</code>) para continuar.</p>
-    <div class="backend-config-row">
-      <input id="backendUrlInput" class="backend-url-input" type="url" placeholder="https://tu-backend.onrender.com" value="${saved}" />
-      <button id="backendUrlSaveBtn" class="btn btn-primary" type="button">Conectar</button>
-    </div>
-    <p class="backend-config-help">También puedes definir la variable <code>BACKEND_API_URL</code> en Netlify para no ingresarla manualmente.</p>
-    ${errorMessage ? `<p class="backend-config-error">${errorMessage}</p>` : ""}
-  `;
-
-  const input = document.getElementById("backendUrlInput");
-  const btn = document.getElementById("backendUrlSaveBtn");
-  const submit = async () => {
-    const value = (input?.value || "").trim().replace(/\/+$/, "");
-    if (!/^https?:\/\//i.test(value)) {
-      renderNetlifyBackendSetup("La URL no es válida. Debe iniciar con http:// o https://");
-      return;
-    }
-    state.backendApiUrl = value;
-    localStorage.setItem("backendApiUrl", value);
-    await initializeChatFlow();
-  };
-  btn?.addEventListener("click", submit);
-  input?.addEventListener("keydown", async (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      await submit();
-    }
-  });
 }
 
 function askCurrentQuestion() {
@@ -1195,7 +1150,6 @@ async function initializeChatFlow() {
   updateProgressLabel();
 
   try {
-    state.backendApiUrl = (state.backendApiUrl || localStorage.getItem("backendApiUrl") || "").trim();
     const status = await loadModelStatus();
     await emitAudit("frontend_model_status_loaded", {
       session_id: state.sessionId,
@@ -1216,15 +1170,6 @@ async function initializeChatFlow() {
     askCurrentQuestion();
   } catch (error) {
     const message = (error && error.message ? error.message : "Error desconocido").toString();
-    const normalized = normalizeText(message);
-    if (normalized.includes("backend no configurado")) {
-      renderNetlifyBackendSetup(message);
-      await emitAudit("frontend_netlify_backend_missing", {
-        session_id: state.sessionId,
-        message,
-      });
-      return;
-    }
     setState(STATE.ERROR);
     addMessage(
       "assistant",
