@@ -161,7 +161,7 @@ function scrollChatToBottom() {
 
 function addMessage(author, text, extraClass = "", asHtml = false) {
   const div = document.createElement("div");
-  div.className = `chat-message ${author} ${extraClass}`.trim();
+  div.className = `chat-message ${author} ${extraClass} ${asHtml ? "rich" : ""}`.trim();
   if (asHtml) {
     div.innerHTML = text;
   } else {
@@ -611,43 +611,43 @@ function reportHtml(report, prediction) {
   const probability = Number(prediction.probability_estimated || 0) * 100;
   const threshold = Number(prediction.threshold_used ?? 0);
 
-  return `
-    <article class="report-card">
-      <h3>${report.title || "Impresión psicológica orientativa"}</h3>
-      <section class="report-section">
-        <strong>Síntesis general</strong>
-        <span>${report.general_synthesis || report.clinical_style_summary || ""}</span>
-      </section>
-      <section class="report-section">
-        <strong>Nivel de compatibilidad</strong>
-        <span>${report.compatibility_level || "No disponible"}</span>
-      </section>
-      <section class="report-section">
-        <strong>Probabilidad estimada</strong>
-        <span>${probability.toFixed(2)}%</span>
-      </section>
-      <section class="report-section">
-        <strong>Indicadores principales observados</strong>
-        ${indicatorList}
-      </section>
-      <section class="report-section">
-        <strong>Impacto funcional</strong>
-        <span>${report.functional_impact || ""}</span>
-      </section>
-      <section class="report-section">
-        <strong>Recomendación profesional</strong>
-        <span>${report.professional_recommendation || ""}</span>
-      </section>
-      <section class="report-section">
-        <strong>Aclaración importante</strong>
-        <span>${report.important_clarification || ""}</span>
-      </section>
-      <section class="report-section">
-        <strong>Detalles técnicos</strong>
-        <span>Threshold usado: ${Number.isFinite(threshold) ? threshold.toFixed(3) : "No disponible"}.</span>
-      </section>
-    </article>
-  `;
+  return [
+    '<article class="report-card">',
+    `<h3>${report.title || "Impresión psicológica orientativa"}</h3>`,
+    '<section class="report-section">',
+    "<strong>Síntesis general</strong>",
+    `<span>${report.general_synthesis || report.clinical_style_summary || ""}</span>`,
+    "</section>",
+    '<section class="report-section">',
+    "<strong>Nivel de compatibilidad</strong>",
+    `<span>${report.compatibility_level || "No disponible"}</span>`,
+    "</section>",
+    '<section class="report-section">',
+    "<strong>Probabilidad estimada</strong>",
+    `<span>${probability.toFixed(2)}%</span>`,
+    "</section>",
+    '<section class="report-section">',
+    "<strong>Indicadores principales observados</strong>",
+    indicatorList,
+    "</section>",
+    '<section class="report-section">',
+    "<strong>Impacto funcional</strong>",
+    `<span>${report.functional_impact || ""}</span>`,
+    "</section>",
+    '<section class="report-section">',
+    "<strong>Recomendación profesional</strong>",
+    `<span>${report.professional_recommendation || ""}</span>`,
+    "</section>",
+    '<section class="report-section">',
+    "<strong>Aclaración importante</strong>",
+    `<span>${report.important_clarification || ""}</span>`,
+    "</section>",
+    '<section class="report-section">',
+    "<strong>Detalles técnicos</strong>",
+    `<span>Threshold usado: ${Number.isFinite(threshold) ? threshold.toFixed(3) : "No disponible"}.</span>`,
+    "</section>",
+    "</article>",
+  ].join("");
 }
 
 async function generatePrediction() {

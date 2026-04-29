@@ -200,6 +200,14 @@ body {
   animation: fadeInUp 0.24s ease;
 }
 
+.chat-message.rich {
+  white-space: normal;
+}
+
+.chat-message.rich .report-card {
+  margin: 0;
+}
+
 .chat-message.assistant {
   justify-self: start;
   background: #161f34;
