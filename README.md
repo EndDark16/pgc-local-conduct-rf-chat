@@ -1,4 +1,12 @@
-﻿# Sistema local PGC: estimación preliminar conversacional con Random Forest
+﻿<!-- technical-overview: EndDark16/pgc-local-conduct-rf-chat -->
+
+**Introduccion tecnica**
+
+Aplicacion local de screening conversacional con API FastAPI, inferencia Random Forest de scikit-learn y analisis de respuestas mediante reglas NLP locales. La interfaz usa HTML, CSS y JavaScript, sin depender de servicios LLM externos.
+
+---
+
+# Sistema local PGC: estimación preliminar conversacional con Random Forest
 
 Aplicación local, gratuita y auditable para estimar si existe un **patrón compatible** con un dominio clínico (por defecto: **conducta**) usando **RandomForestClassifier** y NLP local basado en reglas.
 
